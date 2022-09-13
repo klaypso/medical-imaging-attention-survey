@@ -39,4 +39,10 @@ def resize_images(datapath, newpath, newheight=512):
 
 
 
-# MIMIC-CX
+# MIMIC-CXR: Dataset Class
+class MIMICXRDataset(Dataset):
+    def __init__(self, base_data_path, pickle_path, random_seed=42, resized=None, low_data_regimen=None, perc_train=None, transform=None):
+        """
+        Args:
+            base_data_path (string): Data directory.
+            pickle_path (string): Path for pickle with annotat
