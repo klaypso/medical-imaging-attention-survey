@@ -26,4 +26,17 @@ def resize_images(datapath, newpath, newheight=512):
 
     # Go through data directory and generate new (resized) images
     for f in tqdm(os.listdir(datapath)):
-        if(f.endswith(".jpg") or f
+        if(f.endswith(".jpg") or f.endswith('.png')):
+            img = Image.open(os.path.join(datapath, f))
+            w, h = img.size
+            ratio = w / h
+            new_w = int(np.ceil(newheight * ratio))
+            new_img = img.resize((new_w, newheight), Image.ANTIALIAS)
+            new_img.save(os.path.join(newpath, f))
+
+
+    return
+
+
+
+# MIMIC-CX
