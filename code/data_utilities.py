@@ -16,4 +16,14 @@ from torch.utils.data import Dataset
 
 
 # General
-# Func
+# Function: Resize images
+def resize_images(datapath, newpath, newheight=512):
+    
+    # Create new directories (if necessary)
+    if not os.path.exists(newpath):
+        os.makedirs(newpath)
+    
+
+    # Go through data directory and generate new (resized) images
+    for f in tqdm(os.listdir(datapath)):
+        if(f.endswith(".jpg") or f
