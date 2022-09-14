@@ -53,4 +53,10 @@ class MIMICXRDataset(Dataset):
         # Init variables
         images_paths, images_labels, nr_classes = self.mimic_map_images_and_labels(base_data_path, pickle_path)
 
-        # Activate low data regimen trainin
+        # Activate low data regimen training
+        if low_data_regimen:
+            assert perc_train > 0.0 and perc_train <= 0.50, f"Invalid perc_train '{perc_train}'. Please be sure that perc_train > 0 and perc_train <= 50"
+
+
+            # Get the data percentage
+            images_paths, _, images_labels, _ = train_test_split(images_paths, images_labels, train_size=p
