@@ -71,4 +71,17 @@ class MIMICXRDataset(Dataset):
         self.transform = transform
 
 
-   
+        return
+
+
+    # MIMIC-CXR: Get labels and paths from pickle
+    def mimic_map_images_and_labels(self, base_data_path, pickle_path):
+        # Open pickle file
+        with open(pickle_path, "rb") as fp:
+            pickle_data = cPickle.load(fp)
+
+        # Split Images and Labels
+        images_path = list()
+        labels = list()
+
+     
