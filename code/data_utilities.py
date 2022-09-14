@@ -59,4 +59,16 @@ class MIMICXRDataset(Dataset):
 
 
             # Get the data percentage
-            images_paths, _, images_labels, _ = train_test_split(images_paths, images_labels, train_size=p
+            images_paths, _, images_labels, _ = train_test_split(images_paths, images_labels, train_size=perc_train, stratify=images_labels, random_state=random_seed)
+
+            print(f"Low data regimen.\n% of train data: {perc_train}")
+
+
+        # Attribute variables
+        self.images_paths = images_paths
+        self.images_labels = images_labels
+        self.nr_classes = nr_classes
+        self.transform = transform
+
+
+   
