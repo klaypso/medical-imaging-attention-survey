@@ -93,4 +93,21 @@ class MIMICXRDataset(Dataset):
         # Assign variables to class variables
         images_paths = images_path
         images_labels = labels
-     
+        
+        # Nr of Classes
+        nr_classes = len(np.unique(images_labels))
+
+
+        return images_paths, images_labels, nr_classes
+
+
+    # Method: __len__
+    def __len__(self):
+        return len(self.images_paths)
+
+
+
+    # Method: __getitem__
+    def __getitem__(self, idx):
+        if torch.is_tensor(idx):
+            idx =
