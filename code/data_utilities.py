@@ -126,3 +126,12 @@ class MIMICXRDataset(Dataset):
 
         return image, label
 
+
+
+# ISIC2020: Dataset Class
+class ISIC2020Dataset(Dataset):
+    def __init__(self, base_data_path, split, random_seed=42, resized=None, low_data_regimen=None, perc_train=None, transform=None):
+        """
+        Args:
+            base_data_path (string): Data directory.
+            split (string): "train", "val", "
