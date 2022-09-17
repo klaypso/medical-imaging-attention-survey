@@ -110,4 +110,19 @@ class MIMICXRDataset(Dataset):
     # Method: __getitem__
     def __getitem__(self, idx):
         if torch.is_tensor(idx):
-            idx =
+            idx = idx.tolist()
+        
+
+        # Get images
+        img_name = self.images_paths[idx]
+        image = Image.open(img_name)
+
+        # Get labels
+        label = self.images_labels[idx]
+
+        # Apply transformation
+        if self.transform:
+            image = self.transform(image)
+
+        return image, label
+
