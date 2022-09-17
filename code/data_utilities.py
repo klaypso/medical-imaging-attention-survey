@@ -84,4 +84,13 @@ class MIMICXRDataset(Dataset):
         images_path = list()
         labels = list()
 
+        # Go through pickle file
+        for path, clf in zip(pickle_data[:, 0], pickle_data[:, 1]):
+            images_path.append(os.path.join(base_data_path, path+".jpg"))
+            labels.append(int(clf))
+        
+
+        # Assign variables to class variables
+        images_paths = images_path
+        images_labels = labels
      
