@@ -134,4 +134,9 @@ class ISIC2020Dataset(Dataset):
         """
         Args:
             base_data_path (string): Data directory.
-            split (string): "train", "val", "
+            split (string): "train", "val", "test" splits.
+            transform (callable, optional): Optional transform to be applied on a sample.
+        """
+        
+        # Assure we have the right string in the split argument
+        assert split in ["Train", "Validation", "Test"], "Please provide a valid split (i.e., 'Train', 'Validation
