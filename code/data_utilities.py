@@ -139,4 +139,13 @@ class ISIC2020Dataset(Dataset):
         """
         
         # Assure we have the right string in the split argument
-        assert split in ["Train", "Validation", "Test"], "Please provide a valid split (i.e., 'Train', 'Validation
+        assert split in ["Train", "Validation", "Test"], "Please provide a valid split (i.e., 'Train', 'Validation' or 'Test')"
+
+
+        # Get correct paths
+        data_dir, csv_path, nr_classes = self.isic_get_data_paths(base_data_path=base_data_path, resized=resized)
+
+        # Aux variables to obtain the correct data splits
+        # Read CSV file with label information       
+        csv_df = pd.read_csv(csv_path)
+        # print(f
