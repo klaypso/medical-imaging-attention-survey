@@ -148,4 +148,13 @@ class ISIC2020Dataset(Dataset):
         # Aux variables to obtain the correct data splits
         # Read CSV file with label information       
         csv_df = pd.read_csv(csv_path)
-        # print(f
+        # print(f"The dataframe has: {len(csv_df)} records.")
+        
+        # Get the IDs of the Patients
+        patient_ids = csv_df.copy()["patient_id"]
+        
+        # Get the unique patient ids
+        unique_patient_ids = np.unique(patient_ids.values)
+
+
+        # Split into train, validation and test according
