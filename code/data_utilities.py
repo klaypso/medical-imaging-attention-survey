@@ -157,4 +157,7 @@ class ISIC2020Dataset(Dataset):
         unique_patient_ids = np.unique(patient_ids.values)
 
 
-        # Split into train, validation and test according
+        # Split into train, validation and test according to the IDs of the Patients
+        # First we split into train and test (60%, 20%, 20%)
+        train_ids, test_ids, _, _ = train_test_split(unique_patient_ids, np.zeros_like(unique_patient_ids), test_size=0.20, random_state=random_seed)
+        train_ids, val_ids, _, _ = train_test_split(train_i
