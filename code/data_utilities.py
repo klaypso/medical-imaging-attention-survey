@@ -160,4 +160,12 @@ class ISIC2020Dataset(Dataset):
         # Split into train, validation and test according to the IDs of the Patients
         # First we split into train and test (60%, 20%, 20%)
         train_ids, test_ids, _, _ = train_test_split(unique_patient_ids, np.zeros_like(unique_patient_ids), test_size=0.20, random_state=random_seed)
-        train_ids, val_ids, _, _ = train_test_split(train_i
+        train_ids, val_ids, _, _ = train_test_split(train_ids, np.zeros_like(train_ids), test_size=0.25, random_state=random_seed)
+
+
+        # Now, we get the data
+        if split == "Train":
+            # Get the right sampled dataframe
+            tr_pids_mask = csv_df.copy().patient_id.isin(train_ids)
+            self.dataframe = csv_df.copy()[tr_pids_mask]
+            
