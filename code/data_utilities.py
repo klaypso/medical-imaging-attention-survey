@@ -169,3 +169,13 @@ class ISIC2020Dataset(Dataset):
             tr_pids_mask = csv_df.copy().patient_id.isin(train_ids)
             self.dataframe = csv_df.copy()[tr_pids_mask]
             
+            # Get the image names
+            image_names = self.dataframe.copy()["image_name"].values
+
+            # Get the image labels
+            images_labels = self.dataframe.copy()["target"].values
+
+
+            # Activate low data regimen training
+            if low_data_regimen:
+   
