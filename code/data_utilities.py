@@ -203,4 +203,14 @@ class ISIC2020Dataset(Dataset):
             self.dataframe = csv_df.copy()[val_pids_mask]
             
             # Get the image names
+            self.image_names = self.dataframe.copy()["image_name"].values
+
+            # Get the image labels
+            self.images_labels = self.dataframe.copy()["target"].values
+
+            # Information print
+            print(f"The {split} split has {len(self.image_names)} images")
         
+
+        else:
+            # Get the 
