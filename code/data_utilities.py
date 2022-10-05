@@ -213,4 +213,12 @@ class ISIC2020Dataset(Dataset):
         
 
         else:
-            # Get the 
+            # Get the right sampled dataframe
+            test_pids_mask = csv_df.copy().patient_id.isin(test_ids)
+            self.dataframe = csv_df.copy()[test_pids_mask]
+            
+            # Get the image names
+            self.image_names = self.dataframe.copy()["image_name"].values
+
+            # Get the image labels
+            self.images_labels = self.dataframe.copy(
