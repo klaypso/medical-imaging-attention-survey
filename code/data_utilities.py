@@ -194,4 +194,13 @@ class ISIC2020Dataset(Dataset):
 
 
             # Information print
-            print(f"The 
+            print(f"The {split} split has {len(self.image_names)} images")
+
+
+        elif split == "Validation":
+            # Get the right sampled dataframe
+            val_pids_mask = csv_df.copy().patient_id.isin(val_ids)
+            self.dataframe = csv_df.copy()[val_pids_mask]
+            
+            # Get the image names
+        
