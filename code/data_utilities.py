@@ -178,4 +178,8 @@ class ISIC2020Dataset(Dataset):
 
             # Activate low data regimen training
             if low_data_regimen:
-   
+                assert perc_train > 0.0 and perc_train <= 0.50, f"Invalid perc_train '{perc_train}'. Please be sure that perc_train > 0 and perc_train <= 50"
+
+
+                # Get the data percentage
+                image_names, _, images_labels, _ = train_test_split(image_names, images_labels, train_size=perc_train, stratify=images_l
