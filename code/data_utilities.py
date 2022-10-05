@@ -182,4 +182,16 @@ class ISIC2020Dataset(Dataset):
 
 
                 # Get the data percentage
-                image_names, _, images_labels, _ = train_test_split(image_names, images_labels, train_size=perc_train, stratify=images_l
+                image_names, _, images_labels, _ = train_test_split(image_names, images_labels, train_size=perc_train, stratify=images_labels, random_state=random_seed)
+
+                print(f"Low data regimen.\n% of train data: {perc_train}")
+            
+
+
+            # Attribute variables object variables
+            self.image_names = image_names
+            self.images_labels = images_labels
+
+
+            # Information print
+            print(f"The 
