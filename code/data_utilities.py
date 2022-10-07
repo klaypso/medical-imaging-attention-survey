@@ -263,4 +263,18 @@ class ISIC2020Dataset(Dataset):
         
 
         # Get images
- 
+        img_name = self.image_names[idx]
+        image = Image.open(os.path.join(self.base_data_path, f"{img_name}.jpg"))
+
+        # Get labels
+        label = self.images_labels[idx]
+
+        # Apply transformation
+        if self.transform:
+            image = self.transform(image)
+
+        return image, label
+
+
+
+# APTOS2019: Data
