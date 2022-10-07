@@ -244,4 +244,23 @@ class ISIC2020Dataset(Dataset):
 
 
         # Get number of classes
-     
+        nr_classes = 2
+
+
+        return data_dir, csv_fpath, nr_classes
+
+
+    # Method: __len__
+    def __len__(self):
+        return len(self.image_names)
+
+
+
+    # Method: __getitem__
+    def __getitem__(self, idx):
+        if torch.is_tensor(idx):
+            idx = idx.tolist()
+        
+
+        # Get images
+ 
