@@ -236,4 +236,12 @@ class ISIC2020Dataset(Dataset):
 
 
     # ISIC2020: Get data paths
-   
+    def isic_get_data_paths(self, base_data_path, resized=None):
+        
+        # Build data directories
+        data_dir = os.path.join(base_data_path, 'jpeg', 'train_resized') if resized else os.path.join(base_data_path, 'jpeg', 'train')
+        csv_fpath = os.path.join(base_data_path, 'train.csv')
+
+
+        # Get number of classes
+     
