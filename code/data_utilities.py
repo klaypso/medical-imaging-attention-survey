@@ -221,4 +221,19 @@ class ISIC2020Dataset(Dataset):
             self.image_names = self.dataframe.copy()["image_name"].values
 
             # Get the image labels
-            self.images_labels = self.dataframe.copy(
+            self.images_labels = self.dataframe.copy()["target"].values
+
+            # Information print
+            print(f"The {split} split has {len(self.image_names)} images")
+
+
+        # Init variables
+        self.base_data_path = data_dir
+        self.nr_classes = nr_classes
+        self.transform = transform
+
+        return
+
+
+    # ISIC2020: Get data paths
+   
