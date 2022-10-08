@@ -277,4 +277,10 @@ class ISIC2020Dataset(Dataset):
 
 
 
-# APTOS2019: Data
+# APTOS2019: Dataset Class
+class APTOSDataset(Dataset):
+    def __init__(self, base_data_path, split='Train', resized=None, low_data_regimen=None, perc_train=None, transform=None):
+        """
+        Args:
+            base_data_path (string): Data directory.
+            transform (callable, optional): Optional t
