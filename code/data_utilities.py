@@ -283,4 +283,10 @@ class APTOSDataset(Dataset):
         """
         Args:
             base_data_path (string): Data directory.
-            transform (callable, optional): Optional t
+            transform (callable, optional): Optional transform to be applied
+                on a sample.
+        """
+        
+        # Init variables
+        self.images_paths, self.images_labels, self.nr_classes = self.aptos_map_images_and_labels(base_data_path, split=split, resized=resized, low_data_regimen=low_data_regimen, perc_train=perc_train)
+        self.transform = 
