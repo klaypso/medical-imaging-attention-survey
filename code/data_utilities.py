@@ -289,4 +289,12 @@ class APTOSDataset(Dataset):
         
         # Init variables
         self.images_paths, self.images_labels, self.nr_classes = self.aptos_map_images_and_labels(base_data_path, split=split, resized=resized, low_data_regimen=low_data_regimen, perc_train=perc_train)
-        self.transform = 
+        self.transform = transform
+
+        return
+
+
+    # Method: Get labels and paths
+    def aptos_map_images_and_labels(self, base_path, split='Train', resized=None, low_data_regimen=None, perc_train=None):
+
+        assert split in ["Train", "Validation", "Test"], f"Invalid split '{split}'. Please choose from ['Train', 'Validati
