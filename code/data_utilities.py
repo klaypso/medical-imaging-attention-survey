@@ -297,4 +297,13 @@ class APTOSDataset(Dataset):
     # Method: Get labels and paths
     def aptos_map_images_and_labels(self, base_path, split='Train', resized=None, low_data_regimen=None, perc_train=None):
 
-        assert split in ["Train", "Validation", "Test"], f"Invalid split '{split}'. Please choose from ['Train', 'Validati
+        assert split in ["Train", "Validation", "Test"], f"Invalid split '{split}'. Please choose from ['Train', 'Validation', 'Test']."
+
+
+        df = pd.read_csv(os.path.join(base_path, 'train.csv'))
+        
+        if resized:
+            df["id_code"] = df["id_code"].apply(lambda x: os.path.join(base_path, "train_resized", x + '.png'))
+        
+        else:
+            df["id_code"] = df["id_code"].apply(lambda x: os.path.join(base_path, "trai
