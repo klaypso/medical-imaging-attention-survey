@@ -306,4 +306,13 @@ class APTOSDataset(Dataset):
             df["id_code"] = df["id_code"].apply(lambda x: os.path.join(base_path, "train_resized", x + '.png'))
         
         else:
-            df["id_code"] = df["id_code"].apply(lambda x: os.path.join(base_path, "trai
+            df["id_code"] = df["id_code"].apply(lambda x: os.path.join(base_path, "train_images", x + '.png'))
+        
+        # Convert to binary classification
+        df["diagnosis"] = df["diagnosis"].apply(lambda x: 1 if x > 0 else 0)
+        nr_classes = len(np.unique(df["diagnosis"]))
+        # print(nr_classes)
+
+
+        # Regular train, validation and test split
+        X_train, X_test, y
