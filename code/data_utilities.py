@@ -315,4 +315,9 @@ class APTOSDataset(Dataset):
 
 
         # Regular train, validation and test split
-        X_train, X_test, y
+        X_train, X_test, y_train, y_test = train_test_split(df["id_code"].values, df["diagnosis"].values, train_size=0.85, stratify=df["diagnosis"], random_state=42)
+        X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, train_size=0.75, stratify=y_train, random_state=42)
+
+
+        if low_data_regimen:
+            assert perc_train > 0.0 and pe
