@@ -320,4 +320,10 @@ class APTOSDataset(Dataset):
 
 
         if low_data_regimen:
-            assert perc_train > 0.0 and pe
+            assert perc_train > 0.0 and perc_train <= 0.50, f" Invalid perc_train '{perc_train}'. Please be sure that perc_train > 0 and perc_train <= 50"
+
+
+            # Get the data percentage
+            X_train, _, y_train, _ = train_test_split(X_train, y_train, train_size=perc_train, stratify=y_train, random_state=42)
+
+            print(f"Low data reg
