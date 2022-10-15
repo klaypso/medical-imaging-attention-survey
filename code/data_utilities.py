@@ -326,4 +326,20 @@ class APTOSDataset(Dataset):
             # Get the data percentage
             X_train, _, y_train, _ = train_test_split(X_train, y_train, train_size=perc_train, stratify=y_train, random_state=42)
 
-            print(f"Low data reg
+            print(f"Low data regimen.\n% of train data: {perc_train}")
+
+
+
+        # Get splits
+        if split == "Train":
+            return X_train, y_train, nr_classes
+        
+        elif split == "Validation":
+            return X_val, y_val, nr_classes
+        
+        elif split == "Test":
+            return X_test, y_test, nr_classes
+
+
+    # Method: __len__
+    d
