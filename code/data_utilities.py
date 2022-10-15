@@ -342,4 +342,19 @@ class APTOSDataset(Dataset):
 
 
     # Method: __len__
-    d
+    def __len__(self):
+        return len(self.images_paths)
+
+
+    # Method: __getitem__
+    def __getitem__(self, idx):
+        if torch.is_tensor(idx):
+            idx = idx.tolist()
+        
+
+        # Get images
+        img_name = self.images_paths[idx]
+        image = Image.open(img_name)
+
+        # Get labels
+        label = self.images_l
