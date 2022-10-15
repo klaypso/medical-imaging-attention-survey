@@ -357,4 +357,10 @@ class APTOSDataset(Dataset):
         image = Image.open(img_name)
 
         # Get labels
-        label = self.images_l
+        label = self.images_labels[idx]
+
+        # Apply transformation
+        if self.transform:
+            image = self.transform(image)
+
+        return image, label
