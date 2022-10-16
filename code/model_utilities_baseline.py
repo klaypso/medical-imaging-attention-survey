@@ -18,3 +18,15 @@ class DenseNet121(torch.nn.Module):
 
         # Init variables
         self.channels = channels
+        self.height = height
+        self.width = width
+        self.nr_classes = nr_classes
+
+
+        # Init modules
+        # Backbone to extract features
+        self.densenet121 = torchvision.models.densenet121(pretrained=True).features
+
+        # FC-Layers
+        # Compute in_features
+    
