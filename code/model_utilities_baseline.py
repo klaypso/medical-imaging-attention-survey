@@ -48,4 +48,15 @@ class DenseNet121(torch.nn.Module):
         features = torch.reshape(features, (features.size(0), -1))
 
         # FC1-Layer
-        output
+        outputs = self.fc1(features)
+
+
+        return outputs
+
+
+
+# Helper Function: ResNet Conv3x3 (https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py)
+def conv3x3(in_planes: int, out_planes: int, stride: int = 1, groups: int = 1, dilation: int = 1) -> nn.Conv2d:
+    """3x3 convolution with padding"""
+    
+    return
