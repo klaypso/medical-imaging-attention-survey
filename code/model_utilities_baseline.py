@@ -65,4 +65,14 @@ def conv3x3(in_planes: int, out_planes: int, stride: int = 1, groups: int = 1, d
 
 # Helper Function: ResNet Conv1x1 (https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py)
 def conv1x1(in_planes: int, out_planes: int, stride: int = 1) -> nn.Conv2d:
-    """1x1 co
+    """1x1 convolution"""
+    
+    return nn.Conv2d(in_planes, out_planes, kernel_size=1, stride=stride, bias=False)
+
+
+
+# Helper Class: ResNet BasicBlock (https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py)
+class BasicBlock(nn.Module):
+    expansion: int = 1
+
+    def __init__(self, inplanes: int, planes: int, stride:
