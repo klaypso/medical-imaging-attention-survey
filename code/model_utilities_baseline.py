@@ -118,4 +118,13 @@ class BasicBlock(nn.Module):
             identity = self.downsample(x)
 
         out += identity
-        out =
+        out = self.relu2(out)
+
+        return out
+
+
+
+# Helper Class: ResNet Bottleneck (https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py)
+class Bottleneck(nn.Module):
+    # Bottleneck in torchvision places the stride for downsampling at 3x3 convolution(self.conv2)
+    # while original implementation plac
