@@ -139,4 +139,12 @@ class Bottleneck(nn.Module):
         
         
         if norm_layer is None:
-            no
+            norm_layer = nn.BatchNorm2d
+        
+        width = int(planes * (base_width / 64.0)) * groups
+        
+        
+        # Both self.conv2 and self.downsample layers downsample the input when stride != 1
+        self.conv1 = conv1x1(inplanes, width)
+        self.bn1 = norm_layer(width)
+        self.relu1 = nn.ReLU(inpl
