@@ -155,4 +155,19 @@ class Bottleneck(nn.Module):
         
         self.conv3 = conv1x1(width, planes * self.expansion)
         self.bn3 = norm_layer(planes * self.expansion)
-        self.relu3 = nn.Re
+        self.relu3 = nn.ReLU(inplace=False)
+        
+        self.downsample = downsample
+        self.stride = stride
+
+
+    def forward(self, x: Tensor) -> Tensor:
+        identity = x
+
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu1(out)
+
+        out = self.conv2(out)
+        out = self.bn2(out)
+        ou
