@@ -188,4 +188,18 @@ class Bottleneck(nn.Module):
 
 # Helper Function: ResNet (https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py)
 class ResNet(nn.Module):
-    def __init__(self, block: Type[Union[BasicBlock, Bottleneck]], layers: List[int], num_classes: int = 1000, zero_init_residual: bool = False, groups: int = 1, width_per_group: int = 64, replace_stride_with_dilation: Optional[List[bool]] = None, norm_layer: Optional[Callable[..., nn.Modu
+    def __init__(self, block: Type[Union[BasicBlock, Bottleneck]], layers: List[int], num_classes: int = 1000, zero_init_residual: bool = False, groups: int = 1, width_per_group: int = 64, replace_stride_with_dilation: Optional[List[bool]] = None, norm_layer: Optional[Callable[..., nn.Module]] = None) -> None:
+        super().__init__()
+        
+        # _log_api_usage_once(self)
+        
+        if norm_layer is None:
+            norm_layer = nn.BatchNorm2d
+        
+        self._norm_layer = norm_layer
+
+        self.inplanes = 64
+        self.dilation = 1
+        
+        
+        if replace_stride_with_dilation is Non
