@@ -210,4 +210,12 @@ class ResNet(nn.Module):
         
         if len(replace_stride_with_dilation) != 3:
             raise ValueError(
-                "replace_s
+                "replace_stride_with_dilation should be None "
+                f"or a 3-element tuple, got {replace_stride_with_dilation}"
+            )
+        
+        
+        self.groups = groups
+        self.base_width = width_per_group
+        
+        self.conv1 = nn.Conv2d(3, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
