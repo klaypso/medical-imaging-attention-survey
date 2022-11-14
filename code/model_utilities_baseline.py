@@ -231,3 +231,12 @@ class ResNet(nn.Module):
         
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         
+        self.fc = nn.Linear(512 * block.expansion, num_classes)
+
+
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d):
+                nn.init.kaiming_normal_(m.weight, mode="fan_out", nonlinearity="relu")
+            elif isinstance(m, (nn.BatchNorm2d, nn.GroupNorm)):
+                nn.init.constant_(m.weight, 1)
+                
