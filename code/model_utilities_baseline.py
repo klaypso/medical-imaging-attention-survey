@@ -253,4 +253,15 @@ class ResNet(nn.Module):
                     nn.init.constant_(m.bn2.weight, 0)  # type: ignore[arg-type]
 
     def _make_layer(
-        s
+        self,
+        block: Type[Union[BasicBlock, Bottleneck]],
+        planes: int,
+        blocks: int,
+        stride: int = 1,
+        dilate: bool = False,
+    ) -> nn.Sequential:
+        norm_layer = self._norm_layer
+        downsample = None
+        previous_dilation = self.dilation
+        if dilate:
+            self.dilation *= 
