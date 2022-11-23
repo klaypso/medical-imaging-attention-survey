@@ -308,4 +308,15 @@ class ResNet(nn.Module):
 
         x = self.avgpool(x)
         x = torch.flatten(x, 1)
-        x = self.fc(
+        x = self.fc(x)
+
+        return x
+
+
+    def forward(self, x: Tensor) -> Tensor:
+        return self._forward_impl(x)
+
+
+
+# Helper Function: ResNet _resnet (https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py)
+def _resnet(arch: str, block: Type[Union[BasicBlock, Bottleneck]], layers: List[int], pretrained: bool, progress: bo
