@@ -282,4 +282,17 @@ class ResNet(nn.Module):
         for _ in range(1, blocks):
             layers.append(
                 block(
-            
+                    self.inplanes,
+                    planes,
+                    groups=self.groups,
+                    base_width=self.base_width,
+                    dilation=self.dilation,
+                    norm_layer=norm_layer,
+                )
+            )
+
+        return nn.Sequential(*layers)
+
+
+    def _forward_impl(self, x: Tensor) -> Tensor:
+        # S
