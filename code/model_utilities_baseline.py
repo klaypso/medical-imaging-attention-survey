@@ -319,4 +319,10 @@ class ResNet(nn.Module):
 
 
 # Helper Function: ResNet _resnet (https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py)
-def _resnet(arch: str, block: Type[Union[BasicBlock, Bottleneck]], layers: List[int], pretrained: bool, progress: bo
+def _resnet(arch: str, block: Type[Union[BasicBlock, Bottleneck]], layers: List[int], pretrained: bool, progress: bool, **kwargs: Any) -> ResNet:
+    
+    model_urls = {
+        "resnet18": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+        "resnet34": "https://download.pytorch.org/models/resnet34-b627a593.pth",
+        "resnet50": "https://download.pytorch.org/models/resnet50-0676ba61.pth",
+        "resnet101": "https://download.pytor
