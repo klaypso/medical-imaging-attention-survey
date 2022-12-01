@@ -329,4 +329,12 @@ def _resnet(arch: str, block: Type[Union[BasicBlock, Bottleneck]], layers: List[
         "resnet152": "https://download.pytorch.org/models/resnet152-394f9c45.pth",
         "resnext50_32x4d": "https://download.pytorch.org/models/resnext50_32x4d-7cdf4587.pth",
         "resnext101_32x8d": "https://download.pytorch.org/models/resnext101_32x8d-8ba56ff5.pth",
-        "wide_r
+        "wide_resnet50_2": "https://download.pytorch.org/models/wide_resnet50_2-95faca4d.pth",
+        "wide_resnet101_2": "https://download.pytorch.org/models/wide_resnet101_2-32ee1156.pth",
+        }
+
+
+    model = ResNet(block, layers, **kwargs)
+    
+    if pretrained:
+        state_dict = load_state_dict_from_url(model_urls[arch], progress
