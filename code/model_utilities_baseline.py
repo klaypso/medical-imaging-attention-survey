@@ -347,4 +347,10 @@ def _resnet(arch: str, block: Type[Union[BasicBlock, Bottleneck]], layers: List[
 # Helper Function: ResNet resnet50 (https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py)
 def _resnet50(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet:
     r"""ResNet-50 model from
-    `"Deep Residual Learni
+    `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
+    Args:
+        pretrained (bool): If True, returns a model pre-trained on ImageNet
+        progress (bool): If True, displays a progress bar of the download to stderr
+    """
+    
+    return _resnet("resnet50", Bottleneck, [3, 4, 6, 3], pretrained, progre
