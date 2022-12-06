@@ -366,4 +366,14 @@ class ResNet50(torch.nn.Module):
         self.channels = channels
         self.height = height
         self.width = width
-        self.nr_classes = nr_
+        self.nr_classes = nr_classes
+
+
+        # Init modules
+        # Backbone to extract features
+        resnet50 = _resnet50(pretrained=True)
+        self.resnet50 = torch.nn.Sequential(*(list(resnet50.children())[:-1]))
+
+        # FC-Layers
+        # Compute in_features
+        _in_features = torch.rand(1, self.channels, self.height, s
