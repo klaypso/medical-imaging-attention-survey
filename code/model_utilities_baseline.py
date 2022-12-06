@@ -337,4 +337,14 @@ def _resnet(arch: str, block: Type[Union[BasicBlock, Bottleneck]], layers: List[
     model = ResNet(block, layers, **kwargs)
     
     if pretrained:
-        state_dict = load_state_dict_from_url(model_urls[arch], progress
+        state_dict = load_state_dict_from_url(model_urls[arch], progress=progress)
+        model.load_state_dict(state_dict)
+    
+    return model
+
+
+
+# Helper Function: ResNet resnet50 (https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py)
+def _resnet50(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet:
+    r"""ResNet-50 model from
+    `"Deep Residual Learni
