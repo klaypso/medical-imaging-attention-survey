@@ -353,4 +353,17 @@ def _resnet50(pretrained: bool = False, progress: bool = True, **kwargs: Any) ->
         progress (bool): If True, displays a progress bar of the download to stderr
     """
     
-    return _resnet("resnet50", Bottleneck, [3, 4, 6, 3], pretrained, progre
+    return _resnet("resnet50", Bottleneck, [3, 4, 6, 3], pretrained, progress, **kwargs)
+
+
+
+# Model: ResNet 50 (Baseline)
+class ResNet50(torch.nn.Module):
+    def __init__(self, channels, height, width, nr_classes):
+        super(ResNet50, self).__init__()
+
+        # Init variables
+        self.channels = channels
+        self.height = height
+        self.width = width
+        self.nr_classes = nr_
