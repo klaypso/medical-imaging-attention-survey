@@ -387,4 +387,19 @@ class ResNet50(torch.nn.Module):
         return
     
 
-   
+    def forward(self, inputs):
+        # Compute Backbone features
+        features = self.resnet50(inputs)
+
+        # Reshape features
+        features = torch.reshape(features, (features.size(0), -1))
+
+        # FC1-Layer
+        outputs = self.fc1(features)
+
+
+        return outputs
+
+
+
+# Model: VGG-16 (Baselin
