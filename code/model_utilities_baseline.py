@@ -402,4 +402,18 @@ class ResNet50(torch.nn.Module):
 
 
 
-# Model: VGG-16 (Baselin
+# Model: VGG-16 (Baseline)
+class VGG16(torch.nn.Module):
+    def __init__(self, channels, height, width, nr_classes):
+        super(VGG16, self).__init__()
+
+        # Init variables
+        self.channels = channels
+        self.height = height
+        self.width = width
+        self.nr_classes = nr_classes
+
+
+        # Init modules
+        # Backbone to extract features
+   
