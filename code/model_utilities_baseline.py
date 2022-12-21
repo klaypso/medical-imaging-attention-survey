@@ -416,4 +416,10 @@ class VGG16(torch.nn.Module):
 
         # Init modules
         # Backbone to extract features
-   
+        self.vgg16 = torchvision.models.vgg16(pretrained=True).features
+
+        # FC-Layers
+        # Compute in_features
+        _in_features = torch.rand(1, self.channels, self.height, self.width)
+        _in_features = self.vgg16(_in_features)
+        _in_features = _in_features.size(0) * _in_features.size(1)
