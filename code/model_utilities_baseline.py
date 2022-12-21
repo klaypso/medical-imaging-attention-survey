@@ -435,4 +435,11 @@ class VGG16(torch.nn.Module):
         # Compute Backbone features
         features = self.vgg16(inputs)
 
-       
+        # Reshape features
+        features = torch.reshape(features, (features.size(0), -1))
+
+        # FC1-Layer
+        outputs = self.fc1(features)
+
+
+        return outputs
