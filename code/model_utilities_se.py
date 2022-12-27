@@ -11,4 +11,10 @@ import torch.utils.checkpoint as cp
 
 
 
-# ResNet-50 Functions
+# ResNet-50 Functions and Classes
+# Helper Function (from: https://pytorch.org/vision/stable/_modules/torchvision/models/resnet.html#resnet18)
+def conv3x3(in_planes: int, out_planes: int, stride: int = 1, groups: int = 1, dilation: int = 1) -> torch.nn.Conv2d:
+    
+    """3x3 convolution with padding"""
+
+    return torch.nn.Co
