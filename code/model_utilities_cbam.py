@@ -798,3 +798,28 @@ class CBAMDenseNet121(torch.nn.Module):
         self.cbamdensenet121 = model.features
         
         
+        # FC-Layers
+        # Compute in_features
+        _in_features = torch.rand(1, self.channels, self.height, self.width)
+        _in_features = self.cbamdensenet121(_in_features)
+        _in_features = _in_features.size(0) * _in_features.size(1) * _in_features.size(2) * _in_features.size(3)
+
+        # Create FC1 Layer for classification
+        self.fc1 = torch.nn.Linear(in_features=_in_features, out_features=self.nr_classes)
+
+
+        return
+    
+
+    def forward(self, inputs):
+        # Compute Backbone features
+        features = self.cbamdensenet121(inputs)
+
+        # Reshape features
+        features = torch.reshape(features, (features.size(0), -1))
+
+        # FC1-Layer
+        outputs = self.fc1(features)
+
+
+        return outputs
