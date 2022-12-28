@@ -34,4 +34,11 @@ class SELayer(torch.nn.Module):
     def __init__(self, channel, reduction=16):
         super(SELayer, self).__init__()
         
-    
+        # Average Pooling Layer
+        self.avg_pool = torch.nn.AdaptiveAvgPool2d(1)
+        
+        # FC Layer
+        self.fc = torch.nn.Sequential(
+            torch.nn.Linear(channel, channel // reduction, bias=False),
+            torch.nn.ReLU(inplace=False),
+            torch.nn.Linear
