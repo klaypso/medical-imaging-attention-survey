@@ -41,4 +41,21 @@ class SELayer(torch.nn.Module):
         self.fc = torch.nn.Sequential(
             torch.nn.Linear(channel, channel // reduction, bias=False),
             torch.nn.ReLU(inplace=False),
-            torch.nn.Linear
+            torch.nn.Linear(channel // reduction, channel, bias=False),
+            torch.nn.Sigmoid()
+        )
+
+
+    # Method: forward
+    def forward(self, x):
+        
+        b, c, _, _ = x.size()
+        
+        y = self.avg_pool(x).view(b, c)
+        
+        y = self.fc(y).view(b, c, 1, 1)
+        
+        return x * y.expand_as(x)
+
+
+
