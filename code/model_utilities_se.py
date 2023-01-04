@@ -76,4 +76,12 @@ class SEBottleneck(torch.nn.Module):
         self.bn1 = torch.nn.BatchNorm2d(planes)
         
         # Conv + BN 2
-        self.conv2 = torch.nn.Conv2d(planes, planes, ke
+        self.conv2 = torch.nn.Conv2d(planes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
+        self.bn2 = torch.nn.BatchNorm2d(planes)
+        
+        # Conv + BN 3
+        self.conv3 = torch.nn.Conv2d(planes, planes * 4, kernel_size=1, bias=False)
+        self.bn3 = torch.nn.BatchNorm2d(planes * 4)
+        
+        # ReLU
+        self.relu1 = torch.nn
