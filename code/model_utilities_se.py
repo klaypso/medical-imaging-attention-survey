@@ -84,4 +84,14 @@ class SEBottleneck(torch.nn.Module):
         self.bn3 = torch.nn.BatchNorm2d(planes * 4)
         
         # ReLU
-        self.relu1 = torch.nn
+        self.relu1 = torch.nn.ReLU(inplace=False)
+        self.relu2 = torch.nn.ReLU(inplace=False)
+        self.relu3 = torch.nn.ReLU(inplace=False)
+        
+        # Squeeze-Excitation Block
+        self.se = SELayer(planes * 4, reduction)
+        
+        # Downsample
+        self.downsample = downsample
+        
+       
