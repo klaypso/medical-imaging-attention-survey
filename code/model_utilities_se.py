@@ -134,4 +134,17 @@ class SEResNet50(torch.nn.Module):
         self.height = height
         self.width = width
         self.nr_classes = nr_classes
-        self.weights_url = "https://github.com/moskomule/senet.pytorch/releases/
+        self.weights_url = "https://github.com/moskomule/senet.pytorch/releases/download/archive/seresnet50-60a8950a85b2b.pkl"
+
+
+        # Init modules
+        # Get model
+        model = ResNet(SEBottleneck, [3, 4, 6, 3])
+        model.avgpool = torch.nn.AdaptiveAvgPool2d(1)
+
+        
+        # Load pretrained weights
+        model.load_state_dict(load_state_dict_from_url(self.weights_url))
+
+
+    
