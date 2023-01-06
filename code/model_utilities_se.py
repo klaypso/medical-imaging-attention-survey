@@ -111,4 +111,19 @@ class SEBottleneck(torch.nn.Module):
         out = self.relu2(out)
 
         out = self.conv3(out)
-        out = self.bn3(ou
+        out = self.bn3(out)
+        out = self.se(out)
+
+        if self.downsample is not None:
+            residual = self.downsample(x)
+
+        out += residual
+        out = self.relu3(out)
+
+        return out
+
+
+
+# Model: SEResNet50 (adapted from: https://github.com/moskomule/senet.pytorch)
+class SEResNet50(torch.nn.Module):
+    def __init__(self, c
