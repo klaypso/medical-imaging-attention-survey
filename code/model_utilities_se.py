@@ -126,4 +126,12 @@ class SEBottleneck(torch.nn.Module):
 
 # Model: SEResNet50 (adapted from: https://github.com/moskomule/senet.pytorch)
 class SEResNet50(torch.nn.Module):
-    def __init__(self, c
+    def __init__(self, channels, height, width, nr_classes):
+        super(SEResNet50, self).__init__()
+
+        # Init variables
+        self.channels = channels
+        self.height = height
+        self.width = width
+        self.nr_classes = nr_classes
+        self.weights_url = "https://github.com/moskomule/senet.pytorch/releases/
