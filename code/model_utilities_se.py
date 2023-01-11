@@ -158,4 +158,26 @@ class SEResNet50(torch.nn.Module):
         _in_features = _in_features.size(0) * _in_features.size(1) * _in_features.size(2) * _in_features.size(3)
 
         # Create FC1 Layer for classification
-        self.fc1 = torch.nn.Linear(in_features=_in_features, out_features=self.nr_class
+        self.fc1 = torch.nn.Linear(in_features=_in_features, out_features=self.nr_classes)
+
+
+        return
+    
+
+    def forward(self, inputs):
+        # Compute SE features
+        features = self.se_resnet50(inputs)
+
+        # Reshape features
+        features = torch.reshape(features, (features.size(0), -1))
+
+        # FC1-Layer
+        outputs = self.fc1(features)
+
+        return outputs
+
+
+
+
+# VGG-16 Functions and Classes
+# H
