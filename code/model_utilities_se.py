@@ -147,4 +147,10 @@ class SEResNet50(torch.nn.Module):
         model.load_state_dict(load_state_dict_from_url(self.weights_url))
 
 
-    
+        # Create our new models
+        # We start by converting this model into a new one withouht the FC layers
+        self.se_resnet50 = torch.nn.Sequential(*(list(model.children())[:-1]))
+
+        # FC-Layers
+        # Compute in_features
+        _in_features = torch.rand(1, self.channels, s
