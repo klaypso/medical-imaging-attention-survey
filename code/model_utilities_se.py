@@ -153,4 +153,9 @@ class SEResNet50(torch.nn.Module):
 
         # FC-Layers
         # Compute in_features
-        _in_features = torch.rand(1, self.channels, s
+        _in_features = torch.rand(1, self.channels, self.height, self.width)
+        _in_features = self.se_resnet50(_in_features)
+        _in_features = _in_features.size(0) * _in_features.size(1) * _in_features.size(2) * _in_features.size(3)
+
+        # Create FC1 Layer for classification
+        self.fc1 = torch.nn.Linear(in_features=_in_features, out_features=self.nr_class
