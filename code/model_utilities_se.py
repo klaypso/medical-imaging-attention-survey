@@ -180,4 +180,10 @@ class SEResNet50(torch.nn.Module):
 
 
 # VGG-16 Functions and Classes
-# H
+# Helper Function: Create VGG layers with SE Layer Blocks (adapted from: https://pytorch.org/vision/stable/_modules/torchvision/models/vgg.html#vgg16)
+def make_layers_se(cfg: List[Union[str, int]], batch_norm: bool = False) -> torch.nn.Sequential:
+    layers: List[torch.nn.Module] = []
+    in_channels = 3
+    
+    for v in cfg:
+        i
