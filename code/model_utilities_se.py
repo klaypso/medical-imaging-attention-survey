@@ -217,4 +217,11 @@ class SEVGG16(torch.nn.Module):
         super(SEVGG16, self).__init__()
 
         # Init variables
-        self.chann
+        self.channels = channels
+        self.height = height
+        self.width = width
+        self.nr_classes = nr_classes
+        self.weights_url = 'https://download.pytorch.org/models/vgg16-397923af.pth'
+        self.cfgs: Dict[str, List[Union[str, int]]] = {
+            'A': [64, 'M', 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M'],
+   
