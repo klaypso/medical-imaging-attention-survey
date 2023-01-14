@@ -194,4 +194,20 @@ def make_layers_se(cfg: List[Union[str, int]], batch_norm: bool = False) -> torc
         
         else:
             v = cast(int, v)
-            conv2d = torch.nn.Conv2d(in_channels, v, kernel_size=3, padding
+            conv2d = torch.nn.Conv2d(in_channels, v, kernel_size=3, padding=1)
+
+            
+            if batch_norm:
+                layers += [conv2d, torch.nn.BatchNorm2d(v), torch.nn.ReLU(inplace=False)]
+            
+            else:
+                layers += [conv2d, torch.nn.ReLU(inplace=False)]
+
+            
+            in_channels = v
+
+    
+    return torch.nn.Sequential(*layers)
+
+
+
