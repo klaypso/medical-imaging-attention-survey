@@ -227,3 +227,15 @@ class SEVGG16(torch.nn.Module):
             'B': [64, 64, 'M', 128, 128, 'M', 256, 256, 'M', 512, 512, 'M', 512, 512, 'M'],
             'D': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'M', 512, 512, 512, 'M', 512, 512, 512, 'M'],
             'E': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 256, 'M', 512, 512, 512, 512, 'M', 512, 512, 512, 512, 'M'],
+            }
+
+
+        # Init modules
+        # Build SEVGG16 to extract features
+        if pretrained:
+            kwargs = dict()
+            kwargs['init_weights'] = False
+
+            model = VGG(make_layers_se(self.cfgs['D'], batch_norm=False), **kwargs)
+
+            state_dict = load_state_dict_from_u
