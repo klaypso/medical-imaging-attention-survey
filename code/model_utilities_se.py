@@ -238,4 +238,14 @@ class SEVGG16(torch.nn.Module):
 
             model = VGG(make_layers_se(self.cfgs['D'], batch_norm=False), **kwargs)
 
-            state_dict = load_state_dict_from_u
+            state_dict = load_state_dict_from_url(self.weights_url, progress=True)
+            
+            # To prevent problems with keys: strict=False
+            model.load_state_dict(state_dict, strict=False)
+        
+
+        else:
+            model = VGG(make_layers_se(self.cfgs['D'], batch_norm=False), init_weights=False)
+
+
+        # Get the feature
