@@ -248,4 +248,12 @@ class SEVGG16(torch.nn.Module):
             model = VGG(make_layers_se(self.cfgs['D'], batch_norm=False), init_weights=False)
 
 
-        # Get the feature
+        # Get the features of the model with the SE Layer
+        self.se_vgg16 = model.features
+
+
+        # FC-Layers
+        # Compute in_features
+        _in_features = torch.rand(1, self.channels, self.height, self.width)
+        _in_features = self.se_vgg16(_in_features)
+        _in_features = _in_features.size(0) * _in_features.size(1) * _in_fe
