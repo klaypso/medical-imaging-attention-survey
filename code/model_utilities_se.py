@@ -256,4 +256,18 @@ class SEVGG16(torch.nn.Module):
         # Compute in_features
         _in_features = torch.rand(1, self.channels, self.height, self.width)
         _in_features = self.se_vgg16(_in_features)
-        _in_features = _in_features.size(0) * _in_features.size(1) * _in_fe
+        _in_features = _in_features.size(0) * _in_features.size(1) * _in_features.size(2) * _in_features.size(3)
+
+        # Create FC1 Layer for classification
+        self.fc1 = torch.nn.Linear(in_features=_in_features, out_features=self.nr_classes)
+
+
+        return
+    
+
+    def forward(self, inputs):
+        # Compute Backbone features
+        features = self.se_vgg16(inputs)
+
+        # Reshape features
+        features 
