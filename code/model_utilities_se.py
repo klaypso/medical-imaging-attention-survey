@@ -281,4 +281,15 @@ class SEVGG16(torch.nn.Module):
 
 
 # DenseNet-121 Functions and Classes (adapted from: https://pytorch.org/vision/stable/_modules/torchvision/models/densenet.html#densenet121)
-# Helper Class: Dense Layer Cla
+# Helper Class: Dense Layer Class
+class _DenseLayer(torch.nn.Module):
+    def __init__(
+        self,
+        num_input_features: int,
+        growth_rate: int,
+        bn_size: int,
+        drop_rate: float,
+        memory_efficient: bool = False
+    ) -> None:
+        super(_DenseLayer, self).__init__()
+        self.norm1: torch.nn
