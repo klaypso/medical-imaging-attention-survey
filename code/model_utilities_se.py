@@ -292,4 +292,10 @@ class _DenseLayer(torch.nn.Module):
         memory_efficient: bool = False
     ) -> None:
         super(_DenseLayer, self).__init__()
-        self.norm1: torch.nn
+        self.norm1: torch.nn.BatchNorm2d
+        self.add_module('norm1', torch.nn.BatchNorm2d(num_input_features))
+        self.relu1: torch.nn.ReLU
+        self.add_module('relu1', torch.nn.ReLU(inplace=False))
+        self.conv1: torch.nn.Conv2d
+        self.add_module('conv1', torch.nn.Conv2d(num_input_features, bn_size *
+       
