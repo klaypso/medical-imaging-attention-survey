@@ -303,4 +303,9 @@ class _DenseLayer(torch.nn.Module):
         self.norm2: torch.nn.BatchNorm2d
         self.add_module('norm2', torch.nn.BatchNorm2d(bn_size * growth_rate))
         self.relu2: torch.nn.ReLU
-        self.add_module('rel
+        self.add_module('relu2', torch.nn.ReLU(inplace=False))
+        self.conv2: torch.nn.Conv2d
+        self.add_module('conv2', torch.nn.Conv2d(bn_size * growth_rate, growth_rate,
+                                           kernel_size=3, stride=1, padding=1,
+                                           bias=False))
+        self.drop_rate = f
