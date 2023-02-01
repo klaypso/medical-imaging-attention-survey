@@ -270,4 +270,15 @@ class SEVGG16(torch.nn.Module):
         features = self.se_vgg16(inputs)
 
         # Reshape features
-        features 
+        features = torch.reshape(features, (features.size(0), -1))
+
+        # FC1-Layer
+        outputs = self.fc1(features)
+
+
+        return outputs
+
+
+
+# DenseNet-121 Functions and Classes (adapted from: https://pytorch.org/vision/stable/_modules/torchvision/models/densenet.html#densenet121)
+# Helper Class: Dense Layer Cla
