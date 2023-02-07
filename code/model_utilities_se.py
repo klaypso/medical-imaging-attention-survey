@@ -316,4 +316,12 @@ class _DenseLayer(torch.nn.Module):
         bottleneck_output = self.conv1(self.relu1(self.norm1(concated_features)))  # noqa: T484
         return bottleneck_output
 
-    # to
+    # todo: rewrite when torchscript supports any
+    def any_requires_grad(self, input: List[torch.Tensor]) -> bool:
+        for tensor in input:
+            if tensor.requires_grad:
+                return True
+        return False
+
+    @torch.jit.unused  # noqa: T484
+    def call_checkpoint_bottleneck(self, input: List[torch.Tensor]) -> torch.Tensor:
