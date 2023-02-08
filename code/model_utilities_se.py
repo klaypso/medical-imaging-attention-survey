@@ -335,4 +335,11 @@ class _DenseLayer(torch.nn.Module):
         pass
 
     @torch.jit._overload_method  # noqa: F811
-    def forward(self, input:
+    def forward(self, input: torch.Tensor) -> torch.Tensor:
+        pass
+
+    # torchscript does not yet support *args, so we overload method
+    # allowing it to take either a List[Tensor] or single Tensor
+    def forward(self, input: torch.Tensor) -> torch.Tensor:  # noqa: F811
+        if isinstance(input, torch.Tensor):
+            prev_features = [input]
