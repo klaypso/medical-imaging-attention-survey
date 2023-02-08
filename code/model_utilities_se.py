@@ -325,3 +325,14 @@ class _DenseLayer(torch.nn.Module):
 
     @torch.jit.unused  # noqa: T484
     def call_checkpoint_bottleneck(self, input: List[torch.Tensor]) -> torch.Tensor:
+        def closure(*inputs):
+            return self.bn_function(inputs)
+
+        return cp.checkpoint(closure, *input)
+
+    @torch.jit._overload_method  # noqa: F811
+    def forward(self, input: List[torch.Tensor]) -> torch.Tensor:
+        pass
+
+    @torch.jit._overload_method  # noqa: F811
+    def forward(self, input:
