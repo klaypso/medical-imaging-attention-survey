@@ -375,4 +375,12 @@ class _DenseBlock(torch.nn.ModuleDict):
         drop_rate: float,
         memory_efficient: bool = False
     ) -> None:
-        super(_Den
+        super(_DenseBlock, self).__init__()
+        for i in range(num_layers):
+            layer = _DenseLayer(
+                num_input_features + i * growth_rate,
+                growth_rate=growth_rate,
+                bn_size=bn_size,
+                drop_rate=drop_rate,
+                memory_efficient=memory_efficient,
+            )
