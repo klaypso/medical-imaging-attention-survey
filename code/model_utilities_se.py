@@ -401,4 +401,12 @@ class _Transition(torch.nn.Sequential):
         super(_Transition, self).__init__()
         self.add_module('norm', torch.nn.BatchNorm2d(num_input_features))
         self.add_module('relu', torch.nn.ReLU(inplace=False))
-      
+        self.add_module('conv', torch.nn.Conv2d(num_input_features, num_output_features, kernel_size=1, stride=1, bias=False))
+        self.add_module('pool', torch.nn.AvgPool2d(kernel_size=2, stride=2))
+
+
+
+# Helper Class: SEDenseNet Class
+class SEDenseNet(torch.nn.Module):
+    r"""Densenet-BC model class, based on
+    `"Densely C
