@@ -359,3 +359,20 @@ class _DenseLayer(torch.nn.Module):
             new_features = torch.nn.functional.dropout(new_features, p=self.drop_rate,
                                      training=self.training)
         return new_features
+
+
+
+# Helper Class: Dense Block Class
+class _DenseBlock(torch.nn.ModuleDict):
+    _version = 2
+
+    def __init__(
+        self,
+        num_layers: int,
+        num_input_features: int,
+        bn_size: int,
+        growth_rate: int,
+        drop_rate: float,
+        memory_efficient: bool = False
+    ) -> None:
+        super(_Den
