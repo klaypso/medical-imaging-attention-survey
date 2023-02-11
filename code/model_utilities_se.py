@@ -391,4 +391,14 @@ class _DenseBlock(torch.nn.ModuleDict):
         for name, layer in self.items():
             new_features = layer(features)
             features.append(new_features)
-        return torch.cat(features, 1
+        return torch.cat(features, 1)
+
+
+
+# Helper Class: Transition Layer Class
+class _Transition(torch.nn.Sequential):
+    def __init__(self, num_input_features: int, num_output_features: int) -> None:
+        super(_Transition, self).__init__()
+        self.add_module('norm', torch.nn.BatchNorm2d(num_input_features))
+        self.add_module('relu', torch.nn.ReLU(inplace=False))
+      
