@@ -428,4 +428,14 @@ class SEDenseNet(torch.nn.Module):
         growth_rate: int = 32,
         block_config: Tuple[int, int, int, int] = (6, 12, 24, 16),
         num_init_features: int = 64,
- 
+        bn_size: int = 4,
+        drop_rate: float = 0,
+        num_classes: int = 1000,
+        memory_efficient: bool = False
+    ) -> None:
+
+        super(SEDenseNet, self).__init__()
+
+        # First convolution
+        self.features = torch.nn.Sequential(OrderedDict([
+            ('conv0', torch.nn.Conv2d(3, num_init_features, ke
