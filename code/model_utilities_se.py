@@ -419,4 +419,13 @@ class SEDenseNet(torch.nn.Module):
           (i.e. bn_size * k features in the bottleneck layer)
         drop_rate (float) - dropout rate after each dense layer
         num_classes (int) - number of classification classes
-        memory_efficient (bool) - If Tru
+        memory_efficient (bool) - If True, uses checkpointing. Much more memory efficient,
+          but slower. Default: *False*. See `"paper" <https://arxiv.org/pdf/1707.06990.pdf>`_.
+    """
+
+    def __init__(
+        self,
+        growth_rate: int = 32,
+        block_config: Tuple[int, int, int, int] = (6, 12, 24, 16),
+        num_init_features: int = 64,
+ 
