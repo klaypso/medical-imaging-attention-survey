@@ -409,4 +409,9 @@ class _Transition(torch.nn.Sequential):
 # Helper Class: SEDenseNet Class
 class SEDenseNet(torch.nn.Module):
     r"""Densenet-BC model class, based on
-    `"Densely C
+    `"Densely Connected Convolutional Networks" <https://arxiv.org/pdf/1608.06993.pdf>`_.
+
+    Args:
+        growth_rate (int) - how many filters to add each layer (`k` in paper)
+        block_config (list of 4 ints) - how many layers in each pooling block
+        num_init_features (int) - the number of filters to learn in t
