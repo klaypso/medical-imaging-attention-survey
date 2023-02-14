@@ -438,4 +438,12 @@ class SEDenseNet(torch.nn.Module):
 
         # First convolution
         self.features = torch.nn.Sequential(OrderedDict([
-            ('conv0', torch.nn.Conv2d(3, num_init_features, ke
+            ('conv0', torch.nn.Conv2d(3, num_init_features, kernel_size=7, stride=2, padding=3, bias=False)),
+            ('norm0', torch.nn.BatchNorm2d(num_init_features)),
+            ('relu0', torch.nn.ReLU(inplace=False)),
+            ('pool0', torch.nn.MaxPool2d(kernel_size=3, stride=2, padding=1)),
+        ]))
+
+        # Each denseblock
+        num_features = num_init_features
+      
