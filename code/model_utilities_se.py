@@ -454,4 +454,14 @@ class SEDenseNet(torch.nn.Module):
                 growth_rate=growth_rate,
                 drop_rate=drop_rate,
                 memory_efficient=memory_efficient
-         
+            )
+            self.features.add_module('denseblock%d' % (i + 1), block)
+            
+
+            # Current number of features
+            num_features = num_features + num_layers * growth_rate
+
+
+            # We add SELayer between each Dense Block and Transition Block
+            selayer = SELayer(channel=num_features)
+ 
