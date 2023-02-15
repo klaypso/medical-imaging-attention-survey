@@ -470,4 +470,14 @@ class SEDenseNet(torch.nn.Module):
             # Each Transition Block
             if i != len(block_config) - 1:
                 trans = _Transition(num_input_features=num_features, num_output_features=num_features // 2)
-                self.features.add_module('transition%d' % (i + 1), t
+                self.features.add_module('transition%d' % (i + 1), trans)
+                num_features = num_features // 2
+
+        # Final batch norm
+        self.features.add_module('norm5', torch.nn.BatchNorm2d(num_features))
+
+        # Linear layer
+        self.classifier = torch.nn.Linear(num_features, num_classes)
+
+        # Official init from torch repo.
+        for m in 
