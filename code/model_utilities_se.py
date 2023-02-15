@@ -464,4 +464,10 @@ class SEDenseNet(torch.nn.Module):
 
             # We add SELayer between each Dense Block and Transition Block
             selayer = SELayer(channel=num_features)
- 
+            self.features.add_module('selayer%d' % (i + 1), selayer)
+
+
+            # Each Transition Block
+            if i != len(block_config) - 1:
+                trans = _Transition(num_input_features=num_features, num_output_features=num_features // 2)
+                self.features.add_module('transition%d' % (i + 1), t
