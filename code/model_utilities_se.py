@@ -496,4 +496,14 @@ class SEDenseNet(torch.nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         features = self.features(x)
-        out = torch.nn.functional.relu(featu
+        out = torch.nn.functional.relu(features, inplace=False)
+        out = torch.nn.functional.adaptive_avg_pool2d(out, (1, 1))
+        out = torch.flatten(out, 1)
+        out = self.classifier(out)
+        return out
+
+
+
+# Model: SEDenseNet-121 (adapted from source "_densenet" and "densenet121")
+class SEDenseNet121(torch.nn.Module):
+    def __init__(self, channels,
