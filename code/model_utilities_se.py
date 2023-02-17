@@ -480,4 +480,10 @@ class SEDenseNet(torch.nn.Module):
         self.classifier = torch.nn.Linear(num_features, num_classes)
 
         # Official init from torch repo.
-        for m in 
+        for m in self.modules():
+            if m != None:
+                if isinstance(m, torch.nn.Conv2d):
+                    torch.nn.init.kaiming_normal_(m.weight)
+                elif isinstance(m, torch.nn.BatchNorm2d):
+                    torch.nn.init.constant_(m.weight, 1)
+                    torch.nn.init.constant_
