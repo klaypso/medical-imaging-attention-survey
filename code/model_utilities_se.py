@@ -486,4 +486,14 @@ class SEDenseNet(torch.nn.Module):
                     torch.nn.init.kaiming_normal_(m.weight)
                 elif isinstance(m, torch.nn.BatchNorm2d):
                     torch.nn.init.constant_(m.weight, 1)
-                    torch.nn.init.constant_
+                    torch.nn.init.constant_(m.bias, 0)
+                elif isinstance(m, torch.nn.Linear):
+                    try:
+                        torch.nn.init.constant_(m.bias, 0)
+                    except:
+                        pass
+
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        features = self.features(x)
+        out = torch.nn.functional.relu(featu
