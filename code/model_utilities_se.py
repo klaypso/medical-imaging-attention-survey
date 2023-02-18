@@ -506,4 +506,12 @@ class SEDenseNet(torch.nn.Module):
 
 # Model: SEDenseNet-121 (adapted from source "_densenet" and "densenet121")
 class SEDenseNet121(torch.nn.Module):
-    def __init__(self, channels,
+    def __init__(self, channels, height, width, nr_classes, pretrained=False):
+        super(SEDenseNet121, self).__init__()
+
+        # Init variables
+        self.channels = channels
+        self.height = height
+        self.width = width
+        self.nr_classes = nr_classes
+        self.weigths_url = 'https://download.pytorch.org/models/de
