@@ -514,4 +514,14 @@ class SEDenseNet121(torch.nn.Module):
         self.height = height
         self.width = width
         self.nr_classes = nr_classes
-        self.weigths_url = 'https://download.pytorch.org/models/de
+        self.weigths_url = 'https://download.pytorch.org/models/densenet121-a639ec97.pth'
+        self.arch = 'densenet121'
+        self.growth_rate = 32
+        self.block_config = (6, 12, 24, 16)
+        self.num_init_features = 64
+        self.pretrained = pretrained
+        self.progress = True
+
+
+        # Create model
+        model = SEDenseNet(self.growth_rate, self.block_config, se
