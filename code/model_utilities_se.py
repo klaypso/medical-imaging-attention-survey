@@ -531,4 +531,10 @@ class SEDenseNet121(torch.nn.Module):
         if self.pretrained:
             # '.'s are no longer allowed in module names, but previous _DenseLayer
             # has keys 'norm.1', 'relu.1', 'conv.1', 'norm.2', 'relu.2', 'conv.2'.
-            # They are also in the checkpo
+            # They are also in the checkpoints in model_urls. This pattern is used
+            # to find such keys.
+            pattern = re.compile(r'^(.*denselayer\d+\.(?:norm|relu|conv))\.((?:[12])\.(?:weight|bias|running_mean|running_var))$')
+            state_dict = load_state_dict_from_url(self.weigths_url, progress=self.progress)
+
+            # Go through keys
+    
