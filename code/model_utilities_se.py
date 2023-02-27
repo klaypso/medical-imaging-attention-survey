@@ -547,4 +547,14 @@ class SEDenseNet121(torch.nn.Module):
             
 
             # Load state dict
-            model.load_state_dict(state_
+            model.load_state_dict(state_dict)
+        
+
+        # Else (i.e., no pretraining)
+        self.sedensenet121 = model.features
+        
+        
+        # FC-Layers
+        # Compute in_features
+        _in_features = torch.rand(1, self.channels, self.height, self.width)
+        _in_features = self.sedensenet121(_in_features)
