@@ -537,4 +537,14 @@ class SEDenseNet121(torch.nn.Module):
             state_dict = load_state_dict_from_url(self.weigths_url, progress=self.progress)
 
             # Go through keys
-    
+            for key in list(state_dict.keys()):
+                res = pattern.match(key)
+
+                if res:
+                    new_key = res.group(1) + res.group(2)
+                    state_dict[new_key] = state_dict[key]
+                    del state_dict[key]
+            
+
+            # Load state dict
+            model.load_state_dict(state_
