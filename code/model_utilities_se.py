@@ -524,4 +524,11 @@ class SEDenseNet121(torch.nn.Module):
 
 
         # Create model
-        model = SEDenseNet(self.growth_rate, self.block_config, se
+        model = SEDenseNet(self.growth_rate, self.block_config, self.num_init_features)
+
+
+        # If pretrained (adapted from source "_load_state_dict function")
+        if self.pretrained:
+            # '.'s are no longer allowed in module names, but previous _DenseLayer
+            # has keys 'norm.1', 'relu.1', 'conv.1', 'norm.2', 'relu.2', 'conv.2'.
+            # They are also in the checkpo
