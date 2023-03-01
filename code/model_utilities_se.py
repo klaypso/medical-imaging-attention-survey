@@ -568,4 +568,14 @@ class SEDenseNet121(torch.nn.Module):
     
 
     def forward(self, inputs):
-  
+        # Compute Backbone features
+        features = self.sedensenet121(inputs)
+
+        # Reshape features
+        features = torch.reshape(features, (features.size(0), -1))
+
+        # FC1-Layer
+        outputs = self.fc1(features)
+
+
+        return outputs
