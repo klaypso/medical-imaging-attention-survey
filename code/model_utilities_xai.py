@@ -44,3 +44,10 @@ class CustomLRP(LRP):
             ChannelPool: EpsilonRule,
             }
 
+        for layer in self.layers:
+            if hasattr(layer, "rule"):
+                layer.activations = {}  # type: ignore
+                layer.rule.relevance_input = defaultdict(list)  # type: ignore
+                layer.rule.relevance_output = {}  # type: ignore
+                pass
+            elif type(layer) in
