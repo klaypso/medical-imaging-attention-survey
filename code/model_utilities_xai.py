@@ -24,4 +24,14 @@ from model_utilities_cbam import ChannelPool
 # Fix Random Seeds
 random_seed = 42
 torch.manual_seed(random_seed)
-np.random.seed(rand
+np.random.seed(random_seed)
+
+
+# Class: CustomLRP
+class CustomLRP(LRP):
+    def _check_and_attach_rules(self) -> None:
+        SUPPORTED_NON_LINEAR_LAYERS = [nn.ReLU, nn.Dropout, nn.Tanh, nn.Sigmoid]
+        SUPPORTED_LAYERS_WITH_RULES = {
+            nn.MaxPool1d: EpsilonRule,
+            nn.MaxPool2d: EpsilonRule,
+            
