@@ -34,4 +34,13 @@ class CustomLRP(LRP):
         SUPPORTED_LAYERS_WITH_RULES = {
             nn.MaxPool1d: EpsilonRule,
             nn.MaxPool2d: EpsilonRule,
-            
+            nn.MaxPool3d: EpsilonRule,
+            nn.Conv2d: EpsilonRule,
+            nn.AvgPool2d: EpsilonRule,
+            nn.AdaptiveAvgPool2d: EpsilonRule,
+            nn.Linear: EpsilonRule,
+            nn.BatchNorm2d: EpsilonRule,
+            Addition_Module: EpsilonRule,
+            ChannelPool: EpsilonRule,
+            }
+
