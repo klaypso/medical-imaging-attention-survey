@@ -50,4 +50,8 @@ class CustomLRP(LRP):
                 layer.rule.relevance_input = defaultdict(list)  # type: ignore
                 layer.rule.relevance_output = {}  # type: ignore
                 pass
-            elif type(layer) in
+            elif type(layer) in SUPPORTED_LAYERS_WITH_RULES.keys():
+                layer.activations = {}  # type: ignore
+                layer.rule = SUPPORTED_LAYERS_WITH_RULES[type(layer)]()  # type: ignore
+                layer.rule.relevance_input = defaultdict(list)  # type: ignore
+                layer.rule.relevance_output = {}  # t
