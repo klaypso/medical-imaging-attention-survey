@@ -69,4 +69,12 @@ class CustomLRP(LRP):
     
 
     def _check_rules(self) -> None:
-        for module in self.mod
+        for module in self.model.modules():
+            if hasattr(module, "rule"):
+                if (
+                    not isinstance(module.rule, PropagationRule)
+                    and module.rule is not None
+                ):
+                    raise TypeError(
+                        (
+                            f"Please select propagation rules inherited from clas
