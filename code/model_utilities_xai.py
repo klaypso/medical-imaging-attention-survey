@@ -61,4 +61,12 @@ class CustomLRP(LRP):
                 raise TypeError(
                     (
                         f"Module of type {type(layer)} has no rule defined and no"
-             
+                        "default rule exists for this module type. Please, set a rule"
+                        "explicitly for this module and assure that it is appropriate"
+                        "for this type of layer."
+                    )
+                )
+    
+
+    def _check_rules(self) -> None:
+        for module in self.mod
