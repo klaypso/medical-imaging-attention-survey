@@ -77,4 +77,14 @@ class CustomLRP(LRP):
                 ):
                     raise TypeError(
                         (
-                            f"Please select propagation rules inherited from clas
+                            f"Please select propagation rules inherited from class "
+                            f"PropagationRule for module: {module}"
+                        )
+                    )
+
+
+    def _register_forward_hooks(self) -> None:
+        SUPPORTED_NON_LINEAR_LAYERS = [nn.ReLU, nn.Dropout, nn.Tanh, nn.Sigmoid]
+
+        for layer in self.layers:
+            if type(layer) 
