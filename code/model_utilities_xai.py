@@ -54,4 +54,11 @@ class CustomLRP(LRP):
                 layer.activations = {}  # type: ignore
                 layer.rule = SUPPORTED_LAYERS_WITH_RULES[type(layer)]()  # type: ignore
                 layer.rule.relevance_input = defaultdict(list)  # type: ignore
-                layer.rule.relevance_output = {}  # t
+                layer.rule.relevance_output = {}  # type: ignore
+            elif type(layer) in SUPPORTED_NON_LINEAR_LAYERS:
+                layer.rule = None  # type: ignore
+            else:
+                raise TypeError(
+                    (
+                        f"Module of type {type(layer)} has no rule defined and no"
+             
