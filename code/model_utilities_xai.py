@@ -93,4 +93,13 @@ class CustomLRP(LRP):
                 )
                 self.backward_handles.append(backward_handle)
             else:
-                forward_handle = layer.register_forw
+                forward_handle = layer.register_forward_hook(
+                    layer.rule.forward_hook  # type: ignore
+                )
+                self.forward_handles.append(forward_handle)
+                if self.verbose:
+                    print(f"Applied {layer.rule} on layer {layer}")
+
+
+    def _register_weight_hooks(self) -> None:
+        f
