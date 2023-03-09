@@ -87,4 +87,10 @@ class CustomLRP(LRP):
         SUPPORTED_NON_LINEAR_LAYERS = [nn.ReLU, nn.Dropout, nn.Tanh, nn.Sigmoid]
 
         for layer in self.layers:
-            if type(layer) 
+            if type(layer) in SUPPORTED_NON_LINEAR_LAYERS:
+                backward_handle = layer.register_backward_hook(
+                    PropagationRule.backward_hook_activation
+                )
+                self.backward_handles.append(backward_handle)
+            else:
+                forward_handle = layer.register_forw
