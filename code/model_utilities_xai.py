@@ -102,4 +102,13 @@ class CustomLRP(LRP):
 
 
     def _register_weight_hooks(self) -> None:
-        f
+        for layer in self.layers:
+            if layer.rule is not None:
+                forward_handle = layer.register_forward_hook(
+                    layer.rule.forward_hook_weights  # type: ignore
+                )
+                self.forward_handles.append(forward_handle)
+
+
+    def _register_pre_hooks(self) -> None:
+        for lay
