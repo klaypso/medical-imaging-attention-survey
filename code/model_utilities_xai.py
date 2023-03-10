@@ -120,4 +120,14 @@ class CustomLRP(LRP):
 
 
 
-# Function: A generic function that 
+# Function: A generic function that will be used for calling attribute on attribution algorithm defined in input
+def attribute_image_features(model, algorithm, img_input, gt_label, **kwargs):
+    model.zero_grad()
+    tensor_attributions = algorithm.attribute(img_input, target=gt_label, **kwargs)
+
+
+    return tensor_attributions
+
+
+
+# Function: Function to unno
