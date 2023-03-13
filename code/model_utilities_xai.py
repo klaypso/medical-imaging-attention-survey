@@ -130,4 +130,18 @@ def attribute_image_features(model, algorithm, img_input, gt_label, **kwargs):
 
 
 
-# Function: Function to unno
+# Function: Function to unnormalize images
+def unnormalize(image, mean_array, std_array):
+
+    # Create a copy
+    unnormalized_img = image.copy()
+
+    # Get channels
+    _, _, channels = unnormalized_img.shape
+
+
+    for c in range(channels):
+        unnormalized_img[:, :, c] = image[:, :, c] * std_array[c] + mean_array[c]
+
+
+    retu
