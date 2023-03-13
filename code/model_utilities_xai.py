@@ -144,4 +144,13 @@ def unnormalize(image, mean_array, std_array):
         unnormalized_img[:, :, c] = image[:, :, c] * std_array[c] + mean_array[c]
 
 
-    retu
+    return unnormalized_img
+
+
+
+# Function: Generate post-hoc explanations
+def generate_post_hoc_xmap(image, ground_truth_label, model, post_hoc_method, **kwargs):
+
+    # Get original image
+    original_image = np.transpose(image.cpu().detach().numpy(), (1, 2, 0))
+    original_image = unnormalize(original_image, mean_array=kwargs["me
