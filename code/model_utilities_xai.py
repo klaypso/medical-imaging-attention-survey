@@ -153,4 +153,37 @@ def generate_post_hoc_xmap(image, ground_truth_label, model, post_hoc_method, **
 
     # Get original image
     original_image = np.transpose(image.cpu().detach().numpy(), (1, 2, 0))
-    original_image = unnormalize(original_image, mean_array=kwargs["me
+    original_image = unnormalize(original_image, mean_array=kwargs["mean_array"], std_array=kwargs["std_array"])
+
+
+    # Get label
+    label = ground_truth_label.cpu().item()
+    label = int(label)
+
+
+    # Input to the xAI models
+    input_img = image.unsqueeze(0)
+    input_img.requires_grad = True
+
+
+    # Put model in evaluation mode
+    model.to(kwargs["device"])
+    model.eval()
+
+
+    # Select xAI method
+    # DeepLift
+    if post_hoc_method == "deeplift":
+        # Create DeepLift framework
+        xai_model = DeepLift(model)
+
+
+    # LRP
+    elif post_hoc_method == "lrp":
+        # Create LRP framework
+        xai_model = CustomLRP(model)
+
+
+
+    # Generate xAI post-hoc model
+    xai_map = attribute_image_features(model, xa
