@@ -186,4 +186,14 @@ def generate_post_hoc_xmap(image, ground_truth_label, model, post_hoc_method, **
 
 
     # Generate xAI post-hoc model
-    xai_map = attribute_image_features(model, xa
+    xai_map = attribute_image_features(model, xai_model, input_img, label)
+    xai_map = np.transpose(xai_map.squeeze(0).cpu().detach().numpy(), (1, 2, 0))
+
+
+    return original_image, label, xai_map
+
+
+
+# Helper funtion to get figures to be shown after Captum VIZ
+# https://stackoverflow.com/questions/49503869/attributeerror-while-trying-to-load-the-pickled-matplotlib-figure
+def convert_figure
