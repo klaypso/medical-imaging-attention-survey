@@ -215,4 +215,20 @@ def gen_transformer_att(image, ground_truth_label, model, attribution_generator=
 
     # Get original image
     original_image = np.transpose(image.cpu().detach().numpy(), (1, 2, 0))
-    original_image = unnormalize(original_image, mean_array=kwargs["mean_array"], s
+    original_image = unnormalize(original_image, mean_array=kwargs["mean_array"], std_array=kwargs["std_array"])
+
+
+    # Get label
+    label = ground_truth_label.cpu().item()
+    label = int(label)
+
+
+    # Input to the xAI models
+    input_img = image.unsqueeze(0)
+    input_img.requires_grad = True
+
+
+    # Attribution generator
+    # Recreate attribution generator
+    if attribution_generator == 'lrp':
+      
