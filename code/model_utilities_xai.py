@@ -211,4 +211,8 @@ def convert_figure(fig):
 # Function: Generate Transformer attribution array
 def gen_transformer_att(image, ground_truth_label, model, attribution_generator='lrp', device='cpu', **kwargs):
 
-    assert attribution_generator in ['b
+    assert attribution_generator in ['baselines', 'lrp'], f"Attribution generator {attribution_generator} not supported. Please choose one from ['baselines', 'lrp']."
+
+    # Get original image
+    original_image = np.transpose(image.cpu().detach().numpy(), (1, 2, 0))
+    original_image = unnormalize(original_image, mean_array=kwargs["mean_array"], s
