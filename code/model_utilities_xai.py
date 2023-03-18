@@ -207,4 +207,8 @@ def convert_figure(fig):
 
 
 # Source: https://github.com/hila-chefer/Transformer-Explainability/blob/main/DeiT_example.ipynb
-# We split
+# We split the original functions into one to generate attributes and another to generate visualizations
+# Function: Generate Transformer attribution array
+def gen_transformer_att(image, ground_truth_label, model, attribution_generator='lrp', device='cpu', **kwargs):
+
+    assert attribution_generator in ['b
