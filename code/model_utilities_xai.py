@@ -231,4 +231,11 @@ def gen_transformer_att(image, ground_truth_label, model, attribution_generator=
     # Attribution generator
     # Recreate attribution generator
     if attribution_generator == 'lrp':
-      
+        attribution_generator = DeiT_LRP(model=model, device=device)
+    
+    elif attribution_generator == 'baselines':
+        attribution_generator = DeiT_Baselines(model=model, device=device)
+
+
+    # Get Transformer attribution
+    transformer_attribution = attribution_generator.generate_attribution(input_img=input_img.t
