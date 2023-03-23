@@ -238,4 +238,7 @@ def gen_transformer_att(image, ground_truth_label, model, attribution_generator=
 
 
     # Get Transformer attribution
-    transformer_attribution = attribution_generator.generate_attribution(input_img=input_img.t
+    transformer_attribution = attribution_generator.generate_attribution(input_img=input_img.to(device), method="transformer_attribution", index=label).detach()
+    transformer_attribution = transformer_attribution.reshape(1, 1, 14, 14)
+    transformer_attribution = torch.nn.functional.interpolate(transformer_attribution, scale_factor=16, mode='bilinear')
+    transformer_attribution = transformer_attribution.reshape(224, 
