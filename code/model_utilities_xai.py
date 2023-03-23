@@ -245,4 +245,14 @@ def gen_transformer_att(image, ground_truth_label, model, attribution_generator=
 
     # Original Implementation Applies Normalization
     # (Captum clips the range of attributions to generate the visualizations, so if we do it, we may harm the quality of visualization regarding the signal of attributions)
-    # transformer_attribution = (transformer_attribution - transformer_attribution.min()) / (tran
+    # transformer_attribution = (transformer_attribution - transformer_attribution.min()) / (transformer_attribution.max() - transformer_attribution.min())
+
+
+    return original_image, label, transformer_attribution
+    
+
+
+# Source: https://github.com/hila-chefer/Transformer-Explainability/blob/main/DeiT_example.ipynb
+# Function: Create heatmap from mask on image
+def show_cam_on_image(img, mask):
+    heatmap = cv2.app
