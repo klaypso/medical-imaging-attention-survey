@@ -255,4 +255,15 @@ def gen_transformer_att(image, ground_truth_label, model, attribution_generator=
 # Source: https://github.com/hila-chefer/Transformer-Explainability/blob/main/DeiT_example.ipynb
 # Function: Create heatmap from mask on image
 def show_cam_on_image(img, mask):
-    heatmap = cv2.app
+    heatmap = cv2.applyColorMap(np.uint8(255 * mask), cv2.COLORMAP_JET)
+    heatmap = np.float32(heatmap) / 255
+    cam = heatmap + np.float32(img)
+    cam = cam / np.max(cam)
+
+
+    return cam
+
+
+
+# Source: https://github.com/hila-chefer/Transformer-Explainability/blob/main/DeiT_example.ipynb
+# Function: Generate Transformer attributions visuali
