@@ -266,4 +266,11 @@ def show_cam_on_image(img, mask):
 
 
 # Source: https://github.com/hila-chefer/Transformer-Explainability/blob/main/DeiT_example.ipynb
-# Function: Generate Transformer attributions visuali
+# Function: Generate Transformer attributions visualization
+def gen_transformer_att_vis(original_image, transformer_attribution):
+    vis = show_cam_on_image(original_image, transformer_attribution)
+    vis =  np.uint8(255 * vis)
+    vis = cv2.cvtColor(np.array(vis), cv2.COLOR_RGB2BGR)
+
+
+    return vis
