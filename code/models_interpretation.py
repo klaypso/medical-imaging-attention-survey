@@ -23,3 +23,17 @@ from transformer_explainability_utils.ViT_LRP import deit_tiny_patch16_224 as De
 # Fix Random Seeds
 random_seed = 42
 torch.manual_seed(random_seed)
+np.random.seed(random_seed)
+
+
+
+# Command Line Interface
+# Create the parser
+parser = argparse.ArgumentParser()
+
+# Add the arguments
+# Data dir
+parser.add_argument('--data_dir', type=str, default="data", help="Main data directory (e.g., 'data/')")
+
+# Data set
+parser.add_argument('--dataset', type=str, required=True, c
