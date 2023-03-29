@@ -47,4 +47,11 @@ parser.add_argument('--model', type=str, required=True, choices=["DenseNet121", 
 # Model checkpoint
 parser.add_argument("--modelckpt", type=str, required=True, help="Directory where model is stored")
 
-# Batch 
+# Batch size
+parser.add_argument('--batchsize', type=int, default=4, help="Batch-size for training and validation")
+
+# Image size
+parser.add_argument('--imgsize', type=int, default=224, help="Size of the image after transforms")
+
+# Resize
+parser.add_argument('--resize', type=str, choices=["direct_resize", "resizeshortest_randomcrop"], default="
