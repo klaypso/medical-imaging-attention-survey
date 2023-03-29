@@ -36,4 +36,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--data_dir', type=str, default="data", help="Main data directory (e.g., 'data/')")
 
 # Data set
-parser.add_argument('--dataset', type=str, required=True, c
+parser.add_argument('--dataset', type=str, required=True, choices=["APTOS", "ISIC2020", "MIMICCXR"], help="Data set: APTOS, ISIC2020, MIMICCXR.")
+
+# Data split
+parser.add_argument('--split', type=str, required=True, choices=["Train", "Validation", "Test"], help="Data split: Train, Validation or Test")
+
+# Model
+parser.add_argument('--model', type=str, required=True, choices=["Dense
