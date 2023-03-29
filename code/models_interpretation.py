@@ -42,4 +42,9 @@ parser.add_argument('--dataset', type=str, required=True, choices=["APTOS", "ISI
 parser.add_argument('--split', type=str, required=True, choices=["Train", "Validation", "Test"], help="Data split: Train, Validation or Test")
 
 # Model
-parser.add_argument('--model', type=str, required=True, choices=["Dense
+parser.add_argument('--model', type=str, required=True, choices=["DenseNet121", "ResNet50", "SEDenseNet121", "SEResNet50", "CBAMDenseNet121", "CBAMResNet50", "DeiT-T-LRP"], help='Model Name: DenseNet121, ResNet50, SEDenseNet121, SEResNet50, CBAMDenseNet121, CBAMResNet50, DeiT-T-LRP.')
+
+# Model checkpoint
+parser.add_argument("--modelckpt", type=str, required=True, help="Directory where model is stored")
+
+# Batch 
