@@ -63,4 +63,24 @@ parser.add_argument("--num_workers", type=int, default=0, help="Number of worker
 parser.add_argument("--gpu_id", type=int, default=0, help="The index of the GPU")
 
 # Number of layers (ViT)
-parser.add_argument("--nr_layers", type=int
+parser.add_argument("--nr_layers", type=int, default=12, help="Number of hidden layers (only for ViT)")
+
+
+# Parse the arguments
+args = parser.parse_args()
+
+
+# Data directory
+data_dir = args.data_dir
+
+# Dataset
+dataset = args.dataset
+
+# Data split
+data_split = args.split
+
+# Model Directory
+modelckpt = args.modelckpt
+
+# Number of workers (threads)
+workers = args.num_workers
