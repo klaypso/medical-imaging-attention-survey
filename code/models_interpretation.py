@@ -103,4 +103,22 @@ resize_opt = args.resize
 
 
 # Load data
-# Mean and STD to Normalize the inputs into pretrained mod
+# Mean and STD to Normalize the inputs into pretrained models
+MEAN = [0.485, 0.456, 0.406]
+STD = [0.229, 0.224, 0.225]
+
+
+# Input Data Dimensions
+img_nr_channels = 3
+img_height = IMG_SIZE
+img_width = IMG_SIZE
+
+
+# Get the right model from the CLI
+model = args.model
+model_name = model.lower()
+feature_extractor = None
+
+
+# Evaluation Transforms
+eval_transforms = torchvision.transf
