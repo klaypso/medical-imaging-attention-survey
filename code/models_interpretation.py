@@ -84,3 +84,23 @@ modelckpt = args.modelckpt
 
 # Number of workers (threads)
 workers = args.num_workers
+
+# GPU ID
+gpu_id = args.gpu_id
+
+# Batch size
+BATCH_SIZE = args.batchsize
+
+# Image size (after transforms)
+IMG_SIZE = args.imgsize
+
+# Number of layers of the Visual Transformer
+nr_layers = args.nr_layers
+
+# Resize (data transforms)
+resize_opt = args.resize
+
+
+
+# Load data
+# Mean and STD to Normalize the inputs into pretrained mod
