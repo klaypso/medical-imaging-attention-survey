@@ -121,4 +121,8 @@ feature_extractor = None
 
 
 # Evaluation Transforms
-eval_transforms = torchvision.transf
+eval_transforms = torchvision.transforms.Compose([
+    torchvision.transforms.Resize(IMG_SIZE if resize_opt == 'resizeshortest_randomcrop' else (IMG_SIZE, IMG_SIZE)),
+    torchvision.transforms.RandomCrop(IMG_SIZE if resize_opt == 'resizeshortest_randomcrop' else (IMG_SIZE, IMG_SIZE)),
+    torchvision.transforms.ToTensor(),
+    torchvision.transforms.Normalize(mean=feature_extractor.image_mean if
