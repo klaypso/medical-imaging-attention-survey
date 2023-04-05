@@ -125,4 +125,15 @@ eval_transforms = torchvision.transforms.Compose([
     torchvision.transforms.Resize(IMG_SIZE if resize_opt == 'resizeshortest_randomcrop' else (IMG_SIZE, IMG_SIZE)),
     torchvision.transforms.RandomCrop(IMG_SIZE if resize_opt == 'resizeshortest_randomcrop' else (IMG_SIZE, IMG_SIZE)),
     torchvision.transforms.ToTensor(),
-    torchvision.transforms.Normalize(mean=feature_extractor.image_mean if
+    torchvision.transforms.Normalize(mean=feature_extractor.image_mean if feature_extractor else MEAN, std=feature_extractor.image_std if feature_extractor else STD)
+])
+
+
+
+# APTOS2019
+if dataset == "APTOS":
+    # Directories
+    dataset_dir = os.path.join(data_dir, "APTOS2019")
+
+    # Evaluation set
+    eval_set = APTOSDataset(base_data_path=dataset_dir, split=data_split, transform=eval_transforms)
