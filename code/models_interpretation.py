@@ -137,3 +137,17 @@ if dataset == "APTOS":
 
     # Evaluation set
     eval_set = APTOSDataset(base_data_path=dataset_dir, split=data_split, transform=eval_transforms)
+
+    # Weights directory
+    weights_dir = os.path.join(modelckpt, "weights")
+
+    # Post-hoc explanations
+    xai_maps_dir = os.path.join(modelckpt, "xai_maps")
+    if not(os.path.isdir(xai_maps_dir)):
+        os.makedirs(xai_maps_dir)
+
+
+# ISIC2020
+elif dataset == "ISIC2020":
+    # Directories
+  
