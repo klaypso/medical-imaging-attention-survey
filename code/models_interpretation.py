@@ -170,4 +170,14 @@ elif dataset == "MIMICCXR":
     dataset_dir = os.path.join(data_dir, "MedIA")
 
     if data_split == "Train":    
-        eval_dir = os.path.join(dataset_dir,
+        eval_dir = os.path.join(dataset_dir, "Train_images_AP_resized")
+    
+    elif data_split == "Validation":
+        eval_dir = os.path.join(dataset_dir, "Val_images_AP_resized")
+    
+    elif data_split == "Test":
+        eval_dir = os.path.join(dataset_dir, "Test_images_AP_resized")
+    
+
+    # Evaluation set
+    eval_set = MIMICXRDataset(base_da
