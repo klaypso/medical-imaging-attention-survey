@@ -150,4 +150,13 @@ if dataset == "APTOS":
 # ISIC2020
 elif dataset == "ISIC2020":
     # Directories
-  
+    dataset_dir = os.path.join(data_dir, "ISIC2020/jpeg/train")
+
+    # Evaluation set
+    eval_set = ISIC2020Dataset(base_data_path=dataset_dir, split=data_split, random_seed=random_seed, transform=eval_transforms)
+
+    # Weights directory
+    weights_dir = os.path.join(modelckpt, "weights")
+
+    # Post-hoc explanations
+    xai_map
