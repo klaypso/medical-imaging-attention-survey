@@ -159,4 +159,15 @@ elif dataset == "ISIC2020":
     weights_dir = os.path.join(modelckpt, "weights")
 
     # Post-hoc explanations
-    xai_map
+    xai_maps_dir = os.path.join(modelckpt, "xai_maps")
+    if not(os.path.isdir(xai_maps_dir)):
+        os.makedirs(xai_maps_dir)
+
+
+# MIMICXR
+elif dataset == "MIMICCXR":
+    # Directories
+    dataset_dir = os.path.join(data_dir, "MedIA")
+
+    if data_split == "Train":    
+        eval_dir = os.path.join(dataset_dir,
