@@ -189,4 +189,19 @@ elif dataset == "MIMICCXR":
     # Post-hoc explanations
     xai_maps_dir = os.path.join(modelckpt, "xai_maps")
     if not(os.path.isdir(xai_maps_dir)):
-        os.makedirs(xai
+        os.makedirs(xai_maps_dir)
+
+
+
+# Choose GPU
+DEVICE = f"cuda:{gpu_id}" if torch.cuda.is_available() else "cpu"
+
+
+# Dataloaders
+eval_loader = DataLoader(dataset=eval_set, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True, num_workers=workers)
+
+# Get number of classes
+nr_classes = eval_set.nr_classes
+
+
+# DenseNet12
