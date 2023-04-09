@@ -180,4 +180,13 @@ elif dataset == "MIMICCXR":
     
 
     # Evaluation set
-    eval_set = MIMICXRDataset(base_da
+    eval_set = MIMICXRDataset(base_data_path=eval_dir, pickle_path=os.path.join(eval_dir, "Annotations.pickle"), transform=eval_transforms)
+
+
+    # Weights directory
+    weights_dir = os.path.join(modelckpt, "weights")
+
+    # Post-hoc explanations
+    xai_maps_dir = os.path.join(modelckpt, "xai_maps")
+    if not(os.path.isdir(xai_maps_dir)):
+        os.makedirs(xai
