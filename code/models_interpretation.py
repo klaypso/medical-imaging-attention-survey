@@ -204,4 +204,13 @@ eval_loader = DataLoader(dataset=eval_set, batch_size=BATCH_SIZE, shuffle=False,
 nr_classes = eval_set.nr_classes
 
 
-# DenseNet12
+# DenseNet121
+if model == "DenseNet121":
+    model = DenseNet121(channels=img_nr_channels, height=img_height, width=img_width, nr_classes=nr_classes)
+
+# ResNet50
+elif model == "ResNet50":
+    model = ResNet50(channels=img_nr_channels, height=img_height, width=img_width, nr_classes=nr_classes)
+
+# SEResNet50
+elif model == "SEResNet50":
