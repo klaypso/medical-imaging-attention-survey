@@ -222,4 +222,12 @@ elif model == "SEDenseNet121":
 
 # CBAMResNet50
 elif model == "CBAMResNet50":
-    mo
+    model = CBAMResNet50(channels=img_nr_channels, height=img_height, width=img_width, nr_classes=nr_classes)
+
+# CBAMDenseNet121
+elif model == "CBAMDenseNet121":
+    model = CBAMDenseNet121(channels=img_nr_channels, height=img_height, width=img_width, nr_classes=nr_classes)
+
+# DeiT-Tiny (compatible with LRP)
+elif model == "DeiT-T-LRP":
+ 
