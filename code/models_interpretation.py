@@ -236,4 +236,11 @@ elif model == "DeiT-T-LRP":
 
 
 # Load model weights
-model_file = os.path.join
+model_file = os.path.join(weights_dir, f"{model_name}_{dataset.lower()}_best.pt")
+checkpoint = torch.load(model_file, map_location=DEVICE)
+
+# We need to add an exception to prevent some errors from the attention mechanisms that were already trained
+# Case without any error
+try:
+    model.load_state_dict(checkpoint['model_state_dict'], strict=True)
+    print(
