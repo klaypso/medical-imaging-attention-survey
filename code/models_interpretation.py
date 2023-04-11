@@ -243,4 +243,17 @@ checkpoint = torch.load(model_file, map_location=DEVICE)
 # Case without any error
 try:
     model.load_state_dict(checkpoint['model_state_dict'], strict=True)
-    print(
+    print("Loaded model from " + model_file)
+
+# Case related to CBAM blocks
+except:
+
+    # Debug print
+    print("Fixing key values with old trained CBAM models")
+
+    # Get missing keys
+    missing, unexpected = model.load_state_dict(checkpoint['model_state_dict'], strict=False)
+    # print(missing) 
+    # print(unexpected)
+
+    if len(missing) ==
