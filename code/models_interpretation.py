@@ -256,4 +256,13 @@ except:
     # print(missing) 
     # print(unexpected)
 
-    if len(missing) ==
+    if len(missing) == len(unexpected):
+        
+        # Method to remap the new state_dict keys (https://gist.github.com/the-bass/0bf8aaa302f9ba0d26798b11e4dd73e3)
+        state_dict = checkpoint['model_state_dict']
+        
+        # New state dict
+        new_state_dict = OrderedDict()
+
+        for key, value in state_dict.items():
+         
