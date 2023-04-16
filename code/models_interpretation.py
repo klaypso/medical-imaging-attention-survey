@@ -276,4 +276,24 @@ except:
     
 
     else:
-        model.load_state_dic
+        model.load_state_dict(checkpoint['model_state_dict'], strict=False)
+    
+    print("Success!")
+
+
+
+
+# Move model to device
+model = model.to(DEVICE)
+
+# Put model in evaluation mode
+model.eval()
+
+
+
+# Generate post-hoc explanation
+print(f"Generating post-hoc explanation | Model: {model_name} | Dataset: {dataset}")
+
+
+# Iterate through dataloader
+for batch_idx, (imag
