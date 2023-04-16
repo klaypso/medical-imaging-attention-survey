@@ -296,4 +296,14 @@ print(f"Generating post-hoc explanation | Model: {model_name} | Dataset: {datase
 
 
 # Iterate through dataloader
-for batch_idx, (imag
+for batch_idx, (images, labels) in enumerate(eval_loader):
+
+    # Move data data anda model to GPU (or not)
+    images, labels = images.to(DEVICE), labels.to(DEVICE)
+    model = model.to(DEVICE)
+
+    # Forward pass: compute predicted outputs by passing inputs to the model
+    logits = model(images)
+
+    
+    # Using Softmax Activation
