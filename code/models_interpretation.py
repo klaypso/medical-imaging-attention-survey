@@ -265,4 +265,15 @@ except:
         new_state_dict = OrderedDict()
 
         for key, value in state_dict.items():
-         
+            if key in unexpected:
+                new_state_dict[missing[unexpected.index(key)]] = value
+            else:
+                new_state_dict[key] = value
+
+
+        # Now we try to load the new state_dict
+        model.load_state_dict(new_state_dict, strict=True)
+    
+
+    else:
+        model.load_state_dic
