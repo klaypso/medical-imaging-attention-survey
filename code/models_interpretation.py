@@ -307,3 +307,13 @@ for batch_idx, (images, labels) in enumerate(eval_loader):
 
     
     # Using Softmax Activation
+    # Apply Softmax on Logits and get the argmax to get the predicted labels
+    s_logits = torch.nn.Softmax(dim=1)(logits)
+    s_logits = torch.argmax(s_logits, dim=1)
+
+    # Get prediction
+    prediction = s_logits[0].cpu().item()
+    prediction = int(prediction)
+
+
+    # Generate post-hoc explanatio
