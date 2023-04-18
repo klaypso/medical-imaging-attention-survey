@@ -336,4 +336,15 @@ for batch_idx, (images, labels) in enumerate(eval_loader):
         # xAI maps saving directory
         xai_map_save_dir = os.path.join(xai_maps_dir, "lrp")
         if not(os.path.isdir(xai_map_save_dir)):
-   
+            os.makedirs(xai_map_save_dir)
+        
+        # Save image
+        np.save(file=os.path.join(xai_map_save_dir, f"idx{batch_idx}_gt{original_label}_pred{prediction}.npy"), arr=xai_map, allow_pickle=True)
+
+
+
+    # For the rest of the models
+    else:
+        for post_hoc_method in ["deeplift", "lrp"]:
+
+            # Get original image and post-hoc 
