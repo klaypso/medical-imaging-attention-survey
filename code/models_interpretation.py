@@ -347,4 +347,9 @@ for batch_idx, (images, labels) in enumerate(eval_loader):
     else:
         for post_hoc_method in ["deeplift", "lrp"]:
 
-            # Get original image and post-hoc 
+            # Get original image and post-hoc explanation
+            original_image, original_label, xai_map = generate_post_hoc_xmap(image=images[0], ground_truth_label=labels[0], model=model, post_hoc_method=post_hoc_method, device=DEVICE, mean_array=MEAN, std_array=STD)
+
+
+            # Original images saving directory
+            o
