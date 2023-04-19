@@ -352,4 +352,12 @@ for batch_idx, (images, labels) in enumerate(eval_loader):
 
 
             # Original images saving directory
-            o
+            ori_img_save_dir = os.path.join(xai_maps_dir, "original-imgs")
+            if not(os.path.isdir(ori_img_save_dir)):
+                os.makedirs(ori_img_save_dir)
+
+            # Save image
+            np.save(file=os.path.join(ori_img_save_dir, f"idx{batch_idx}_gt{original_label}_pred{prediction}.npy"), arr=original_image, allow_pickle=True)
+
+
+            # xAI 
