@@ -360,4 +360,10 @@ for batch_idx, (images, labels) in enumerate(eval_loader):
             np.save(file=os.path.join(ori_img_save_dir, f"idx{batch_idx}_gt{original_label}_pred{prediction}.npy"), arr=original_image, allow_pickle=True)
 
 
-            # xAI 
+            # xAI maps saving directory
+            xai_map_save_dir = os.path.join(xai_maps_dir, post_hoc_method)
+            if not(os.path.isdir(xai_map_save_dir)):
+                os.makedirs(xai_map_save_dir)
+            
+            # Save image
+            np.save(file=os.path.join(xai_map_save_dir, f"idx{batch_idx}_gt{original_la
