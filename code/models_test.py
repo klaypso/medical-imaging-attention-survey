@@ -243,3 +243,92 @@ except:
         
         # Method to remap the new state_dict keys (https://gist.github.com/the-bass/0bf8aaa302f9ba0d26798b11e4dd73e3)
         state_dict = checkpoint['model_state_dict']
+        
+        # New state dict
+        new_state_dict = OrderedDict()
+
+        for key, value in state_dict.items():
+            if key in unexpected:
+                new_state_dict[missing[unexpected.index(key)]] = value
+            else:
+                new_state_dict[key] = value
+
+
+    # Now we try to load the new state_dict
+    model.load_state_dict(new_state_dict, strict=True)
+    print("Success!")
+
+
+
+# Move model to device
+model = model.to(DEVICE)
+
+# Put model in evaluation mode
+model.eval()
+
+
+# Loss function
+LOSS = torch.nn.CrossEntropyLoss(reduction="sum")
+
+
+# Test model
+print(f"Testing Step | Data Set: {dataset}")
+
+
+# Initialise lists to compute scores
+y_eval_true = np.empty((0), int)
+y_eval_pred = torch.empty(0, dtype=torch.int32, device=DEVICE)
+y_eval_scores = torch.empty(0, dtype=torch.float, device=DEVICE)
+
+# Running train loss
+run_eval_loss = 0.0
+
+
+# Deactivate gradients
+with torch.no_grad():
+
+    # Iterate through dataloader
+    for images, labels in tqdm(eval_loader):
+        y_eval_true = np.append(y_eval_true, labels.numpy(), axis=0)
+
+        # Move data data anda model to GPU (or not)
+        images, labels = images.to(DEVICE, non_blocking=True), labels.to(DEVICE, non_blocking=True)
+
+        # Forward pass: compute predicted outputs by passing inputs to the model
+        logits = model(images)
+        
+        # Compute the batch loss
+        # Using CrossEntropy w/ Softmax
+        loss = LOSS(logits, labels)
+        
+        # Update batch losses
+        run_eval_loss += loss
+
+
+        # Using Softmax Activation
+        # Apply Softmax on Logits and get the argmax to get the predicted labels
+        s_logits = torch.nn.Softmax(dim=1)(logits)
+        y_eval_scores = torch.cat((y_eval_scores, s_logits))
+        s_logits = torch.argmax(s_logits, dim=1)
+        y_eval_pred = torch.cat((y_eval_pred, s_logits))
+
+    
+
+    # Compute Average Validation Loss
+    avg_eval_loss = run_eval_loss/len(eval_loader.dataset)
+
+    # Compute Validation Accuracy
+    y_eval_pred = y_eval_pred.cpu().detach().numpy()
+    y_eval_scores = y_eval_scores.cpu().detach().numpy()
+    eval_acc = accuracy_score(y_true=y_eval_true, y_pred=y_eval_pred)
+    eval_f1 = f1_score(y_true=y_eval_true, y_pred=y_eval_pred, average='micro')
+    eval_auc = roc_auc_score(y_true=y_eval_true, y_score=y_eval_scores[:, 1], average='micro')
+
+    # Print Statistics
+    best_epoch = checkpoint["epoch"]
+    print(f"Model Name: {model_name}\t{data_split} Epoch: {best_epoch} Loss: {avg_eval_loss} Accuracy: {eval_acc} F1-score: {eval_f1} ROC AUC: {eval_auc}")
+    
+
+
+# Finish statement
+print("Finished.")
