@@ -366,4 +366,10 @@ for batch_idx, (images, labels) in enumerate(eval_loader):
                 os.makedirs(xai_map_save_dir)
             
             # Save image
-            np.save(file=os.path.join(xai_map_save_dir, f"idx{batch_idx}_gt{original_la
+            np.save(file=os.path.join(xai_map_save_dir, f"idx{batch_idx}_gt{original_label}_pred{prediction}.npy"), arr=xai_map, allow_pickle=True)
+
+
+
+
+# Finish statement
+print("Finished.")
