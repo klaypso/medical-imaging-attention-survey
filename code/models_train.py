@@ -48,4 +48,13 @@ parser.add_argument('--model', type=str, required=True, choices=["DenseNet121", 
 
 # Low Data Regimen
 parser.add_argument('--low_data_regimen', action="store_true", help="Activate the low data regimen training.")
-parser.add_argument('--perc_train', type=float, default=1, help="Percentage of training data to be used during training."
+parser.add_argument('--perc_train', type=float, default=1, help="Percentage of training data to be used during training.")
+
+# Batch size
+parser.add_argument('--batchsize', type=int, default=4, help="Batch-size for training and validation")
+
+# Image size
+parser.add_argument('--imgsize', type=int, default=224, help="Size of the image after transforms")
+
+# Resize
+parser.add_argument('--resize', type=str, choices=["direct_resize", "resizeshortest_randomcrop"], default="direct_resize", hel
