@@ -44,4 +44,8 @@ parser.add_argument('--data_dir', type=str, required=True, help="Directory of th
 parser.add_argument('--dataset', type=str, required=True, choices=["APTOS2019", "ISIC2020", "MIMICCXR"], help="Data set: APTOS2019, ISIC2020, MIMICCXR.")
 
 # Model
-parser.add_argument('--model', type=str, required=True, choices=["DenseNet121", "ResNet50", "SEDenseNet121", "SEResNet50", "CBAMDenseNet121", "CBAMResNet50", "DeiT-T-LRP"], help='Model Name: DenseNet121, ResNet50
+parser.add_argument('--model', type=str, required=True, choices=["DenseNet121", "ResNet50", "SEDenseNet121", "SEResNet50", "CBAMDenseNet121", "CBAMResNet50", "DeiT-T-LRP"], help='Model Name: DenseNet121, ResNet50, SEDenseNet121, SEResNet50, CBAMDenseNet121, CBAMResNet50, DeiT-T-LRP.')
+
+# Low Data Regimen
+parser.add_argument('--low_data_regimen', action="store_true", help="Activate the low data regimen training.")
+parser.add_argument('--perc_train', type=float, default=1, help="Percentage of training data to be used during training."
