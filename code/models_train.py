@@ -57,4 +57,13 @@ parser.add_argument('--batchsize', type=int, default=4, help="Batch-size for tra
 parser.add_argument('--imgsize', type=int, default=224, help="Size of the image after transforms")
 
 # Resize
-parser.add_argument('--resize', type=str, choices=["direct_resize", "resizeshortest_randomcrop"], default="direct_resize", hel
+parser.add_argument('--resize', type=str, choices=["direct_resize", "resizeshortest_randomcrop"], default="direct_resize", help="Resize data transformation")
+
+# Class Weights
+parser.add_argument("--classweights", action="store_true", help="Weight loss with class imbalance")
+
+# Number of epochs
+parser.add_argument('--epochs', type=int, default=300, help="Number of training epochs")
+
+# Learning rate
+parser.add_argument('--lr', type=float, default=1e-4, help="Le
