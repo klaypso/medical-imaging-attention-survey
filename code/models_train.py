@@ -66,4 +66,13 @@ parser.add_argument("--classweights", action="store_true", help="Weight loss wit
 parser.add_argument('--epochs', type=int, default=300, help="Number of training epochs")
 
 # Learning rate
-parser.add_argument('--lr', type=float, default=1e-4, help="Le
+parser.add_argument('--lr', type=float, default=1e-4, help="Learning rate")
+
+# Output directory
+parser.add_argument("--outdir", type=str, default="results", help="Output directory")
+
+# Number of workers
+parser.add_argument("--num_workers", type=int, default=0, help="Number of workers for dataloader")
+
+# GPU ID
+parser.add_argument("--gpu_id", type=int, default=0,
