@@ -75,4 +75,11 @@ parser.add_argument("--outdir", type=str, default="results", help="Output direct
 parser.add_argument("--num_workers", type=int, default=0, help="Number of workers for dataloader")
 
 # GPU ID
-parser.add_argument("--gpu_id", type=int, default=0,
+parser.add_argument("--gpu_id", type=int, default=0, help="The index of the GPU")
+
+# Save frequency
+parser.add_argument("--save_freq", type=int, default=10, help="Frequency (in number of epochs) to save the model")
+
+# Resume training
+parser.add_argument("--resume", action="store_true", help="Resume training")
+parser.add_argument("--ckpt", type=str, default=None, help="Checkpoint from which
