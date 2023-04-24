@@ -95,3 +95,27 @@ args = parser.parse_args()
 # Resume training
 if args.resume:
     assert args.ckpt is not None, "Please specify the model checkpoint when resume is True"
+
+resume = args.resume
+
+# Training checkpoint
+ckpt = args.ckpt
+
+
+# Data directory
+data_dir = args.data_dir
+
+# Dataset
+dataset = args.dataset
+
+# Results Directory
+outdir = args.outdir
+
+# Number of workers (threads)
+workers = args.num_workers
+
+# Number of training epochs
+EPOCHS = args.epochs
+
+# Learning rate
+LEARN
