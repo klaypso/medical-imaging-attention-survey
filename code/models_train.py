@@ -118,4 +118,21 @@ workers = args.num_workers
 EPOCHS = args.epochs
 
 # Learning rate
-LEARN
+LEARNING_RATE = args.lr
+
+# Batch size
+BATCH_SIZE = args.batchsize
+
+# Image size (after transforms)
+IMG_SIZE = args.imgsize
+
+# Save frquency
+save_freq = args.save_freq
+
+# Number of layers of the Visual Transformer
+nr_layers = args.nr_layers
+
+# Resize (data transforms)
+resize_opt = args.resize
+model = args.model
+model_name = mo
