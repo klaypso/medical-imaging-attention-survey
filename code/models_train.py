@@ -82,4 +82,16 @@ parser.add_argument("--save_freq", type=int, default=10, help="Frequency (in num
 
 # Resume training
 parser.add_argument("--resume", action="store_true", help="Resume training")
-parser.add_argument("--ckpt", type=str, default=None, help="Checkpoint from which
+parser.add_argument("--ckpt", type=str, default=None, help="Checkpoint from which to resume training")
+
+# Number of layers (ViT)
+parser.add_argument("--nr_layers", type=int, default=12, help="Number of hidden layers (only for ViT)")
+
+
+# Parse the arguments
+args = parser.parse_args()
+
+
+# Resume training
+if args.resume:
+    assert args.ckpt is not None, "Please specify the model checkpoint when resume is True"
