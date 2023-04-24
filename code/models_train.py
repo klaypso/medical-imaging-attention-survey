@@ -135,4 +135,19 @@ nr_layers = args.nr_layers
 # Resize (data transforms)
 resize_opt = args.resize
 model = args.model
-model_name = mo
+model_name = model.lower()
+
+# Low data regimen
+low_data_regimen = args.low_data_regimen
+perc_train = args.perc_train
+
+
+
+# Timestamp (to save results)
+timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+outdir = os.path.join(outdir, dataset.lower(), model_name, timestamp)
+if not os.path.isdir(outdir):
+    os.makedirs(outdir)
+
+
+# Save training parame
