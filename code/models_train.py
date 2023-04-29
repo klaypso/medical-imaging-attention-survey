@@ -150,4 +150,21 @@ if not os.path.isdir(outdir):
     os.makedirs(outdir)
 
 
-# Save training parame
+# Save training parameters
+with open(os.path.join(outdir, "train_params.txt"), "w") as f:
+    f.write(str(args))
+
+
+
+# Load data
+# Mean and STD to Normalize the inputs into pretrained models
+MEAN = [0.485, 0.456, 0.406]
+STD = [0.229, 0.224, 0.225]
+
+
+# Input Data Dimensions
+img_nr_channels = 3
+img_height = IMG_SIZE
+img_width = IMG_SIZE
+
+# Feature
