@@ -167,4 +167,11 @@ img_nr_channels = 3
 img_height = IMG_SIZE
 img_width = IMG_SIZE
 
-# Feature
+# Feature extractor (for Transformers)
+feature_extractor = None
+
+
+# Train Transforms
+train_transforms = torchvision.transforms.Compose([
+    torchvision.transforms.Resize(IMG_SIZE if resize_opt == 'resizeshortest_randomcrop' else (IMG_SIZE, IMG_SIZE)),
+    torchvision.transforms.RandomCrop(IMG_SIZE if resize_opt == 'resizeshortest_randomcrop
