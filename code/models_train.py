@@ -208,4 +208,9 @@ elif dataset == "ISIC2020":
 # MIMICXR
 elif dataset == "MIMICCXR":
     # Directories
-    train_dir = os.pat
+    train_dir = os.path.join(data_dir, "Train_images_AP_resized")
+    val_dir = os.path.join(data_dir, "Val_images_AP_resized")
+    test_dir = os.path.join(data_dir, "Test_images_AP_resized")
+
+    # Datasets
+    train_set = MIMICXRDataset(base_data_path=train_dir, pickle_path=os.path.join(train_dir, "Annotations.pickle"), resized=True
