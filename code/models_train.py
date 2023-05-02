@@ -201,4 +201,11 @@ if dataset == "APTOS":
 # ISIC2020
 elif dataset == "ISIC2020":
     # Datasets
-    train_set = ISIC2020Dataset(base_data_path=data_dir, split='Train', random_seed=random_seed, resized=True, low_data_regimen=low_data_regimen, perc_train=perc_
+    train_set = ISIC2020Dataset(base_data_path=data_dir, split='Train', random_seed=random_seed, resized=True, low_data_regimen=low_data_regimen, perc_train=perc_train, transform=train_transforms)
+    val_set = ISIC2020Dataset(base_data_path=data_dir, split='Validation', random_seed=random_seed, resized=True, low_data_regimen=low_data_regimen, perc_train=perc_train, transform=val_transforms)
+
+
+# MIMICXR
+elif dataset == "MIMICCXR":
+    # Directories
+    train_dir = os.pat
