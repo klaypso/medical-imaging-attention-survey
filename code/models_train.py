@@ -213,4 +213,11 @@ elif dataset == "MIMICCXR":
     test_dir = os.path.join(data_dir, "Test_images_AP_resized")
 
     # Datasets
-    train_set = MIMICXRDataset(base_data_path=train_dir, pickle_path=os.path.join(train_dir, "Annotations.pickle"), resized=True
+    train_set = MIMICXRDataset(base_data_path=train_dir, pickle_path=os.path.join(train_dir, "Annotations.pickle"), resized=True, low_data_regimen=low_data_regimen, perc_train=perc_train, transform=train_transforms)
+    val_set = MIMICXRDataset(base_data_path=val_dir, pickle_path=os.path.join(val_dir, "Annotations.pickle"), transform=val_transforms)
+
+
+
+# Results and Weights
+weights_dir = os.path.join(outdir, "weights")
+if not os.path.isdir(we
