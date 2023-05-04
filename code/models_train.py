@@ -235,4 +235,18 @@ tbwritter = SummaryWriter(log_dir=os.path.join(outdir, "tensorboard"), flush_sec
 
 
 # Choose GPU
-DEVICE = f"cuda:{args.gpu_id}" if torch.cuda.is_availab
+DEVICE = f"cuda:{args.gpu_id}" if torch.cuda.is_available() else "cpu"
+print(f"Using device: {DEVICE}")
+
+
+# Number of classes for models
+nr_classes = train_set.nr_classes
+
+
+# DenseNet121
+if model == "DenseNet121":
+    model = DenseNet121(channels=img_nr_channels, height=img_height, width=img_width, nr_classes=nr_classes)
+
+# ResNet50
+elif model == "ResNet50":
+    model = ResNet50(channels
