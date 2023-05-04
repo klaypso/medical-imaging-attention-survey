@@ -220,4 +220,19 @@ elif dataset == "MIMICCXR":
 
 # Results and Weights
 weights_dir = os.path.join(outdir, "weights")
-if not os.path.isdir(we
+if not os.path.isdir(weights_dir):
+    os.makedirs(weights_dir)
+
+
+# History Files
+history_dir = os.path.join(outdir, "history")
+if not os.path.isdir(history_dir):
+    os.makedirs(history_dir)
+
+
+# Tensorboard
+tbwritter = SummaryWriter(log_dir=os.path.join(outdir, "tensorboard"), flush_secs=30)
+
+
+# Choose GPU
+DEVICE = f"cuda:{args.gpu_id}" if torch.cuda.is_availab
