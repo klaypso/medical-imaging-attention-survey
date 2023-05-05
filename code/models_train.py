@@ -287,4 +287,15 @@ except:
 
 
 # Write into file
-with open(os.path.join(outdir, "model_summary.txt"),
+with open(os.path.join(outdir, "model_summary.txt"), 'w') as f:
+    f.write(str(model_summary))
+
+
+
+# Class weights for loss
+if args.classweights:
+    classes = np.array(range(nr_classes))
+    cw = compute_class_weight('balanced', classes=classes, y=np.array(train_set.images_labels))
+    cw = torch.from_numpy(cw).float().to(DEVICE)
+    print(f"Using class weights {cw}")
+el
