@@ -257,4 +257,12 @@ elif model == "SEDenseNet121":
 
 # SEResNet50
 elif model == "SEResNet50":
-    model = SEResNet50(channels=img_nr_channels, height=img_h
+    model = SEResNet50(channels=img_nr_channels, height=img_height, width=img_width, nr_classes=nr_classes)
+
+# CBAMDenseNet121
+elif model == "CBAMDenseNet121":
+    model = CBAMDenseNet121(channels=img_nr_channels, height=img_height, width=img_width, nr_classes=nr_classes)
+
+# CBAMResNet50
+elif model == "CBAMResNet50":
+    model = CBAMResNet50(channels=img_nr_channels, 
