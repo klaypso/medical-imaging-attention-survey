@@ -270,4 +270,21 @@ elif model == "CBAMResNet50":
 # DeiT-Tiny (compatible with LRP)
 elif model == "DeiT-T-LRP":
     model = DeiT_Tiny(pretrained=True, num_classes=nr_classes, input_size=(3, IMG_SIZE, IMG_SIZE), url="https://dl.fbaipublicfiles.com/deit/deit_tiny_patch16_224-a1311bcf.pth")
-    feature_extractor = DeiTFeatureExtractor.from_p
+    feature_extractor = DeiTFeatureExtractor.from_pretrained("facebook/deit-tiny-patch16-224")
+
+
+
+# Put model into DEVICE (CPU or GPU)
+model = model.to(DEVICE)
+
+
+# Get model summary
+try:
+    model_summary = summary(model, (1, 3, IMG_SIZE, IMG_SIZE), device=DEVICE)
+
+except:
+    model_summary = str(model)
+
+
+# Write into file
+with open(os.path.join(outdir, "model_summary.txt"),
