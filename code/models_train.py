@@ -249,4 +249,12 @@ if model == "DenseNet121":
 
 # ResNet50
 elif model == "ResNet50":
-    model = ResNet50(channels
+    model = ResNet50(channels=img_nr_channels, height=img_height, width=img_width, nr_classes=nr_classes)
+
+# SEDenseNet121
+elif model == "SEDenseNet121":
+    model = SEDenseNet121(channels=img_nr_channels, height=img_height, width=img_width, nr_classes=nr_classes)
+
+# SEResNet50
+elif model == "SEResNet50":
+    model = SEResNet50(channels=img_nr_channels, height=img_h
