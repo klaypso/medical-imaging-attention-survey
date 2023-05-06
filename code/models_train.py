@@ -298,4 +298,18 @@ if args.classweights:
     cw = compute_class_weight('balanced', classes=classes, y=np.array(train_set.images_labels))
     cw = torch.from_numpy(cw).float().to(DEVICE)
     print(f"Using class weights {cw}")
-el
+else:
+    cw = None
+
+
+
+# Hyper-parameters
+LOSS = torch.nn.CrossEntropyLoss(reduction="sum", weight=cw)
+VAL_LOSS = torch.nn.CrossEntropyLoss(reduction="sum")
+OPTIMISER = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
+
+
+
+# Resume training from given checkpoint
+if resume:
+    checkpoint = torch.lo
