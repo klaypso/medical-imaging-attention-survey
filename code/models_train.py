@@ -328,4 +328,17 @@ val_loader = DataLoader(dataset=val_set, batch_size=BATCH_SIZE, shuffle=True, pi
 
 
 # Train model and save best weights on validation set
-# Initialise min_train and min_val los
+# Initialise min_train and min_val loss trackers
+min_train_loss = np.inf
+min_val_loss = np.inf
+
+# Initialise losses arrays
+train_losses = np.zeros((EPOCHS, ))
+val_losses = np.zeros_like(train_losses)
+
+# Initialise metrics arrays
+train_metrics = np.zeros((EPOCHS, 5))
+val_metrics = np.zeros_like(train_metrics)
+
+# Go through the number of Epochs
+for epoch in 
