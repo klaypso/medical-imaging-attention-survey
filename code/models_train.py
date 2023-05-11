@@ -312,4 +312,14 @@ OPTIMISER = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
 # Resume training from given checkpoint
 if resume:
-    checkpoint = torch.lo
+    checkpoint = torch.load(ckpt)
+    model.load_state_dict(checkpoint['model_state_dict'], strict=True)
+    OPTIMISER.load_state_dict(checkpoint['optimizer_state_dict'])
+    init_epoch = checkpoint['epoch'] + 1
+    print(f"Resuming from {ckpt} at epoch {init_epoch}")
+else:
+    init_epoch = 0
+
+
+# Dataloaders
+train_loader = DataLoader(dat
