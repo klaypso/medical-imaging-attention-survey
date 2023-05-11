@@ -341,4 +341,14 @@ train_metrics = np.zeros((EPOCHS, 5))
 val_metrics = np.zeros_like(train_metrics)
 
 # Go through the number of Epochs
-for epoch in 
+for epoch in range(init_epoch, EPOCHS):
+    # Epoch 
+    print(f"Epoch: {epoch+1}")
+    
+    # Training Loop
+    print("Training Phase")
+    
+    # Initialise lists to compute scores
+    y_train_true = np.empty((0), int)
+    y_train_pred = torch.empty(0, dtype=torch.int32, device=DEVICE)
+    y_train_scores = torch.empty(0, dtype=torch.float, device=DEVICE) # save sc
