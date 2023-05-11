@@ -322,4 +322,10 @@ else:
 
 
 # Dataloaders
-train_loader = DataLoader(dat
+train_loader = DataLoader(dataset=train_set, batch_size=BATCH_SIZE, shuffle=True, pin_memory=False, num_workers=workers)
+val_loader = DataLoader(dataset=val_set, batch_size=BATCH_SIZE, shuffle=True, pin_memory=False, num_workers=workers)
+
+
+
+# Train model and save best weights on validation set
+# Initialise min_train and min_val los
