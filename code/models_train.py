@@ -364,4 +364,11 @@ for epoch in range(init_epoch, EPOCHS):
     # Iterate through dataloader
     for images, labels in tqdm(train_loader):
         # Concatenate lists
-        y_tra
+        y_train_true = np.append(y_train_true, labels.numpy(), axis=0)
+
+        # Move data and model to GPU (or not)
+        images, labels = images.to(DEVICE, non_blocking=True), labels.to(DEVICE, non_blocking=True)
+
+        # Find the loss and update the model parameters accordingly
+        # Clear the gradients of all optimized variables
+        OP
