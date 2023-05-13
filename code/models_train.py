@@ -351,4 +351,17 @@ for epoch in range(init_epoch, EPOCHS):
     # Initialise lists to compute scores
     y_train_true = np.empty((0), int)
     y_train_pred = torch.empty(0, dtype=torch.int32, device=DEVICE)
-    y_train_scores = torch.empty(0, dtype=torch.float, device=DEVICE) # save sc
+    y_train_scores = torch.empty(0, dtype=torch.float, device=DEVICE) # save scores after softmax for roc auc
+
+
+    # Running train loss
+    run_train_loss = torch.tensor(0, dtype=torch.float64, device=DEVICE)
+
+
+    # Put model in training mode
+    model.train()
+
+    # Iterate through dataloader
+    for images, labels in tqdm(train_loader):
+        # Concatenate lists
+        y_tra
