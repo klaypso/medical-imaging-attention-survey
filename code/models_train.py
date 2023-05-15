@@ -392,4 +392,15 @@ for epoch in range(init_epoch, EPOCHS):
         OPTIMISER.step()
 
         # Using Softmax
-        # Apply Softmax on Logits and get the argmax to get the predicted label
+        # Apply Softmax on Logits and get the argmax to get the predicted labels
+        s_logits = torch.nn.Softmax(dim=1)(logits)
+        y_train_scores = torch.cat((y_train_scores, s_logits))
+        s_logits = torch.argmax(s_logits, dim=1)
+        y_train_pred = torch.cat((y_train_pred, s_logits))
+
+
+    # Compute Average Train Loss
+    avg_train_loss = run_train_loss/len(train_loader.dataset)
+    
+
+    # Compute Train Metric
