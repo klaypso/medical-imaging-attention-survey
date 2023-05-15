@@ -383,4 +383,13 @@ for epoch in range(init_epoch, EPOCHS):
         loss = LOSS(logits, labels)
 
         # Update batch losses
-        run_train_loss 
+        run_train_loss += loss
+
+        # Backward pass: compute gradient of the loss with respect to model parameters
+        loss.backward()
+        
+        # Perform a single optimization step (parameter update)
+        OPTIMISER.step()
+
+        # Using Softmax
+        # Apply Softmax on Logits and get the argmax to get the predicted label
