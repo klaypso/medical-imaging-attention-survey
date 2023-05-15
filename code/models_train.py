@@ -371,4 +371,16 @@ for epoch in range(init_epoch, EPOCHS):
 
         # Find the loss and update the model parameters accordingly
         # Clear the gradients of all optimized variables
-        OP
+        OPTIMISER.zero_grad(set_to_none=True)
+
+
+        # Forward pass: compute predicted outputs by passing inputs to the model
+        logits = model(images)
+
+        
+        # Compute the batch loss
+        # Using CrossEntropy w/ Softmax
+        loss = LOSS(logits, labels)
+
+        # Update batch losses
+        run_train_loss 
