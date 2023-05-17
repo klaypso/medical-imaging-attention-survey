@@ -417,4 +417,15 @@ for epoch in range(init_epoch, EPOCHS):
 
 
     # Append values to the arrays
-    
+    # Train Loss
+    train_losses[epoch] = avg_train_loss
+    # Save it to directory
+    fname = os.path.join(history_dir, f"{model_name}_tr_losses.npy")
+    np.save(file=fname, arr=train_losses, allow_pickle=True)
+
+
+    # Train Metrics
+    # Acc
+    train_metrics[epoch, 0] = train_acc
+    # Recall
+    train_metrics[epoch, 1] = train_recal
