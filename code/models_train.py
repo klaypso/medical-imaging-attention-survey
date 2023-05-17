@@ -408,4 +408,13 @@ for epoch in range(init_epoch, EPOCHS):
     y_train_scores = y_train_scores.cpu().detach().numpy()
     train_acc = accuracy_score(y_true=y_train_true, y_pred=y_train_pred)
     train_recall = recall_score(y_true=y_train_true, y_pred=y_train_pred, average='micro')
-    train_precision = precision_score(y_true=y_train_true, y_pred=y_tra
+    train_precision = precision_score(y_true=y_train_true, y_pred=y_train_pred, average='micro')
+    train_f1 = f1_score(y_true=y_train_true, y_pred=y_train_pred, average='micro')
+    train_auc = roc_auc_score(y_true=y_train_true, y_score=y_train_scores[:, 1], average='micro')
+
+    # Print Statistics
+    print(f"Train Loss: {avg_train_loss}\tTrain Accuracy: {train_acc}")
+
+
+    # Append values to the arrays
+    
