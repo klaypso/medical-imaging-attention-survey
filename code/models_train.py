@@ -403,4 +403,9 @@ for epoch in range(init_epoch, EPOCHS):
     avg_train_loss = run_train_loss/len(train_loader.dataset)
     
 
-    # Compute Train Metric
+    # Compute Train Metrics
+    y_train_pred = y_train_pred.cpu().detach().numpy()
+    y_train_scores = y_train_scores.cpu().detach().numpy()
+    train_acc = accuracy_score(y_true=y_train_true, y_pred=y_train_pred)
+    train_recall = recall_score(y_true=y_train_true, y_pred=y_train_pred, average='micro')
+    train_precision = precision_score(y_true=y_train_true, y_pred=y_tra
