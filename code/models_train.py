@@ -428,4 +428,16 @@ for epoch in range(init_epoch, EPOCHS):
     # Acc
     train_metrics[epoch, 0] = train_acc
     # Recall
-    train_metrics[epoch, 1] = train_recal
+    train_metrics[epoch, 1] = train_recall
+    # Precision
+    train_metrics[epoch, 2] = train_precision
+    # F1-Score
+    train_metrics[epoch, 3] = train_f1
+    # ROC AUC
+    train_metrics[epoch, 4] = train_auc
+
+    # Save it to directory
+    fname = os.path.join(history_dir, f"{model_name}_tr_metrics.npy")
+    np.save(file=fname, arr=train_metrics, allow_pickle=True)
+
+    
