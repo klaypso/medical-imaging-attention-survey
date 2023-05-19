@@ -440,4 +440,9 @@ for epoch in range(init_epoch, EPOCHS):
     fname = os.path.join(history_dir, f"{model_name}_tr_metrics.npy")
     np.save(file=fname, arr=train_metrics, allow_pickle=True)
 
-    
+    # Plot to Tensorboard
+    tbwritter.add_scalar("loss/train", avg_train_loss, global_step=epoch)
+    tbwritter.add_scalar("acc/train", train_acc, global_step=epoch)
+    tbwritter.add_scalar("rec/train", train_recall, global_step=epoch)
+    tbwritter.add_scalar("prec/train", train_precision, global_step=epoch)
+    tbwritter.add_scalar("f1/train", train_f1, global_step=e
