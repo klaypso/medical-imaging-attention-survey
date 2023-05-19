@@ -478,4 +478,11 @@ for epoch in range(init_epoch, EPOCHS):
             y_val_true = np.append(y_val_true, labels.numpy(), axis=0)
 
             # Move data data anda model to GPU (or not)
-            images, lab
+            images, labels = images.to(DEVICE, non_blocking=True), labels.to(DEVICE, non_blocking=True)
+
+            # Forward pass: compute predicted outputs by passing inputs to the model
+            logits = model(images)
+            
+            # Compute the batch loss
+            # Using CrossEntropy w/ Softmax
+            loss = VAL_LOSS(logits, 
