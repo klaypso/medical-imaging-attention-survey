@@ -456,4 +456,15 @@ for epoch in range(init_epoch, EPOCHS):
 
 
     # Validation Loop
-    print("Valid
+    print("Validation Phase")
+
+
+    # Initialise lists to compute scores
+    y_val_true = np.empty((0), int)
+    y_val_pred = torch.empty(0, dtype=torch.int32, device=DEVICE)
+    y_val_scores = torch.empty(0, dtype=torch.float, device=DEVICE) # save scores after softmax for roc auc
+
+    # Running train loss
+    run_val_loss = 0.0
+
+ 
