@@ -445,4 +445,15 @@ for epoch in range(init_epoch, EPOCHS):
     tbwritter.add_scalar("acc/train", train_acc, global_step=epoch)
     tbwritter.add_scalar("rec/train", train_recall, global_step=epoch)
     tbwritter.add_scalar("prec/train", train_precision, global_step=epoch)
-    tbwritter.add_scalar("f1/train", train_f1, global_step=e
+    tbwritter.add_scalar("f1/train", train_f1, global_step=epoch)
+    tbwritter.add_scalar("auc/train", train_auc, global_step=epoch)
+
+    # Update Variables
+    # Min Training Loss
+    if avg_train_loss < min_train_loss:
+        print(f"Train loss decreased from {min_train_loss} to {avg_train_loss}.")
+        min_train_loss = avg_train_loss
+
+
+    # Validation Loop
+    print("Valid
