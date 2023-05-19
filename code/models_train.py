@@ -467,4 +467,15 @@ for epoch in range(init_epoch, EPOCHS):
     # Running train loss
     run_val_loss = 0.0
 
- 
+    # Put model in evaluation mode
+    model.eval()
+
+    # Deactivate gradients
+    with torch.no_grad():
+
+        # Iterate through dataloader
+        for images, labels in tqdm(val_loader):
+            y_val_true = np.append(y_val_true, labels.numpy(), axis=0)
+
+            # Move data data anda model to GPU (or not)
+            images, lab
