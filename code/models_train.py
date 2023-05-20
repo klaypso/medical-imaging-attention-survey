@@ -485,4 +485,12 @@ for epoch in range(init_epoch, EPOCHS):
             
             # Compute the batch loss
             # Using CrossEntropy w/ Softmax
-            loss = VAL_LOSS(logits, 
+            loss = VAL_LOSS(logits, labels)
+            
+            # Update batch losses
+            run_val_loss += loss
+
+
+            # Using Softmax Activation
+            # Apply Softmax on Logits and get the argmax to get the predicted labels
+            s_logits = torch.nn.Softmax(dim=1)(logits)                   
