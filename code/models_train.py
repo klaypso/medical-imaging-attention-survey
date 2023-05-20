@@ -493,4 +493,14 @@ for epoch in range(init_epoch, EPOCHS):
 
             # Using Softmax Activation
             # Apply Softmax on Logits and get the argmax to get the predicted labels
-            s_logits = torch.nn.Softmax(dim=1)(logits)                   
+            s_logits = torch.nn.Softmax(dim=1)(logits)                        
+            y_val_scores = torch.cat((y_val_scores, s_logits))
+            s_logits = torch.argmax(s_logits, dim=1)
+            y_val_pred = torch.cat((y_val_pred, s_logits))
+
+        
+
+        # Compute Average Validation Loss
+        avg_val_loss = run_val_loss/len(val_loader.dataset)
+
+        # Compute Validat
