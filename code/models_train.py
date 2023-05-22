@@ -515,4 +515,16 @@ for epoch in range(init_epoch, EPOCHS):
         # Print Statistics
         print(f"Validation Loss: {avg_val_loss}\tValidation Accuracy: {val_acc}")
 
-        # Append values to 
+        # Append values to the arrays
+        # Validation Loss
+        val_losses[epoch] = avg_val_loss
+        # Save it to directory
+        fname = os.path.join(history_dir, f"{model_name}_val_losses.npy")
+        np.save(file=fname, arr=val_losses, allow_pickle=True)
+
+
+        # Train Metrics
+        # Acc
+        val_metrics[epoch, 0] = val_acc
+        # Recall
+        
