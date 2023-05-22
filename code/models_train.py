@@ -527,4 +527,14 @@ for epoch in range(init_epoch, EPOCHS):
         # Acc
         val_metrics[epoch, 0] = val_acc
         # Recall
-        
+        val_metrics[epoch, 1] = val_recall
+        # Precision
+        val_metrics[epoch, 2] = val_precision
+        # F1-Score
+        val_metrics[epoch, 3] = val_f1
+        # ROC AUC
+        val_metrics[epoch, 4] = val_auc
+
+        # Save it to directory
+        fname = os.path.join(history_dir, f"{model_name}_val_metrics.npy")
+      
