@@ -503,4 +503,9 @@ for epoch in range(init_epoch, EPOCHS):
         # Compute Average Validation Loss
         avg_val_loss = run_val_loss/len(val_loader.dataset)
 
-        # Compute Validat
+        # Compute Validation Accuracy
+        y_val_pred = y_val_pred.cpu().detach().numpy()
+        y_val_scores = y_val_scores.cpu().detach().numpy()
+        val_acc = accuracy_score(y_true=y_val_true, y_pred=y_val_pred)
+        val_recall = recall_score(y_true=y_val_true, y_pred=y_val_pred, average='micro')
+        val_precision = precision_score(y_true=y_val_true, y_pred
