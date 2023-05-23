@@ -537,4 +537,10 @@ for epoch in range(init_epoch, EPOCHS):
 
         # Save it to directory
         fname = os.path.join(history_dir, f"{model_name}_val_metrics.npy")
-      
+        np.save(file=fname, arr=val_metrics, allow_pickle=True)
+
+        # Plot to Tensorboard
+        tbwritter.add_scalar("loss/val", avg_val_loss, global_step=epoch)
+        tbwritter.add_scalar("acc/val", val_acc, global_step=epoch)
+        tbwritter.add_scalar("rec/val", val_recall, global_step=epoch)
+  
