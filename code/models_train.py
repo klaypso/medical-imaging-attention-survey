@@ -543,4 +543,10 @@ for epoch in range(init_epoch, EPOCHS):
         tbwritter.add_scalar("loss/val", avg_val_loss, global_step=epoch)
         tbwritter.add_scalar("acc/val", val_acc, global_step=epoch)
         tbwritter.add_scalar("rec/val", val_recall, global_step=epoch)
-  
+        tbwritter.add_scalar("prec/val", val_precision, global_step=epoch)
+        tbwritter.add_scalar("f1/val", val_f1, global_step=epoch)
+        tbwritter.add_scalar("auc/val", val_auc, global_step=epoch)
+
+        # Update Variables
+        # Min validation loss and save if validation loss decreases
+        if avg_val_loss < min_val_loss:
