@@ -566,4 +566,15 @@ for epoch in range(init_epoch, EPOCHS):
             }
             torch.save(save_dict, model_path)
 
-            print(f"Successfully saved at: {
+            print(f"Successfully saved at: {model_path}")
+
+
+        # Checkpoint loop/condition
+        if epoch % save_freq == 0 and epoch > 0:
+
+            # Save checkpoint
+            model_path = os.path.join(weights_dir, f"{model_name}_{dataset.lower()}_{epoch:04}.pt")
+
+            save_dict = {
+                'epoch': epoch,
+                'model_state_dict': model.state_dict(),
