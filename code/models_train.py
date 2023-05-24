@@ -550,3 +550,11 @@ for epoch in range(init_epoch, EPOCHS):
         # Update Variables
         # Min validation loss and save if validation loss decreases
         if avg_val_loss < min_val_loss:
+            print(f"Validation loss decreased from {min_val_loss} to {avg_val_loss}.")
+            min_val_loss = avg_val_loss
+
+            print("Saving best model on validation...")
+
+            # Save checkpoint
+            model_path = os.path.join(weights_dir, f"{model_name}_{dataset.lower()}_best.pt")
+    
