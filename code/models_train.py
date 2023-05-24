@@ -578,3 +578,11 @@ for epoch in range(init_epoch, EPOCHS):
             save_dict = {
                 'epoch': epoch,
                 'model_state_dict': model.state_dict(),
+                'optimizer_state_dict': OPTIMISER.state_dict(),
+                'loss': avg_train_loss,
+            }
+            torch.save(save_dict, model_path)
+
+
+# Finish statement
+print("Finished.")
