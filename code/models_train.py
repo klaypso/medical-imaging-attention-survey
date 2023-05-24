@@ -557,4 +557,13 @@ for epoch in range(init_epoch, EPOCHS):
 
             # Save checkpoint
             model_path = os.path.join(weights_dir, f"{model_name}_{dataset.lower()}_best.pt")
-    
+            
+            save_dict = {
+                'epoch': epoch,
+                'model_state_dict': model.state_dict(),
+                'optimizer_state_dict': OPTIMISER.state_dict(),
+                'loss': avg_train_loss,
+            }
+            torch.save(save_dict, model_path)
+
+            print(f"Successfully saved at: {
