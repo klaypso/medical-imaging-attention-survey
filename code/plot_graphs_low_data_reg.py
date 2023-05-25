@@ -27,4 +27,13 @@ for d in datasets:
         row = row.drop("Model")
         accs = row.values
         plt.plot(x, accs, label=legend, color=colors[i], linestyle=style[i], marker=markers[i], markersize=4)
-        plt.ylim(bottom=0
+        plt.ylim(bottom=0.70, top=1.0)
+        plt.xticks(x, x_labels)
+    plt.legend(loc='best')
+    plt.ylabel("Accuracy")
+    plt.xlabel("Percentage of training examples")
+    plt.title(d)
+    # plt.show()
+    plt.savefig(f'results/plot_{d}.png', bbox_inches='tight')
+
+print("Finished.")
