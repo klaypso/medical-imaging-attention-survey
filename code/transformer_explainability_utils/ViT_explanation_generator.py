@@ -18,4 +18,20 @@ def compute_rollout_attention(all_layer_matrices, start_layer=0):
     all_layer_matrices = [all_layer_matrices[i] + eye for i in range(len(all_layer_matrices))]
     matrices_aug = [all_layer_matrices[i] / all_layer_matrices[i].sum(dim=-1, keepdim=True)
                           for i in range(len(all_layer_matrices))]
-    joint_attention = matrices_aug[start_layer
+    joint_attention = matrices_aug[start_layer]
+    
+    for i in range(start_layer+1, len(matrices_aug)):
+        joint_attention = matrices_aug[i].bmm(joint_attention)
+    
+    
+    return joint_attention
+
+
+
+# Class: DeiT-LRP
+class LRP:
+    def __init__(self, model, device):
+        
+        # Put model into evaluation mode
+        self.model = model
+        self.mo
