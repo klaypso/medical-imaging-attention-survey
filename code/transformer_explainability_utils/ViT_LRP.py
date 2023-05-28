@@ -419,3 +419,96 @@ class VisionTransformer(nn.Module):
             return cam
 
         elif method == "last_layer_attn":
+            cam = self.blocks[-1].attn.get_attn()
+            cam = cam[0].reshape(-1, cam.shape[-1], cam.shape[-1])
+            cam = cam.clamp(min=0).mean(dim=0)
+            cam = cam[0, 1:]
+            return cam
+
+        elif method == "second_layer":
+            cam = self.blocks[1].attn.get_attn_cam()
+            cam = cam[0].reshape(-1, cam.shape[-1], cam.shape[-1])
+            if is_ablation:
+                grad = self.blocks[1].attn.get_attn_gradients()
+                grad = grad[0].reshape(-1, grad.shape[-1], grad.shape[-1])
+                cam = grad * cam
+            cam = cam.clamp(min=0).mean(dim=0)
+            cam = cam[0, 1:]
+            return cam
+
+
+
+# Function: _conv_filter
+def _conv_filter(state_dict, patch_size=16):
+    """ convert patch embedding weight from manual patchify + linear proj to conv"""
+    out_dict = {}
+    for k, v in state_dict.items():
+        if 'patch_embed.proj.weight' in k:
+            v = v.reshape((v.shape[0], 3, patch_size, patch_size))
+        out_dict[k] = v
+    return out_dict
+
+
+
+# Function: Build vit_base_patch16_224
+def vit_base_patch16_224(pretrained=False, **kwargs):
+    model = VisionTransformer(
+        patch_size=16, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4, qkv_bias=True, **kwargs)
+    # model.default_cfg = default_cfgs['vit_base_patch16_224']
+    model.default_cfg = get_default_cfgs()['vit_base_patch16_224']
+    if pretrained:
+        load_pretrained(
+            model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3), filter_fn=_conv_filter)
+    return model
+
+
+
+# Function: Build vit_large_patch16_224
+def vit_large_patch16_224(pretrained=False, **kwargs):
+    model = VisionTransformer(
+        patch_size=16, embed_dim=1024, depth=24, num_heads=16, mlp_ratio=4, qkv_bias=True, **kwargs)
+    # model.default_cfg = default_cfgs['vit_large_patch16_224']
+    model.default_cfg = get_default_cfgs()['vit_large_patch16_224']
+    if pretrained:
+        load_pretrained(model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
+    return model
+
+
+
+# Original Models from: https://github.com/facebookresearch/deit/blob/main/models.py
+# Function: Build DeiT - Base
+def deit_base_patch16_224(pretrained=False, num_classes=2, input_size=(3, 224, 224), url="https://dl.fbaipublicfiles.com/deit/deit_base_patch16_224-b5f2ef4d.pth", **kwargs):
+
+    # Build model
+    model = VisionTransformer(patch_size=16, num_classes=num_classes, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4, qkv_bias=True, **kwargs)
+    # model.default_cfg = _cfg(url=url, num_classes=num_classes, input_size=input_size)
+    cfg = _cfg(url=url, num_classes=num_classes, input_size=input_size)
+    
+    # Load pretrained model
+    if pretrained:
+        # checkpoint = torch.hub.load_state_dict_from_url(url="https://dl.fbaipublicfiles.com/deit/deit_base_patch16_224-b5f2ef4d.pth", map_location="cpu", check_hash=True)
+        # checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu", check_hash=True)
+        # model.load_state_dict(checkpoint["model"], strict=False)
+        load_pretrained(model=model, cfg=cfg)
+    
+
+    return model
+
+
+
+# Function: Build DeiT - Tiny 
+def deit_tiny_patch16_224(pretrained=False, num_classes=2, input_size=(3, 224, 224), url="https://dl.fbaipublicfiles.com/deit/deit_tiny_patch16_224-a1311bcf.pth", **kwargs):
+    
+    # Build model
+    model = VisionTransformer(patch_size=16, num_classes=num_classes, embed_dim=192, depth=12, num_heads=3, mlp_ratio=4, qkv_bias=True, **kwargs)
+    # model.default_cfg = _cfg(url=url, num_classes=num_classes, input_size=input_size)
+    cfg = _cfg(url=url, num_classes=num_classes, input_size=input_size)
+    
+    # Load pretrained model
+    if pretrained:
+        # checkpoint = torch.hub.load_state_dict_from_url(url="https://dl.fbaipublicfiles.com/deit/deit_tiny_patch16_224-a1311bcf.pth", map_location="cpu", check_hash=True)
+        # model.load_state_dict(checkpoint["model"])
+        load_pretrained(model=model, cfg=cfg)
+    
+    
+    return model
