@@ -34,4 +34,14 @@ class LRP:
         
         # Put model into evaluation mode
         self.model = model
-        self.mo
+        self.model.eval()
+
+        # Select device (GPU or CPU)
+        self.device= device
+
+
+    # Method: Generate LRP attribution
+    def generate_attribution(self, input_img, index=None, method="transformer_attribution", is_ablation=False, start_layer=0):
+        output = self.model(input_img)
+        kwargs = {"alpha": 1}
+ 
