@@ -52,4 +52,10 @@ class LRP:
         one_hot[0, index] = 1
         one_hot_vector = one_hot
         one_hot = torch.from_numpy(one_hot).requires_grad_(True)
-  
+        # one_hot = torch.sum(one_hot.cuda() * output)
+        one_hot = torch.sum(one_hot.to(self.device) * output)
+
+        self.model.zero_grad()
+        one_hot.backward(retain_graph=True)
+
+        # return self.model.relprop(torch.tensor(one_hot_vector).to(input.device), method=method, is_ablation=is_ablation, start_layer=start_layer, **
