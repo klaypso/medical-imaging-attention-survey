@@ -44,4 +44,12 @@ class LRP:
     def generate_attribution(self, input_img, index=None, method="transformer_attribution", is_ablation=False, start_layer=0):
         output = self.model(input_img)
         kwargs = {"alpha": 1}
- 
+        
+        if index == None:
+            index = np.argmax(output.cpu().data.numpy(), axis=-1)
+
+        one_hot = np.zeros((1, output.size()[-1]), dtype=np.float32)
+        one_hot[0, index] = 1
+        one_hot_vector = one_hot
+        one_hot = torch.from_numpy(one_hot).requires_grad_(True)
+  
