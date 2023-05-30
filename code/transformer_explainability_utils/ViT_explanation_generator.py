@@ -58,4 +58,15 @@ class LRP:
         self.model.zero_grad()
         one_hot.backward(retain_graph=True)
 
-        # return self.model.relprop(torch.tensor(one_hot_vector).to(input.device), method=method, is_ablation=is_ablation, start_layer=start_layer, **
+        # return self.model.relprop(torch.tensor(one_hot_vector).to(input.device), method=method, is_ablation=is_ablation, start_layer=start_layer, **kwargs)
+        return self.model.relprop(torch.tensor(one_hot_vector).to(self.device), method=method, is_ablation=is_ablation, start_layer=start_layer, **kwargs)
+
+
+
+# Class: Baselines
+class Baselines:
+    def __init__(self, model, device):
+        
+        # Put model into evaluation mode
+        self.model = model
+        sel
