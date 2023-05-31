@@ -69,4 +69,15 @@ class Baselines:
         
         # Put model into evaluation mode
         self.model = model
-        sel
+        self.model.eval()
+
+        # Select device (GPU or CPU)
+        self.device= device
+
+
+    # Method: Generate LRP attribution
+    def generate_attribution(self, input_img, index=None):
+        
+        output = self.model(input_img.to(self.device), register_hook=True)
+        if index == None:
+            index = np.argmax(output.cpu().da
