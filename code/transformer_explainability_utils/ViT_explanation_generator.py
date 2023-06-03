@@ -110,4 +110,12 @@ class Baselines:
         blocks = self.model.blocks
         all_layer_attentions = []
         
-        fo
+        for blk in blocks:
+            attn_heads = blk.attn.get_attention_map()
+            avg_heads = (attn_heads.sum(dim=1) / attn_heads.shape[1]).detach()
+            all_layer_attentions.append(avg_heads)
+        
+        rollout = compute_rollout_attention(all_layer_attentions, start_layer=start_layer)
+        
+        
+     
