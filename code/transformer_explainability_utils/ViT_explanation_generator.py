@@ -118,4 +118,4 @@ class Baselines:
         rollout = compute_rollout_attention(all_layer_attentions, start_layer=start_layer)
         
         
-     
+        return rollout[:,0, 1:]
