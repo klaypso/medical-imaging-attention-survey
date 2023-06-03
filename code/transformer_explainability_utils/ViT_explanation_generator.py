@@ -89,4 +89,12 @@ class Baselines:
         one_hot = torch.sum(one_hot.to(self.device) * output)
 
         self.model.zero_grad()
-   
+        one_hot.backward(retain_graph=True)
+        
+        
+        # Attention CAM
+        grad = self.model.blocks[-1].attn.get_attn_gradients()
+        cam = self.model.blocks[-1].attn.get_attention_map()
+        cam = cam[0, :, 0, 1:].reshape(-1, 14, 14)
+        grad = grad[0, :, 0, 1:].reshape(-1, 14, 14)
+        grad = grad.mean(dim=[1, 2], kee
