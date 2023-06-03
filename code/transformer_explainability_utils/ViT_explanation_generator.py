@@ -97,4 +97,17 @@ class Baselines:
         cam = self.model.blocks[-1].attn.get_attention_map()
         cam = cam[0, :, 0, 1:].reshape(-1, 14, 14)
         grad = grad[0, :, 0, 1:].reshape(-1, 14, 14)
-        grad = grad.mean(dim=[1, 2], kee
+        grad = grad.mean(dim=[1, 2], keepdim=True)
+        cam = (cam * grad).mean(0).clamp(min=0)
+        cam = (cam - cam.min()) / (cam.max() - cam.min())
+
+        return cam
+
+
+    # Method: Generate rollout
+    def generate_rollout(self, input_img, start_layer=0):
+        self.model(input_img)
+        blocks = self.model.blocks
+        all_layer_attentions = []
+        
+        fo
