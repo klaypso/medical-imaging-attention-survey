@@ -34,4 +34,9 @@ default_cfgs = {
         url='https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-weights/vit_small_p16_224-15ec54c9.pth',
     ),
     'vit_base_patch16_224': _cfg(
-        url='https://github.com/rwig
+        url='https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-vitjx/jx_vit_base_p16_224-80ecf9dd.pth',
+        mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5),
+    ),
+    'vit_large_patch16_224': _cfg(
+        url='https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-vitjx/jx_vit_large_p16_224-4ee7a4dc.pth',
+        mea
