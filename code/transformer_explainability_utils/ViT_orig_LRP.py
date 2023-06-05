@@ -62,4 +62,10 @@ def compute_rollout_attention(all_layer_matrices, start_layer=0):
 
 # Class: Mlp
 class Mlp(nn.Module):
-    def __init__(self, in_features, hidden_featu
+    def __init__(self, in_features, hidden_features=None, out_features=None, drop=0.):
+        super().__init__()
+        out_features = out_features or in_features
+        hidden_features = hidden_features or in_features
+        self.fc1 = Linear(in_features, hidden_features)
+        self.act = GELU()
+        self.fc2 = Linear(hidden_features, out_features)
