@@ -81,4 +81,16 @@ class Mlp(nn.Module):
 
     def relprop(self, cam, **kwargs):
         cam = self.drop.relprop(cam, **kwargs)
-        cam = self.fc2.re
+        cam = self.fc2.relprop(cam, **kwargs)
+        cam = self.act.relprop(cam, **kwargs)
+        cam = self.fc1.relprop(cam, **kwargs)
+        return cam
+
+
+
+# Class: Attention
+class Attention(nn.Module):
+    def __init__(self, dim, num_heads=8, qkv_bias=False,attn_drop=0., proj_drop=0.):
+        super().__init__()
+        self.num_heads = num_heads
+        head_dim = di
