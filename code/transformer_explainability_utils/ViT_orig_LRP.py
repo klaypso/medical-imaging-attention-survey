@@ -69,3 +69,16 @@ class Mlp(nn.Module):
         self.fc1 = Linear(in_features, hidden_features)
         self.act = GELU()
         self.fc2 = Linear(hidden_features, out_features)
+        self.drop = Dropout(drop)
+
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.act(x)
+        x = self.drop(x)
+        x = self.fc2(x)
+        x = self.drop(x)
+        return x
+
+    def relprop(self, cam, **kwargs):
+        cam = self.drop.relprop(cam, **kwargs)
+        cam = self.fc2.re
