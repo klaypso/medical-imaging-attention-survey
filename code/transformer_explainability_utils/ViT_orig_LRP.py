@@ -115,4 +115,22 @@ class Attention(nn.Module):
         self.attn_gradients = None
 
     def get_attn(self):
-        return
+        return self.attn
+
+    def save_attn(self, attn):
+        self.attn = attn
+
+    def save_attn_cam(self, cam):
+        self.attn_cam = cam
+
+    def get_attn_cam(self):
+        return self.attn_cam
+
+    def get_v(self):
+        return self.v
+
+    def save_v(self, v):
+        self.v = v
+
+    def save_v_cam(self, cam):
+        self.v
