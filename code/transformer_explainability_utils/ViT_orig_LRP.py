@@ -133,4 +133,18 @@ class Attention(nn.Module):
         self.v = v
 
     def save_v_cam(self, cam):
-        self.v
+        self.v_cam = cam
+
+    def get_v_cam(self):
+        return self.v_cam
+
+    def save_attn_gradients(self, attn_gradients):
+        self.attn_gradients = attn_gradients
+
+    def get_attn_gradients(self):
+        return self.attn_gradients
+
+    def forward(self, x):
+        b, n, _, h = *x.shape, self.num_heads
+        qkv = self.qkv(x)
+ 
