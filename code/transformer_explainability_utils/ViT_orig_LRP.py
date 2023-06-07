@@ -93,4 +93,13 @@ class Attention(nn.Module):
     def __init__(self, dim, num_heads=8, qkv_bias=False,attn_drop=0., proj_drop=0.):
         super().__init__()
         self.num_heads = num_heads
-        head_dim = di
+        head_dim = dim // num_heads
+        # NOTE scale factor was wrong in my original version, can set manually to be compat with prev weights
+        self.scale = head_dim ** -0.5
+
+        # A = Q*K^T
+        self.matmul1 = einsum('bhid,bhjd->bhij')
+        # attn = A*V
+        self.matmul2 = einsum('bhij,bhjd->bhid')
+
+        self.qkv = Linear(dim, dim * 3, bias=qkv_bias)
