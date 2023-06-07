@@ -103,3 +103,16 @@ class Attention(nn.Module):
         self.matmul2 = einsum('bhij,bhjd->bhid')
 
         self.qkv = Linear(dim, dim * 3, bias=qkv_bias)
+        self.attn_drop = Dropout(attn_drop)
+        self.proj = Linear(dim, dim)
+        self.proj_drop = Dropout(proj_drop)
+        self.softmax = Softmax(dim=-1)
+
+        self.attn_cam = None
+        self.attn = None
+        self.v = None
+        self.v_cam = None
+        self.attn_gradients = None
+
+    def get_attn(self):
+        return
