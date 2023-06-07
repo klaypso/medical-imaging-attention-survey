@@ -147,4 +147,16 @@ class Attention(nn.Module):
     def forward(self, x):
         b, n, _, h = *x.shape, self.num_heads
         qkv = self.qkv(x)
- 
+        q, k, v = rearrange(qkv, 'b n (qkv h d) -> qkv b h n d', qkv=3, h=h)
+
+        self.save_v(v)
+
+        dots = self.matmul1([q, k]) * self.scale
+
+        attn = self.softmax(dots)
+        attn = self.attn_drop(attn)
+
+        self.save_attn(attn)
+        attn.register_hook(self.save_attn_gradients)
+
+   
