@@ -194,4 +194,11 @@ class Attention(nn.Module):
 
 
 # Class: Block
-class Block(nn.Module)
+class Block(nn.Module):
+
+    def __init__(self, dim, num_heads, mlp_ratio=4., qkv_bias=False, drop=0., attn_drop=0.):
+        super().__init__()
+        self.norm1 = LayerNorm(dim, eps=1e-6)
+        self.attn = Attention(
+            dim, num_heads=num_heads, qkv_bias=qkv_bias, attn_drop=attn_drop, proj_drop=drop)
+        self.n
