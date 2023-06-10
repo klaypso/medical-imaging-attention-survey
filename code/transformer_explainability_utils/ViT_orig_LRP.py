@@ -180,4 +180,18 @@ class Attention(nn.Module):
         self.save_attn_cam(cam1)
 
         cam1 = self.attn_drop.relprop(cam1, **kwargs)
-        cam1 = self.softmax.relprop(cam1, **kwargs
+        cam1 = self.softmax.relprop(cam1, **kwargs)
+
+        # A = Q*K^T
+        (cam_q, cam_k) = self.matmul1.relprop(cam1, **kwargs)
+        cam_q /= 2
+        cam_k /= 2
+
+        cam_qkv = rearrange([cam_q, cam_k, cam_v], 'qkv b h n d -> b n (qkv h d)', qkv=3, h=self.num_heads)
+
+        return self.qkv.relprop(cam_qkv, **kwargs)
+
+
+
+# Class: Block
+class Block(nn.Module)
