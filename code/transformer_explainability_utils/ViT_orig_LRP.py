@@ -169,4 +169,15 @@ class Attention(nn.Module):
     def relprop(self, cam, **kwargs):
         cam = self.proj_drop.relprop(cam, **kwargs)
         cam = self.proj.relprop(cam, **kwargs)
-        cam = rear
+        cam = rearrange(cam, 'b n (h d) -> b h n d', h=self.num_heads)
+
+        # attn = A*V
+        (cam1, cam_v)= self.matmul2.relprop(cam, **kwargs)
+        cam1 /= 2
+        cam_v /= 2
+
+        self.save_v_cam(cam_v)
+        self.save_attn_cam(cam1)
+
+        cam1 = self.attn_drop.relprop(cam1, **kwargs)
+        cam1 = self.softmax.relprop(cam1, **kwargs
