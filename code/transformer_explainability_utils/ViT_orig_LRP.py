@@ -159,4 +159,14 @@ class Attention(nn.Module):
         self.save_attn(attn)
         attn.register_hook(self.save_attn_gradients)
 
-   
+        out = self.matmul2([attn, v])
+        out = rearrange(out, 'b h n d -> b n (h d)')
+
+        out = self.proj(out)
+        out = self.proj_drop(out)
+        return out
+
+    def relprop(self, cam, **kwargs):
+        cam = self.proj_drop.relprop(cam, **kwargs)
+        cam = self.proj.relprop(cam, **kwargs)
+        cam = rear
