@@ -211,4 +211,13 @@ class Block(nn.Module):
         self.clone2 = Clone()
 
     def forward(self, x):
-        x1, x2 = self.cl
+        x1, x2 = self.clone1(x, 2)
+        x = self.add1([x1, self.attn(self.norm1(x2))])
+        x1, x2 = self.clone2(x, 2)
+        x = self.add2([x1, self.mlp(self.norm2(x2))])
+        return x
+
+    def relprop(self, cam, **kwargs):
+        (cam1, cam2) = self.add2.relprop(cam, **kwargs)
+        cam2 = self.mlp.relprop(cam2, **kwargs)
+        c
