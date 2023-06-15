@@ -220,4 +220,15 @@ class Block(nn.Module):
     def relprop(self, cam, **kwargs):
         (cam1, cam2) = self.add2.relprop(cam, **kwargs)
         cam2 = self.mlp.relprop(cam2, **kwargs)
-        c
+        cam2 = self.norm2.relprop(cam2, **kwargs)
+        cam = self.clone2.relprop((cam1, cam2), **kwargs)
+
+        (cam1, cam2) = self.add1.relprop(cam, **kwargs)
+        cam2 = self.attn.relprop(cam2, **kwargs)
+        cam2 = self.norm1.relprop(cam2, **kwargs)
+        cam = self.clone1.relprop((cam1, cam2), **kwargs)
+        return cam
+
+
+
+# Cla
