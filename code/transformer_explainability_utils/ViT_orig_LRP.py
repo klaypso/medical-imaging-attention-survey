@@ -255,4 +255,13 @@ class PatchEmbed(nn.Module):
         return x
 
     def relprop(self, cam, **kwargs):
-        ca
+        cam = cam.transpose(1,2)
+        cam = cam.reshape(cam.shape[0], cam.shape[1],
+                     (self.img_size[0] // self.patch_size[0]), (self.img_size[1] // self.patch_size[1]))
+        return self.proj.relprop(cam, **kwargs)
+
+
+
+# Class: VisionTransformer
+class VisionTransformer(nn.Module):
+    
