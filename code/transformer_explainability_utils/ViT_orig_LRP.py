@@ -264,4 +264,8 @@ class PatchEmbed(nn.Module):
 
 # Class: VisionTransformer
 class VisionTransformer(nn.Module):
-    
+    """ Vision Transformer with support for patch or hybrid CNN input stage
+    """
+    def __init__(self, img_size=224, patch_size=16, in_chans=3, num_classes=1000, embed_dim=768, depth=12,
+                 num_heads=12, mlp_ratio=4., qkv_bias=False, mlp_head=False, drop_rate=0., attn_drop_rate=0.):
+        super().__i
