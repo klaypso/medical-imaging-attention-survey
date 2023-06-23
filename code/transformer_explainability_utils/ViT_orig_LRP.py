@@ -281,4 +281,10 @@ class VisionTransformer(nn.Module):
         self.blocks = nn.ModuleList([
             Block(
                 dim=embed_dim, num_heads=num_heads, mlp_ratio=mlp_ratio, qkv_bias=qkv_bias,
-                drop=drop_rate, a
+                drop=drop_rate, attn_drop=attn_drop_rate)
+            for i in range(depth)])
+
+        self.norm = LayerNorm(embed_dim)
+        if mlp_head:
+            # paper diagram suggests 'MLP head', but results in 4M extra parameters vs paper
+            self.head = Mlp(embed_dim, int(embed_dim * mlp_ratio), num_classes
