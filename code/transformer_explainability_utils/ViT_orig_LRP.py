@@ -287,4 +287,11 @@ class VisionTransformer(nn.Module):
         self.norm = LayerNorm(embed_dim)
         if mlp_head:
             # paper diagram suggests 'MLP head', but results in 4M extra parameters vs paper
-            self.head = Mlp(embed_dim, int(embed_dim * mlp_ratio), num_classes
+            self.head = Mlp(embed_dim, int(embed_dim * mlp_ratio), num_classes)
+        else:
+            # with a single Linear layer as head, the param count within rounding of paper
+            self.head = Linear(embed_dim, num_classes)
+
+        # FIXME not quite sure what the proper weight init is supposed to be,
+        # normal / trunc normal w/ std == .02 similar to other Bert like transformers
+   
