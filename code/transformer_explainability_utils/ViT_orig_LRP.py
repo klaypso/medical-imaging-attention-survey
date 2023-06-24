@@ -294,4 +294,16 @@ class VisionTransformer(nn.Module):
 
         # FIXME not quite sure what the proper weight init is supposed to be,
         # normal / trunc normal w/ std == .02 similar to other Bert like transformers
-   
+        trunc_normal_(self.pos_embed, std=.02)  # embeddings same as weights?
+        trunc_normal_(self.cls_token, std=.02)
+        self.apply(self._init_weights)
+
+        self.pool = IndexSelect()
+        self.add = Add()
+
+        self.inp_grad = None
+
+    def save_inp_grad(self,grad):
+        self.inp_grad = grad
+
+    de
