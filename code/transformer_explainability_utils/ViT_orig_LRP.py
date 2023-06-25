@@ -338,3 +338,13 @@ class VisionTransformer(nn.Module):
 
         x = self.norm(x)
         x = self.pool(x, dim=1, indices=torch.tensor(0, device=x.device))
+        x = x.squeeze(1)
+        x = self.head(x)
+        return x
+
+    def relprop(self, cam=None,method="grad", is_ablation=False, start_layer=0, **kwargs):
+        # print(kwargs)
+        # print("conservation 1", cam.sum())
+        cam = self.head.relprop(cam, **kwargs)
+        cam = cam.unsqueeze(1)
+        cam = self.pool.relprop(cam,
