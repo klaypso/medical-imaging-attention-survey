@@ -367,4 +367,13 @@ class VisionTransformer(nn.Module):
             # cam rollout
             attn_cams = []
             for blk in self.blocks:
-                attn_heads = blk.attn.get_
+                attn_heads = blk.attn.get_attn_cam().clamp(min=0)
+                avg_heads = (attn_heads.sum(dim=1) / attn_heads.shape[1]).detach()
+                attn_cams.append(avg_heads)
+            cam = compute_rollout_attention(attn_cams, start_layer=start_layer)
+            cam = cam[:, 0, 1:]
+            return cam
+
+        elif method == "grad":
+            cams = []
+          
