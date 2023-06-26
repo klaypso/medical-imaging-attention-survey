@@ -376,4 +376,10 @@ class VisionTransformer(nn.Module):
 
         elif method == "grad":
             cams = []
-          
+            for blk in self.blocks:
+                grad = blk.attn.get_attn_gradients()
+                cam = blk.attn.get_attn_cam()
+                cam = cam[0].reshape(-1, cam.shape[-1], cam.shape[-1])
+                grad = grad[0].reshape(-1, grad.shape[-1], grad.shape[-1])
+                cam = grad * cam
+              
