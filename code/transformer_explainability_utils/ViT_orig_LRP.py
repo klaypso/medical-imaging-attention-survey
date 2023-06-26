@@ -356,4 +356,15 @@ class VisionTransformer(nn.Module):
         # print("min", cam.min())
 
         if method == "full":
-            (cam, _) = self.add.relprop(cam, **kwar
+            (cam, _) = self.add.relprop(cam, **kwargs)
+            cam = cam[:, 1:]
+            cam = self.patch_embed.relprop(cam, **kwargs)
+            # sum on channels
+            cam = cam.sum(dim=1)
+            return cam
+
+        elif method == "rollout":
+            # cam rollout
+            attn_cams = []
+            for blk in self.blocks:
+                attn_heads = blk.attn.get_
