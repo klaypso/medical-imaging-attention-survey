@@ -382,4 +382,12 @@ class VisionTransformer(nn.Module):
                 cam = cam[0].reshape(-1, cam.shape[-1], cam.shape[-1])
                 grad = grad[0].reshape(-1, grad.shape[-1], grad.shape[-1])
                 cam = grad * cam
-              
+                cam = cam.clamp(min=0).mean(dim=0)
+                cams.append(cam.unsqueeze(0))
+            rollout = compute_rollout_attention(cams, start_layer=start_layer)
+            cam = rollout[:, 0, 1:]
+            return cam
+
+        elif method == "last_layer":
+            cam = self.blocks[-1].attn.get_attn_cam()
+           
