@@ -413,4 +413,15 @@ class VisionTransformer(nn.Module):
                 grad = self.blocks[1].attn.get_attn_gradients()
                 grad = grad[0].reshape(-1, grad.shape[-1], grad.shape[-1])
                 cam = grad * cam
-   
+            cam = cam.clamp(min=0).mean(dim=0)
+            cam = cam[0, 1:]
+            return cam
+
+
+
+# Function: _conv_filter
+def _conv_filter(state_dict, patch_size=16):
+    """ convert patch embedding weight from manual patchify + linear proj to conv"""
+    out_dict = {}
+    for k, v in state_dict.items():
+        if 'p
