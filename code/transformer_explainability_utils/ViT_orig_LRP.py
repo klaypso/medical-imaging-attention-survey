@@ -450,4 +450,4 @@ def vit_large_patch16_224(pretrained=False, **kwargs):
     model.default_cfg = default_cfgs['vit_large_patch16_224']
     if pretrained:
         load_pretrained(model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
-    ret
+    return model
