@@ -15,4 +15,13 @@ import torch
 import torch.nn as nn
 import torch.utils.model_zoo as model_zoo
 
-_logger = logging.getLo
+_logger = logging.getLogger(__name__)
+
+
+
+# Function: load_state_dict
+def load_state_dict(checkpoint_path, use_ema=False):
+    if checkpoint_path and os.path.isfile(checkpoint_path):
+        checkpoint = torch.load(checkpoint_path, map_location='cpu')
+        state_dict_key = 'state_dict'
+        if isinstance(checkpoint, dict
