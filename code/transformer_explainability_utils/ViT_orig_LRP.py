@@ -444,4 +444,10 @@ def vit_base_patch16_224(pretrained=False, **kwargs):
 
 
 # Function: Build vit_large_patch16_224
-def vit_large_patch16_224(pretrained=False, *
+def vit_large_patch16_224(pretrained=False, **kwargs):
+    model = VisionTransformer(
+        patch_size=16, embed_dim=1024, depth=24, num_heads=16, mlp_ratio=4, qkv_bias=True, **kwargs)
+    model.default_cfg = default_cfgs['vit_large_patch16_224']
+    if pretrained:
+        load_pretrained(model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
+    ret
