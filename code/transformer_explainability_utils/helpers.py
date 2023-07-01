@@ -39,4 +39,16 @@ def load_state_dict(checkpoint_path, use_ema=False):
         _logger.info("Loaded {} from checkpoint '{}'".format(state_dict_key, checkpoint_path))
         return state_dict
     else:
-        _logger.e
+        _logger.error("No checkpoint found at '{}'".format(checkpoint_path))
+        raise FileNotFoundError()
+
+
+
+# Function: load_checkpoint
+def load_checkpoint(model, checkpoint_path, use_ema=False, strict=True):
+    state_dict = load_state_dict(checkpoint_path, use_ema)
+    model.load_state_dict(state_dict, strict=strict)
+
+
+
+# Function: resume_checkpo
