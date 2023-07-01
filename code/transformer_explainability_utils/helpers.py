@@ -51,4 +51,11 @@ def load_checkpoint(model, checkpoint_path, use_ema=False, strict=True):
 
 
 
-# Function: resume_checkpo
+# Function: resume_checkpoint
+def resume_checkpoint(model, checkpoint_path, optimizer=None, loss_scaler=None, log_info=True):
+    resume_epoch = None
+    if os.path.isfile(checkpoint_path):
+        checkpoint = torch.load(checkpoint_path, map_location='cpu')
+        if isinstance(checkpoint, dict) and 'state_dict' in checkpoint:
+            if log_info:
+   
