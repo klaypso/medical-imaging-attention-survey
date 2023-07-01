@@ -31,4 +31,12 @@ def load_state_dict(checkpoint_path, use_ema=False):
             new_state_dict = OrderedDict()
             for k, v in checkpoint[state_dict_key].items():
                 # strip `module.` prefix
-        
+                name = k[7:] if k.startswith('module') else k
+                new_state_dict[name] = v
+            state_dict = new_state_dict
+        else:
+            state_dict = checkpoint
+        _logger.info("Loaded {} from checkpoint '{}'".format(state_dict_key, checkpoint_path))
+        return state_dict
+    else:
+        _logger.e
