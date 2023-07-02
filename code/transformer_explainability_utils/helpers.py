@@ -63,4 +63,13 @@ def resume_checkpoint(model, checkpoint_path, optimizer=None, loss_scaler=None, 
             for k, v in checkpoint['state_dict'].items():
                 name = k[7:] if k.startswith('module') else k
                 new_state_dict[name] = v
-            model.load_s
+            model.load_state_dict(new_state_dict)
+
+            if optimizer is not None and 'optimizer' in checkpoint:
+                if log_info:
+                    _logger.info('Restoring optimizer state from checkpoint...')
+                optimizer.load_state_dict(checkpoint['optimizer'])
+
+            if loss_scaler is not None and loss_scaler.state_dict_key in checkpoint:
+                if log_info:
+  
