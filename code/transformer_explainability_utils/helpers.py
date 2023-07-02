@@ -58,4 +58,9 @@ def resume_checkpoint(model, checkpoint_path, optimizer=None, loss_scaler=None, 
         checkpoint = torch.load(checkpoint_path, map_location='cpu')
         if isinstance(checkpoint, dict) and 'state_dict' in checkpoint:
             if log_info:
-   
+                _logger.info('Restoring model state from checkpoint...')
+            new_state_dict = OrderedDict()
+            for k, v in checkpoint['state_dict'].items():
+                name = k[7:] if k.startswith('module') else k
+                new_state_dict[name] = v
+            model.load_s
