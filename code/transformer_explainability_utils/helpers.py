@@ -72,4 +72,9 @@ def resume_checkpoint(model, checkpoint_path, optimizer=None, loss_scaler=None, 
 
             if loss_scaler is not None and loss_scaler.state_dict_key in checkpoint:
                 if log_info:
-  
+                    _logger.info('Restoring AMP loss scaler state from checkpoint...')
+                loss_scaler.load_state_dict(checkpoint[loss_scaler.state_dict_key])
+
+            if 'epoch' in checkpoint:
+                resume_epoch = checkpoint['epoch']
+                if 'version' in checkpoint and checkpoint['version'] > 1:
