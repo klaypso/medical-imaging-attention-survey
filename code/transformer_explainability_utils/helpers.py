@@ -83,4 +83,15 @@ def resume_checkpoint(model, checkpoint_path, optimizer=None, loss_scaler=None, 
             if log_info:
                 _logger.info("Loaded checkpoint '{}' (epoch {})".format(checkpoint_path, checkpoint['epoch']))
         else:
-            model.load_state_dict(checkpoint
+            model.load_state_dict(checkpoint)
+            if log_info:
+                _logger.info("Loaded checkpoint '{}'".format(checkpoint_path))
+        return resume_epoch
+    else:
+        _logger.error("No checkpoint found at '{}'".format(checkpoint_path))
+        raise FileNotFoundError()
+
+
+
+# Function: load_pretrained
+def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=Non
