@@ -101,4 +101,16 @@ def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=Non
         _logger.warning("Pretrained model URL is invalid, using random initialization.")
         return
 
-    state_dict = model_zoo.load_url(cfg['url'], progress=False, map_locatio
+    state_dict = model_zoo.load_url(cfg['url'], progress=False, map_location='cpu')
+    
+    # We had to change somethings to load the models
+    # print(state_dict.keys())
+    if 'model' in state_dict.keys():
+        state_dict = state_dict['model']
+    
+
+    if filter_fn is not None:
+        state_dict = filter_fn(state_dict)
+
+    if in_chans == 1:
+        conv1_name = cfg
