@@ -94,4 +94,11 @@ def resume_checkpoint(model, checkpoint_path, optimizer=None, loss_scaler=None, 
 
 
 # Function: load_pretrained
-def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=Non
+def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=None, strict=True):
+    if cfg is None:
+        cfg = getattr(model, 'default_cfg')
+    if cfg is None or 'url' not in cfg or not cfg['url']:
+        _logger.warning("Pretrained model URL is invalid, using random initialization.")
+        return
+
+    state_dict = model_zoo.load_url(cfg['url'], progress=False, map_locatio
