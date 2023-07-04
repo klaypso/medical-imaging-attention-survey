@@ -113,4 +113,9 @@ def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=Non
         state_dict = filter_fn(state_dict)
 
     if in_chans == 1:
-        conv1_name = cfg
+        conv1_name = cfg['first_conv']
+        _logger.info('Converting first conv (%s) pretrained weights from 3 to 1 channel' % conv1_name)
+        conv1_weight = state_dict[conv1_name + '.weight']
+        # Some weights are in torch.half, ensure it's float for sum on CPU
+        conv1_type = conv1_weight.dtype
+        conv1_wei
