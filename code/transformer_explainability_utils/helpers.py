@@ -118,4 +118,11 @@ def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=Non
         conv1_weight = state_dict[conv1_name + '.weight']
         # Some weights are in torch.half, ensure it's float for sum on CPU
         conv1_type = conv1_weight.dtype
-        conv1_wei
+        conv1_weight = conv1_weight.float()
+        O, I, J, K = conv1_weight.shape
+        if I > 3:
+            assert conv1_weight.shape[1] % 3 == 0
+            # For models with space2depth stems
+            conv1_weight = conv1_weight.reshape(O, I // 3, 3, J, K)
+            conv1_weight = conv1_weight.sum(dim=2, keepdim=False)
+        el
