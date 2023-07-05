@@ -125,4 +125,11 @@ def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=Non
             # For models with space2depth stems
             conv1_weight = conv1_weight.reshape(O, I // 3, 3, J, K)
             conv1_weight = conv1_weight.sum(dim=2, keepdim=False)
-        el
+        else:
+            conv1_weight = conv1_weight.sum(dim=1, keepdim=True)
+        conv1_weight = conv1_weight.to(conv1_type)
+        state_dict[conv1_name + '.weight'] = conv1_weight
+    elif in_chans != 3:
+        conv1_name = cfg['first_conv']
+        conv1_weight = state_dict[conv1_name + '.weight']
+        conv1_type = conv1_weight.dt
