@@ -156,4 +156,13 @@ def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=Non
         state_dict[classifier_name + '.weight'] = classifier_weight[1:]
         classifier_bias = state_dict[classifier_name + '.bias']
         state_dict[classifier_name + '.bias'] = classifier_bias[1:]
-    elif num_classes != cfg['num
+    elif num_classes != cfg['num_classes']:
+        # completely discard fully connected for all other differences between pretrained and created model
+        del state_dict[classifier_name + '.weight']
+        del state_dict[classifier_name + '.bias']
+        strict = False
+
+
+    # Load state_dict
+    model.load_state_dict(state_dict, strict=strict)
+    pr
