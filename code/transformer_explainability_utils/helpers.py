@@ -140,4 +140,8 @@ def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=Non
             del state_dict[conv1_name + '.weight']
             strict = False
         else:
-            # NOTE this strategy should be better than random
+            # NOTE this strategy should be better than random init, but there could be other combinations of
+            # the original RGB input layer weights that'd work better for specific cases.
+            _logger.info('Repeating first conv (%s) weights in channel dim.' % conv1_name)
+            repeat = int(math.ceil(in_chans / 3))
+            conv1_weight = conv1_weight.repeat(1, rep
