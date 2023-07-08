@@ -144,4 +144,11 @@ def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=Non
             # the original RGB input layer weights that'd work better for specific cases.
             _logger.info('Repeating first conv (%s) weights in channel dim.' % conv1_name)
             repeat = int(math.ceil(in_chans / 3))
-            conv1_weight = conv1_weight.repeat(1, rep
+            conv1_weight = conv1_weight.repeat(1, repeat, 1, 1)[:, :in_chans, :, :]
+            conv1_weight *= (3 / float(in_chans))
+            conv1_weight = conv1_weight.to(conv1_type)
+            state_dict[conv1_name + '.weight'] = conv1_weight
+
+    classifier_name = cfg['classifier']
+    if num_classes == 1000 and cfg['num_classes'] == 1001:
+        # special case for imagenet trained models with
