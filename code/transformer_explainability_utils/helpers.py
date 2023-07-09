@@ -178,4 +178,18 @@ def extract_layer(model, layer):
     if not hasattr(model, 'module') and layer[0] == 'module':
         layer = layer[1:]
     for l in layer:
- 
+        if hasattr(module, l):
+            if not l.isdigit():
+                module = getattr(module, l)
+            else:
+                module = module[int(l)]
+        else:
+            return module
+    return module
+
+
+
+# Function: set_layer
+def set_layer(model, layer, val):
+    layer = layer.split('.')
+    module = m
