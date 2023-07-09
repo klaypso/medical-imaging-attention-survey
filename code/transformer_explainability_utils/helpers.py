@@ -165,4 +165,17 @@ def load_pretrained(model, cfg=None, num_classes=1000, in_chans=3, filter_fn=Non
 
     # Load state_dict
     model.load_state_dict(state_dict, strict=strict)
-    pr
+    print("Model loaded with success.")
+
+
+
+# Function: extract_layer
+def extract_layer(model, layer):
+    layer = layer.split('.')
+    module = model
+    if hasattr(model, 'module') and layer[0] != 'module':
+        module = model.module
+    if not hasattr(model, 'module') and layer[0] == 'module':
+        layer = layer[1:]
+    for l in layer:
+ 
