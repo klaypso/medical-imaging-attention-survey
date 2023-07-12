@@ -229,4 +229,13 @@ def adapt_model_from_string(parent_module, model_string):
 
     new_module = deepcopy(parent_module)
     for n, m in parent_module.named_modules():
-        old_module = extract_layer(parent_modu
+        old_module = extract_layer(parent_module, n)
+        if isinstance(old_module, nn.Conv2d) or isinstance(old_module, Conv2dSame):
+            if isinstance(old_module, Conv2dSame):
+                conv = Conv2dSame
+            else:
+                conv = nn.Conv2d
+            s = state_dict[n + '.weight']
+            in_channels = s[1]
+            out_channels = s[0]
+ 
