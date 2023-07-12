@@ -203,4 +203,20 @@ def set_layer(model, layer, val):
                 module2 = getattr(module2, l)
             else:
                 module2 = module2[int(l)]
-            lst_inde
+            lst_index += 1
+    lst_index -= 1
+    for l in layer[:lst_index]:
+        if not l.isdigit():
+            module = getattr(module, l)
+        else:
+            module = module[int(l)]
+    l = layer[lst_index]
+    setattr(module, l, val)
+
+
+
+# Function: adapt_model_from_string
+def adapt_model_from_string(parent_module, model_string):
+    separator = '***'
+    state_dict = {}
+    
