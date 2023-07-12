@@ -219,4 +219,14 @@ def set_layer(model, layer, val):
 def adapt_model_from_string(parent_module, model_string):
     separator = '***'
     state_dict = {}
-    
+    lst_shape = model_string.split(separator)
+    for k in lst_shape:
+        k = k.split(':')
+        key = k[0]
+        shape = k[1][1:-1].split(',')
+        if shape[0] != '':
+            state_dict[key] = [int(i) for i in shape]
+
+    new_module = deepcopy(parent_module)
+    for n, m in parent_module.named_modules():
+        old_module = extract_layer(parent_modu
