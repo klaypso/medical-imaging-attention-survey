@@ -238,4 +238,10 @@ def adapt_model_from_string(parent_module, model_string):
             s = state_dict[n + '.weight']
             in_channels = s[1]
             out_channels = s[0]
- 
+            g = 1
+            if old_module.groups > 1:
+                in_channels = out_channels
+                g = in_channels
+            new_conv = conv(
+                in_channels=in_channels, out_channels=out_channels, kernel_size=old_module.kernel_size,
+                bias=old_module.bias is not None, padding=old_module.padding, d
