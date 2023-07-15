@@ -244,4 +244,9 @@ def adapt_model_from_string(parent_module, model_string):
                 g = in_channels
             new_conv = conv(
                 in_channels=in_channels, out_channels=out_channels, kernel_size=old_module.kernel_size,
-                bias=old_module.bias is not None, padding=old_module.padding, d
+                bias=old_module.bias is not None, padding=old_module.padding, dilation=old_module.dilation,
+                groups=g, stride=old_module.stride)
+            set_layer(new_module, n, new_conv)
+        if isinstance(old_module, nn.BatchNorm2d):
+            new_bn = nn.BatchNorm2d(
+                num_features=state_dict[n + '.weight'][0], eps=old_module.eps, momentum=ol
