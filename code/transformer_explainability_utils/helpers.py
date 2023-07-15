@@ -249,4 +249,9 @@ def adapt_model_from_string(parent_module, model_string):
             set_layer(new_module, n, new_conv)
         if isinstance(old_module, nn.BatchNorm2d):
             new_bn = nn.BatchNorm2d(
-                num_features=state_dict[n + '.weight'][0], eps=old_module.eps, momentum=ol
+                num_features=state_dict[n + '.weight'][0], eps=old_module.eps, momentum=old_module.momentum,
+                affine=old_module.affine, track_running_stats=True)
+            set_layer(new_module, n, new_bn)
+        if isinstance(old_module, nn.Linear):
+            # FIXME extra checks to ensure this is actually the FC classifier layer and not a diff Linear layer?
+            num_features = state_dict[n + '.weight'][1]
