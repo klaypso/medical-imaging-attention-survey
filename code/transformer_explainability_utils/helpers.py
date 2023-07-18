@@ -255,3 +255,9 @@ def adapt_model_from_string(parent_module, model_string):
         if isinstance(old_module, nn.Linear):
             # FIXME extra checks to ensure this is actually the FC classifier layer and not a diff Linear layer?
             num_features = state_dict[n + '.weight'][1]
+            new_fc = nn.Linear(
+                in_features=num_features, out_features=old_module.out_features, bias=old_module.bias is not None)
+            set_layer(new_module, n, new_fc)
+            if hasattr(new_module, 'num_features'):
+                new_module.num_features = num_features
+    new_modul
