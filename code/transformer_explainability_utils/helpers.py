@@ -260,4 +260,15 @@ def adapt_model_from_string(parent_module, model_string):
             set_layer(new_module, n, new_fc)
             if hasattr(new_module, 'num_features'):
                 new_module.num_features = num_features
-    new_modul
+    new_module.eval()
+    parent_module.eval()
+
+    return new_module
+
+
+
+# Function: adapt_model_from_file
+def adapt_model_from_file(parent_module, model_variant):
+    adapt_file = os.path.join(os.path.dirname(__file__), 'pruned', model_variant + '.txt')
+    with open(adapt_file, 'r') as f:
+        return adapt_model_fr
