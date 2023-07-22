@@ -284,4 +284,14 @@ def build_model_with_cfg(
         model_cfg: dict = None,
         feature_cfg: dict = None,
         pretrained_strict: bool = True,
-        pretrained_filter
+        pretrained_filter_fn: Callable = None,
+        **kwargs):
+    pruned = kwargs.pop('pruned', False)
+    features = False
+    feature_cfg = feature_cfg or {}
+
+    if kwargs.pop('features_only', False):
+        features = True
+        feature_cfg.setdefault('out_indices', (0, 1, 2, 3, 4))
+        if 'out_indices' in kwargs:
+            feature_cfg['
