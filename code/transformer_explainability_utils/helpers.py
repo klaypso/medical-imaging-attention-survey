@@ -294,4 +294,14 @@ def build_model_with_cfg(
         features = True
         feature_cfg.setdefault('out_indices', (0, 1, 2, 3, 4))
         if 'out_indices' in kwargs:
-            feature_cfg['
+            feature_cfg['out_indices'] = kwargs.pop('out_indices')
+
+    model = model_cls(**kwargs) if model_cfg is None else model_cls(cfg=model_cfg, **kwargs)
+    model.default_cfg = deepcopy(default_cfg)
+
+    if pruned:
+        model = adapt_model_from_file(model, variant)
+
+    if pretrained:
+        load_pretrained(
+           
