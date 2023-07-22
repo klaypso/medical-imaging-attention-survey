@@ -304,4 +304,12 @@ def build_model_with_cfg(
 
     if pretrained:
         load_pretrained(
-           
+            model,
+            num_classes=kwargs.get('num_classes', 0),
+            in_chans=kwargs.get('in_chans', 3),
+            filter_fn=pretrained_filter_fn, strict=pretrained_strict)
+
+    if features:
+        feature_cls = FeatureListNet
+        if 'feature_cls' in feature_cfg:
+            feature_cls = feature_cfg.po
