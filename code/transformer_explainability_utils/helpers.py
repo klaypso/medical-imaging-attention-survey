@@ -271,4 +271,17 @@ def adapt_model_from_string(parent_module, model_string):
 def adapt_model_from_file(parent_module, model_variant):
     adapt_file = os.path.join(os.path.dirname(__file__), 'pruned', model_variant + '.txt')
     with open(adapt_file, 'r') as f:
-        return adapt_model_fr
+        return adapt_model_from_string(parent_module, f.read().strip())
+
+
+
+# Function: build_model_with_cfg
+def build_model_with_cfg(
+        model_cls: Callable,
+        variant: str,
+        pretrained: bool,
+        default_cfg: dict,
+        model_cfg: dict = None,
+        feature_cfg: dict = None,
+        pretrained_strict: bool = True,
+        pretrained_filter
