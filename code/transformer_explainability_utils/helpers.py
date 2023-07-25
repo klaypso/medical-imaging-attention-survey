@@ -312,4 +312,11 @@ def build_model_with_cfg(
     if features:
         feature_cls = FeatureListNet
         if 'feature_cls' in feature_cfg:
-            feature_cls = feature_cfg.po
+            feature_cls = feature_cfg.pop('feature_cls')
+            if isinstance(feature_cls, str):
+                feature_cls = feature_cls.lower()
+                if 'hook' in feature_cls:
+                    feature_cls = FeatureHookNet
+                else:
+                    assert False, f'Unknown feature class {feature_cls}'
+        model = feature_
