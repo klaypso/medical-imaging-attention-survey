@@ -319,4 +319,6 @@ def build_model_with_cfg(
                     feature_cls = FeatureHookNet
                 else:
                     assert False, f'Unknown feature class {feature_cls}'
-        model = feature_
+        model = feature_cls(model, **feature_cfg)
+
+    return model
