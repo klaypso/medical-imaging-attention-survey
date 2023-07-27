@@ -241,3 +241,25 @@ class Conv2d(nn.Conv2d, RelProp):
 
             S = R / Za
             C = X * self.gradprop2(S, self.weight) - L * self.gradprop2(S, pw) - H * self.gradprop2(S, nw)
+            R = C
+        else:
+            beta = alpha - 1
+            pw = torch.clamp(self.weight, min=0)
+            nw = torch.clamp(self.weight, max=0)
+            px = torch.clamp(self.X, min=0)
+            nx = torch.clamp(self.X, max=0)
+
+            def f(w1, w2, x1, x2):
+                Z1 = F.conv2d(x1, w1, bias=None, stride=self.stride, padding=self.padding)
+                Z2 = F.conv2d(x2, w2, bias=None, stride=self.stride, padding=self.padding)
+                S1 = safe_divide(R, Z1)
+                S2 = safe_divide(R, Z2)
+                C1 = x1 * self.gradprop(Z1, x1, S1)[0]
+                C2 = x2 * self.gradprop(Z2, x2, S2)[0]
+                return C1 + C2
+
+            activator_relevances = f(pw, nw, px, nx)
+            inhibitor_relevances = f(nw, pw, px, nx)
+
+            R = alpha * activator_relevances - beta * inhibitor_relevances
+        return R
