@@ -54,4 +54,15 @@ class RelPropSimple(RelProp):
         S = safe_divide(R, Z)
         C = self.gradprop(Z, self.X, S)
 
-        if tor
+        if torch.is_tensor(self.X) == False:
+            outputs = []
+            outputs.append(self.X[0] * C[0])
+            outputs.append(self.X[1] * C[1])
+        else:
+            outputs = self.X * (C[0])
+        return outputs
+
+class AddEye(RelPropSimple):
+    # input of shape B, C, seq_len, seq_len
+    def forward(self, input):
+        retu
