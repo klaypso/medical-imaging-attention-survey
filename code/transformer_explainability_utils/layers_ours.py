@@ -42,4 +42,16 @@ class RelProp(nn.Module):
         self.register_forward_hook(forward_hook)
 
     def gradprop(self, Z, X, S):
-        C =
+        C = torch.autograd.grad(Z, X, S, retain_graph=True)
+        return C
+
+    def relprop(self, R, alpha):
+        return R
+
+class RelPropSimple(RelProp):
+    def relprop(self, R, alpha):
+        Z = self.forward(self.X)
+        S = safe_divide(R, Z)
+        C = self.gradprop(Z, self.X, S)
+
+        if tor
