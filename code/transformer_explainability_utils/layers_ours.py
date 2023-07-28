@@ -30,4 +30,16 @@ def forward_hook(self, input, output):
     self.Y = output
 
 
-def backward
+def backward_hook(self, grad_input, grad_output):
+    self.grad_input = grad_input
+    self.grad_output = grad_output
+
+
+class RelProp(nn.Module):
+    def __init__(self):
+        super(RelProp, self).__init__()
+        # if not self.training:
+        self.register_forward_hook(forward_hook)
+
+    def gradprop(self, Z, X, S):
+        C =
