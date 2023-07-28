@@ -17,4 +17,17 @@ def safe_divide(a, b):
 
 
 def forward_hook(self, input, output):
-    
+    if type(input[0]) in (list, tuple):
+        self.X = []
+        for i in input[0]:
+            x = i.detach()
+            x.requires_grad = True
+            self.X.append(x)
+    else:
+        self.X = input[0].detach()
+        self.X.requires_grad = True
+
+    self.Y = output
+
+
+def backward
