@@ -65,4 +65,25 @@ class RelPropSimple(RelProp):
 class AddEye(RelPropSimple):
     # input of shape B, C, seq_len, seq_len
     def forward(self, input):
-        retu
+        return input + torch.eye(input.shape[2]).expand_as(input).to(input.device)
+
+class ReLU(nn.ReLU, RelProp):
+    pass
+
+class GELU(nn.GELU, RelProp):
+    pass
+
+class Softmax(nn.Softmax, RelProp):
+    pass
+
+class LayerNorm(nn.LayerNorm, RelProp):
+    pass
+
+class Dropout(nn.Dropout, RelProp):
+    pass
+
+
+class MaxPool2d(nn.MaxPool2d, RelPropSimple):
+    pass
+
+class LayerNorm(nn.LayerNo
