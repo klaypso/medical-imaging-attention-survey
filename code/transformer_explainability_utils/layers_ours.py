@@ -86,4 +86,22 @@ class Dropout(nn.Dropout, RelProp):
 class MaxPool2d(nn.MaxPool2d, RelPropSimple):
     pass
 
-class LayerNorm(nn.LayerNo
+class LayerNorm(nn.LayerNorm, RelProp):
+    pass
+
+class AdaptiveAvgPool2d(nn.AdaptiveAvgPool2d, RelPropSimple):
+    pass
+
+
+class AvgPool2d(nn.AvgPool2d, RelPropSimple):
+    pass
+
+
+class Add(RelPropSimple):
+    def forward(self, inputs):
+        return torch.add(*inputs)
+
+    def relprop(self, R, alpha):
+        Z = self.forward(self.X)
+        S = safe_divide(R, Z)
+  
