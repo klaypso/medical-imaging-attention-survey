@@ -115,4 +115,18 @@ class Add(RelPropSimple):
         a_fact = safe_divide(a_sum.abs(), a_sum.abs() + b_sum.abs()) * R.sum()
         b_fact = safe_divide(b_sum.abs(), a_sum.abs() + b_sum.abs()) * R.sum()
 
-        a = a * safe_divide(a_fact, a.sum(
+        a = a * safe_divide(a_fact, a.sum())
+        b = b * safe_divide(b_fact, b.sum())
+
+        outputs = [a, b]
+
+        return outputs
+
+class einsum(RelPropSimple):
+    def __init__(self, equation):
+        super().__init__()
+        self.equation = equation
+    def forward(self, *operands):
+        return torch.einsum(self.equation, *operands)
+
+class IndexSelect(RelProp)
