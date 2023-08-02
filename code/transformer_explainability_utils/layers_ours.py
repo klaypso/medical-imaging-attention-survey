@@ -129,4 +129,14 @@ class einsum(RelPropSimple):
     def forward(self, *operands):
         return torch.einsum(self.equation, *operands)
 
-class IndexSelect(RelProp)
+class IndexSelect(RelProp):
+    def forward(self, inputs, dim, indices):
+        self.__setattr__('dim', dim)
+        self.__setattr__('indices', indices)
+
+        return torch.index_select(inputs, dim, indices)
+
+    def relprop(self, R, alpha):
+        Z = self.forward(self.X, self.dim, self.indices)
+        S = safe_divide(R, Z)
+        C = 
