@@ -104,4 +104,15 @@ class Add(RelPropSimple):
     def relprop(self, R, alpha):
         Z = self.forward(self.X)
         S = safe_divide(R, Z)
-  
+        C = self.gradprop(Z, self.X, S)
+
+        a = self.X[0] * C[0]
+        b = self.X[1] * C[1]
+
+        a_sum = a.sum()
+        b_sum = b.sum()
+
+        a_fact = safe_divide(a_sum.abs(), a_sum.abs() + b_sum.abs()) * R.sum()
+        b_fact = safe_divide(b_sum.abs(), a_sum.abs() + b_sum.abs()) * R.sum()
+
+        a = a * safe_divide(a_fact, a.sum(
