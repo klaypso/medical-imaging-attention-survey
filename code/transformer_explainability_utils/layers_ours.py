@@ -178,4 +178,18 @@ class Cat(RelProp):
 
     def relprop(self, R, alpha):
         Z = self.forward(self.X, self.dim)
-        S = safe_divid
+        S = safe_divide(R, Z)
+        C = self.gradprop(Z, self.X, S)
+
+        outputs = []
+        for x, c in zip(self.X, C):
+            outputs.append(x * c)
+
+        return outputs
+
+
+class Sequential(nn.Sequential):
+    def relprop(self, R, alpha):
+        for m in reversed(self._modules.values()):
+            R = m.relprop(R, alpha)
+        re
