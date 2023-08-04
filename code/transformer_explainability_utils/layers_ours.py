@@ -153,4 +153,16 @@ class IndexSelect(RelProp):
 
 class Clone(RelProp):
     def forward(self, input, num):
-        self.__setatt
+        self.__setattr__('num', num)
+        outputs = []
+        for _ in range(num):
+            outputs.append(input)
+
+        return outputs
+
+    def relprop(self, R, alpha):
+        Z = []
+        for _ in range(self.num):
+            Z.append(self.X)
+        S = [safe_divide(r, z) for r, z in zip(R, Z)]
+        C
