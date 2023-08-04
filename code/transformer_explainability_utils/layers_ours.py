@@ -165,4 +165,17 @@ class Clone(RelProp):
         for _ in range(self.num):
             Z.append(self.X)
         S = [safe_divide(r, z) for r, z in zip(R, Z)]
-        C
+        C = self.gradprop(Z, self.X, S)[0]
+
+        R = self.X * C
+
+        return R
+
+class Cat(RelProp):
+    def forward(self, inputs, dim):
+        self.__setattr__('dim', dim)
+        return torch.cat(inputs, dim)
+
+    def relprop(self, R, alpha):
+        Z = self.forward(self.X, self.dim)
+        S = safe_divid
