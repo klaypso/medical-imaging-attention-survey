@@ -192,4 +192,12 @@ class Sequential(nn.Sequential):
     def relprop(self, R, alpha):
         for m in reversed(self._modules.values()):
             R = m.relprop(R, alpha)
-        re
+        return R
+
+class BatchNorm2d(nn.BatchNorm2d, RelProp):
+    def relprop(self, R, alpha):
+        X = self.X
+        beta = 1 - alpha
+        weight = self.weight.unsqueeze(0).unsqueeze(2).unsqueeze(3) / (
+            (self.running_var.unsqueeze(0).unsqueeze(2).unsqueeze(3).pow(2) + self.eps).pow(0.5))
+        Z = X * weight + 1e-9
