@@ -223,4 +223,19 @@ class Linear(nn.Linear, RelProp):
             C1 = x1 * torch.autograd.grad(Z1, x1, S1)[0]
             C2 = x2 * torch.autograd.grad(Z2, x2, S2)[0]
 
-            
+            return C1 + C2
+
+        activator_relevances = f(pw, nw, px, nx)
+        inhibitor_relevances = f(nw, pw, px, nx)
+
+        R = alpha * activator_relevances - beta * inhibitor_relevances
+
+        return R
+
+
+class Conv2d(nn.Conv2d, RelProp):
+    def gradprop2(self, DY, weight):
+        Z = self.forward(self.X)
+
+        output_padding = self.X.size()[2] - (
+              
