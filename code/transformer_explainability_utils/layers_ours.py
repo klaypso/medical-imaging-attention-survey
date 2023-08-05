@@ -213,4 +213,14 @@ class Linear(nn.Linear, RelProp):
         pw = torch.clamp(self.weight, min=0)
         nw = torch.clamp(self.weight, max=0)
         px = torch.clamp(self.X, min=0)
-        nx = torch.clamp
+        nx = torch.clamp(self.X, max=0)
+
+        def f(w1, w2, x1, x2):
+            Z1 = F.linear(x1, w1)
+            Z2 = F.linear(x2, w2)
+            S1 = safe_divide(R, Z1 + Z2)
+            S2 = safe_divide(R, Z1 + Z2)
+            C1 = x1 * torch.autograd.grad(Z1, x1, S1)[0]
+            C2 = x2 * torch.autograd.grad(Z2, x2, S2)[0]
+
+            
