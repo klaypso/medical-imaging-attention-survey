@@ -201,3 +201,16 @@ class BatchNorm2d(nn.BatchNorm2d, RelProp):
         weight = self.weight.unsqueeze(0).unsqueeze(2).unsqueeze(3) / (
             (self.running_var.unsqueeze(0).unsqueeze(2).unsqueeze(3).pow(2) + self.eps).pow(0.5))
         Z = X * weight + 1e-9
+        S = R / Z
+        Ca = S * weight
+        R = self.X * (Ca)
+        return R
+
+
+class Linear(nn.Linear, RelProp):
+    def relprop(self, R, alpha):
+        beta = alpha - 1
+        pw = torch.clamp(self.weight, min=0)
+        nw = torch.clamp(self.weight, max=0)
+        px = torch.clamp(self.X, min=0)
+        nx = torch.clamp
