@@ -238,4 +238,11 @@ class Conv2d(nn.Conv2d, RelProp):
         Z = self.forward(self.X)
 
         output_padding = self.X.size()[2] - (
-              
+                (Z.size()[2] - 1) * self.stride[0] - 2 * self.padding[0] + self.kernel_size[0])
+
+        return F.conv_transpose2d(DY, weight, stride=self.stride, padding=self.padding, output_padding=output_padding)
+
+    def relprop(self, R, alpha):
+        if self.X.shape[1] == 3:
+            pw = torch.clamp(self.weight, min=0)
+            nw = torch.clamp(self.weig
