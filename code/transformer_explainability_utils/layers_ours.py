@@ -255,4 +255,13 @@ class Conv2d(nn.Conv2d, RelProp):
                           keepdim=True)[0]
             Za = torch.conv2d(X, self.weight, bias=None, stride=self.stride, padding=self.padding) - \
                  torch.conv2d(L, pw, bias=None, stride=self.stride, padding=self.padding) - \
-                 torch.conv2d(H, nw, bias=None, stride=s
+                 torch.conv2d(H, nw, bias=None, stride=self.stride, padding=self.padding) + 1e-9
+
+            S = R / Za
+            C = X * self.gradprop2(S, self.weight) - L * self.gradprop2(S, pw) - H * self.gradprop2(S, nw)
+            R = C
+        else:
+            beta = alpha - 1
+            pw = torch.clamp(self.weight, min=0)
+            nw = torch.clamp(self.weight, max=0)
+    
