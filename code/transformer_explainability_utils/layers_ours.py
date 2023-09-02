@@ -251,4 +251,8 @@ class Conv2d(nn.Conv2d, RelProp):
                 torch.min(torch.min(torch.min(self.X, dim=1, keepdim=True)[0], dim=2, keepdim=True)[0], dim=3,
                           keepdim=True)[0]
             H = self.X * 0 + \
-                torch.max(torch.max(torch.max(self.X, dim=1, keepdim=True)[0], dim=2
+                torch.max(torch.max(torch.max(self.X, dim=1, keepdim=True)[0], dim=2, keepdim=True)[0], dim=3,
+                          keepdim=True)[0]
+            Za = torch.conv2d(X, self.weight, bias=None, stride=self.stride, padding=self.padding) - \
+                 torch.conv2d(L, pw, bias=None, stride=self.stride, padding=self.padding) - \
+                 torch.conv2d(H, nw, bias=None, stride=s
