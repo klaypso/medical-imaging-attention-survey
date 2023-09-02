@@ -245,4 +245,10 @@ class Conv2d(nn.Conv2d, RelProp):
     def relprop(self, R, alpha):
         if self.X.shape[1] == 3:
             pw = torch.clamp(self.weight, min=0)
-            nw = torch.clamp(self.weig
+            nw = torch.clamp(self.weight, max=0)
+            X = self.X
+            L = self.X * 0 + \
+                torch.min(torch.min(torch.min(self.X, dim=1, keepdim=True)[0], dim=2, keepdim=True)[0], dim=3,
+                          keepdim=True)[0]
+            H = self.X * 0 + \
+                torch.max(torch.max(torch.max(self.X, dim=1, keepdim=True)[0], dim=2
