@@ -270,4 +270,11 @@ class Conv2d(nn.Conv2d, RelProp):
             def f(w1, w2, x1, x2):
                 Z1 = F.conv2d(x1, w1, bias=None, stride=self.stride, padding=self.padding)
                 Z2 = F.conv2d(x2, w2, bias=None, stride=self.stride, padding=self.padding)
-                S1 = sa
+                S1 = safe_divide(R, Z1)
+                S2 = safe_divide(R, Z2)
+                C1 = x1 * self.gradprop(Z1, x1, S1)[0]
+                C2 = x2 * self.gradprop(Z2, x2, S2)[0]
+                return C1 + C2
+
+            activator_relevances = f(pw, nw, px, nx)
+            inhibitor_relevances = f(nw, pw,
