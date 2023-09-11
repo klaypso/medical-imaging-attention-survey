@@ -264,4 +264,10 @@ class Conv2d(nn.Conv2d, RelProp):
             beta = alpha - 1
             pw = torch.clamp(self.weight, min=0)
             nw = torch.clamp(self.weight, max=0)
-    
+            px = torch.clamp(self.X, min=0)
+            nx = torch.clamp(self.X, max=0)
+
+            def f(w1, w2, x1, x2):
+                Z1 = F.conv2d(x1, w1, bias=None, stride=self.stride, padding=self.padding)
+                Z2 = F.conv2d(x2, w2, bias=None, stride=self.stride, padding=self.padding)
+                S1 = sa
