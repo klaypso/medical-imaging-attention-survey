@@ -277,4 +277,7 @@ class Conv2d(nn.Conv2d, RelProp):
                 return C1 + C2
 
             activator_relevances = f(pw, nw, px, nx)
-            inhibitor_relevances = f(nw, pw,
+            inhibitor_relevances = f(nw, pw, px, nx)
+
+            R = alpha * activator_relevances - beta * inhibitor_relevances
+        return R
