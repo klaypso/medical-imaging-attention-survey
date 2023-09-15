@@ -5,4 +5,19 @@
 # Imports
 import cv2
 import numpy as np
-import subproc
+import subprocess
+
+# PyTorch Imports
+import torch
+import torchvision.transforms as transforms
+
+
+
+# Class: NormalizeInverse
+class NormalizeInverse(transforms.Normalize):
+    # Undo normalization on images
+
+    def __init__(self, mean, std):
+        mean = torch.as_tensor(mean)
+        std = torch.as_tensor(std)
+        std_inv = 1 / (std + 1e-7
