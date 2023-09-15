@@ -32,4 +32,17 @@ class NormalizeInverse(transforms.Normalize):
 # Function: Create folder
 def create_folder(folder_name):
     try:
-   
+        subprocess.call(['mkdir', '-p', folder_name])
+    except OSError:
+        None
+
+
+
+# Function: Save saliency map on image
+def save_saliency_map(image, saliency_map, filename):
+    """
+    Save saliency map on image.
+
+    Args:
+        image: Tensor of size (3,H,W)
+        saliency_map: Tensor of size (1
