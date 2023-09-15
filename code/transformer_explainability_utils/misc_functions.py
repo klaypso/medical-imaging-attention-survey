@@ -45,4 +45,14 @@ def save_saliency_map(image, saliency_map, filename):
 
     Args:
         image: Tensor of size (3,H,W)
-        saliency_map: Tensor of size (1
+        saliency_map: Tensor of size (1,H,W)
+        filename: string with complete path and file extension
+
+    """
+
+    image = image.data.cpu().numpy()
+    saliency_map = saliency_map.data.cpu().numpy()
+
+    saliency_map = saliency_map - saliency_map.min()
+    saliency_map = saliency_map / saliency_map.max()
+    saliency_map = s
