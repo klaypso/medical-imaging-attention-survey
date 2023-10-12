@@ -29,4 +29,14 @@ def _no_grad_trunc_normal_(tensor, mean, std, a, b):
         l = norm_cdf((a - mean) / std)
         u = norm_cdf((b - mean) / std)
 
-        # Uniformly fill tensor with values
+        # Uniformly fill tensor with values from [l, u], then translate to
+        # [2l-1, 2u-1].
+        tensor.uniform_(2 * l - 1, 2 * u - 1)
+
+        # Use inverse cdf transform for normal distribution to get truncated
+        # standard normal
+        tensor.erfinv_()
+
+        # Transform to proper mean, std
+        tensor.mul_(std * math.sqrt(2.))
+        tensor.add_(mea
