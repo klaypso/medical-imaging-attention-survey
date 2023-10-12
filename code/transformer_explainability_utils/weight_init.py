@@ -39,4 +39,15 @@ def _no_grad_trunc_normal_(tensor, mean, std, a, b):
 
         # Transform to proper mean, std
         tensor.mul_(std * math.sqrt(2.))
-        tensor.add_(mea
+        tensor.add_(mean)
+
+        # Clamp to ensure it's in the proper range
+        tensor.clamp_(min=a, max=b)
+
+        return tensor
+
+
+
+# Function: Fills the input Tensor with values drawn from a truncated normal distribution
+def trunc_normal_(tensor, mean=0., std=1., a=-2., b=2.):
+    # type: (Tensor, float, float, float,
