@@ -10,4 +10,17 @@ The paper extensively reviews the use of attention mechanisms in machine learnin
 To clone this repository, open a Terminal window and type:
 ```bash
 $ git clone git@github.com:klaypso/medical-imaging-attention-survey.git
-`
+```
+Then go to the repository's main directory:
+```bash
+$ cd medical-imaging-attention-survey
+```
+
+## Dependencies
+### Install the necessary Python packages
+We advise you to create a virtual Python environment first (Python 3.7). To install the necessary Python packages run:
+```bash
+$ pip install -r requirements.txt
+```
+
+## Dat
