@@ -23,4 +23,15 @@ We advise you to create a virtual Python environment first (Python 3.7). To inst
 $ pip install -r requirements.txt
 ```
 
-## Dat
+## Data
+To know more about the data used in this paper, please send an e-mail to [**tiago.f.goncalves@inesctec.pt**](mailto:tiago.f.goncalves@inesctec.pt).
+
+## Usage
+### Train Models
+To train the models:
+```bash
+$ python code/models_train.py {command line arguments}
+```
+This script accepts the following command line arguments:
+```
+--dat
