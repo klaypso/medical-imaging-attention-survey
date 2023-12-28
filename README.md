@@ -34,4 +34,9 @@ $ python code/models_train.py {command line arguments}
 ```
 This script accepts the following command line arguments:
 ```
---dat
+--data_dir: Directory of the data set
+--dataset: Data set {APTOS, ISIC2020, MIMICCXR}
+--model: Model Name {DenseNet121, ResNet50, SEDenseNet121, SEResNet50, CBAMDenseNet121, CBAMResNet50, DeiT-T-LRP}
+--low_data_regimen: Activate the low data regimen training
+--perc_train: Percentage of training data to be used during training
+--batchsi
