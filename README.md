@@ -39,4 +39,11 @@ This script accepts the following command line arguments:
 --model: Model Name {DenseNet121, ResNet50, SEDenseNet121, SEResNet50, CBAMDenseNet121, CBAMResNet50, DeiT-T-LRP}
 --low_data_regimen: Activate the low data regimen training
 --perc_train: Percentage of training data to be used during training
---batchsi
+--batchsize: Batch-size for training and validation
+--imgsize: Size of the image after transforms
+--resize: Resize data transformation {direct_resize,resizeshortest_randomcrop}
+--classweights: Weight loss with class imbalance
+--epochs: Number of training epochs
+--lr: Learning rate
+--outdir: Output directory
+--num_workers: Number of workers for 
