@@ -65,4 +65,9 @@ This script accepts the following command line arguments:
 --dataset: Data set {APTOS, ISIC2020, MIMICCXR}
 --split: Data split {Train,Validation,Test}
 --model: Model Name {DenseNet121, ResNet50, SEDenseNet121, SEResNet50, CBAMDenseNet121, CBAMResNet50, DeiT-T-LRP}
--
+--low_data_regimen: Activate the low data regimen training
+--perc_train: Percentage of training data to be used during training
+--modelckpt: Directory where model is stored
+--batchsize: Batch-size for training and validation
+--imgsize: Size of the image after transforms
+--resize: Resize data transformation
