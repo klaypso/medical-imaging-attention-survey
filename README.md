@@ -57,4 +57,12 @@ This script accepts the following command line arguments:
 ### Test Models
 To test the models:
 ```bash
-$ python code/models_test.py {command 
+$ python code/models_test.py {command line arguments}
+```
+This script accepts the following command line arguments:
+```
+--data_dir: Directory of the data set
+--dataset: Data set {APTOS, ISIC2020, MIMICCXR}
+--split: Data split {Train,Validation,Test}
+--model: Model Name {DenseNet121, ResNet50, SEDenseNet121, SEResNet50, CBAMDenseNet121, CBAMResNet50, DeiT-T-LRP}
+-
