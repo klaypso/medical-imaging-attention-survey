@@ -46,4 +46,15 @@ This script accepts the following command line arguments:
 --epochs: Number of training epochs
 --lr: Learning rate
 --outdir: Output directory
---num_workers: Number of workers for 
+--num_workers: Number of workers for dataloader
+--gpu_id: The index of the GPU
+--save_freq: Frequency (in number of epochs) to save the model
+--resume: Resume training
+--ckpt: Checkpoint from which to resume training
+--nr_layers: Number of hidden layers (only for ViT)
+```
+
+### Test Models
+To test the models:
+```bash
+$ python code/models_test.py {command 
