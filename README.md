@@ -70,4 +70,15 @@ This script accepts the following command line arguments:
 --modelckpt: Directory where model is stored
 --batchsize: Batch-size for training and validation
 --imgsize: Size of the image after transforms
---resize: Resize data transformation
+--resize: Resize data transformation {direct_resize,resizeshortest_randomcrop}
+--num_workers: Number of workers for dataloader
+--gpu_id: The index of the GPU
+--nr_layers: Number of hidden layers (only for ViT)
+```
+
+### Generate Post-hoc Explanations (Saliency Maps)
+To generate post-hoc explanations (saliency maps):
+```bash
+$ python code/models_interpretation.py {command line arguments}
+```
+T
