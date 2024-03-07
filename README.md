@@ -87,4 +87,11 @@ This script accepts the following command line arguments:
 --dataset: Data set {APTOS, ISIC2020, MIMICCXR}
 --split: Data split {Train, Validation, Test}
 --model: Model Name {DenseNet121, ResNet50, SEDenseNet121, SEResNet50, CBAMDenseNet121, CBAMResNet50, DeiT-T-LRP}
---modelckpt: Directory w
+--modelckpt: Directory where model is stored
+--batchsize: Batch-size for training and validation
+--imgsize: Size of the image after transforms
+--resize: Resize data transformation {direct_resize,resizeshortest_randomcrop}
+--num_workers: Number of workers for dataloader
+--gpu_id: The index of the GPU
+--nr_layers: Number of hidden layers (only for ViT)
+``
