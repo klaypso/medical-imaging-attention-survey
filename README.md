@@ -81,4 +81,10 @@ To generate post-hoc explanations (saliency maps):
 ```bash
 $ python code/models_interpretation.py {command line arguments}
 ```
-T
+This script accepts the following command line arguments:
+```
+--data_dir: Directory of the data set
+--dataset: Data set {APTOS, ISIC2020, MIMICCXR}
+--split: Data split {Train, Validation, Test}
+--model: Model Name {DenseNet121, ResNet50, SEDenseNet121, SEResNet50, CBAMDenseNet121, CBAMResNet50, DeiT-T-LRP}
+--modelckpt: Directory w
