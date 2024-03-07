@@ -94,4 +94,13 @@ This script accepts the following command line arguments:
 --num_workers: Number of workers for dataloader
 --gpu_id: The index of the GPU
 --nr_layers: Number of hidden layers (only for ViT)
-``
+```
+
+### Generate Figures from Post-hoc Explanations (Saliency Maps)
+To generate figures from post-hoc explanations (saliency maps):
+```bash
+$ python code/generate_xai_figures.py {command line arguments}
+```
+This script accepts the following command line arguments:
+```
+--modelckpt: Directory where model is
