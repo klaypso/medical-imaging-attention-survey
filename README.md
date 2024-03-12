@@ -119,4 +119,4 @@ If you use this repository in your research work, please cite this paper:
   volume={10},  
   number={},  
   pages={98909-98935},  
-  abstract={The increasing popularity of attention mechanisms in deep l
+  abstract={The increasing popularity of attention mechanisms in deep learning algorithms for computer vision and natural language processing made these models attractive to other research domains. In healthcare, there is a strong need for tools that may improve the routines of the clinicians and the patients. Naturally, the use of attention-based algorithms for medical applications occurred smoothly. However, bei
