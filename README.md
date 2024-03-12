@@ -103,4 +103,13 @@ $ python code/generate_xai_figures.py {command line arguments}
 ```
 This script accepts the following command line arguments:
 ```
---modelckpt: Directory where model is
+--modelckpt: Directory where model is stored
+--saliency_maps: Saliency maps {ALL, DEEPLIFT, LRP}
+--alpha_overlay: Alpha parameter for overlayed saliency maps.
+```
+
+## Citation
+If you use this repository in your research work, please cite this paper:
+```bibtex
+@ARTICLE{gonccalves2022survey,  
+  author={Gonçalves, Tiago and Rio-Torto, Isabel and Teixeira,
