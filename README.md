@@ -112,4 +112,11 @@ This script accepts the following command line arguments:
 If you use this repository in your research work, please cite this paper:
 ```bibtex
 @ARTICLE{gonccalves2022survey,  
-  author={Gonçalves, Tiago and Rio-Torto, Isabel and Teixeira,
+  author={Gonçalves, Tiago and Rio-Torto, Isabel and Teixeira, Luís F. and Cardoso, Jaime S.},  
+  journal={IEEE Access},   
+  title={A Survey on Attention Mechanisms for Medical Applications: are we Moving Toward Better Algorithms?},   
+  year={2022},  
+  volume={10},  
+  number={},  
+  pages={98909-98935},  
+  abstract={The increasing popularity of attention mechanisms in deep l
