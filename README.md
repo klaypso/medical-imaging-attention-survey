@@ -131,4 +131,5 @@ If you use this repository in your research work, please cite this paper:
 ### Squeeze-and-Excitation (SE) Networks
 This model and associated [**code**](https://github.com/moskomule/senet.pytorch) are related to the paper [_'Squeeze-and-Excitation Networks'_](https://ieeexplore.ieee.org/abstract/document/8759331) by Jie Hu, Li Shen, Samuel Albanie, Gang Sun and Enhua Wu.
 
-### Convolutional Block Attenti
+### Convolutional Block Attention Module (CBAM)
+This model and associated [**code**](https://github.com/Jongchan/attention-module) are related to the paper [_'CBAM: Convolutional Block Attention Module'_](https://openaccess.thecvf.com/content_ECCV_2018/html/Sanghyun_Woo_Convolutional_Block_Attention_ECCV_2018_paper.html) by Sanghyun Woo, Jongchan Park, Joon-Yo
