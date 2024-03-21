@@ -128,4 +128,7 @@ If you use this repository in your research work, please cite this paper:
 ```
 
 ## Credits and Acknowledgments
-### Squeeze-and-Excitation (SE) Netw
+### Squeeze-and-Excitation (SE) Networks
+This model and associated [**code**](https://github.com/moskomule/senet.pytorch) are related to the paper [_'Squeeze-and-Excitation Networks'_](https://ieeexplore.ieee.org/abstract/document/8759331) by Jie Hu, Li Shen, Samuel Albanie, Gang Sun and Enhua Wu.
+
+### Convolutional Block Attenti
