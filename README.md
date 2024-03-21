@@ -132,4 +132,7 @@ If you use this repository in your research work, please cite this paper:
 This model and associated [**code**](https://github.com/moskomule/senet.pytorch) are related to the paper [_'Squeeze-and-Excitation Networks'_](https://ieeexplore.ieee.org/abstract/document/8759331) by Jie Hu, Li Shen, Samuel Albanie, Gang Sun and Enhua Wu.
 
 ### Convolutional Block Attention Module (CBAM)
-This model and associated [**code**](https://github.com/Jongchan/attention-module) are related to the paper [_'CBAM: Convolutional Block Attention Module'_](https://openaccess.thecvf.com/content_ECCV_2018/html/Sanghyun_Woo_Convolutional_Block_Attention_ECCV_2018_paper.html) by Sanghyun Woo, Jongchan Park, Joon-Yo
+This model and associated [**code**](https://github.com/Jongchan/attention-module) are related to the paper [_'CBAM: Convolutional Block Attention Module'_](https://openaccess.thecvf.com/content_ECCV_2018/html/Sanghyun_Woo_Convolutional_Block_Attention_ECCV_2018_paper.html) by Sanghyun Woo, Jongchan Park, Joon-Young Lee and In So Kweon.
+
+### Transformer Explainability
+This framework and associated [**code**](https://github.com/hila-chefer/Transformer-Explainability) are related to the paper [_'Transformer Interpretability Beyond Attention Visualization'_](https://arxiv.org/abs/2012.09838) by Hila Chefer, Shir Gur and Lior Wolf.
